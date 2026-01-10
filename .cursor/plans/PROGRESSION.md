@@ -63,6 +63,7 @@ client-producte/
   - public/uploads/ (images via Tina)
   - public/photos/ (photos historiques)
   - public/books/ (couvertures)
+- ✅ **Route `/admin`** créée pour Tina Cloud
 
 #### Fichiers de Contenu Exemples
 
@@ -85,32 +86,36 @@ client-producte/
 
 ## 🔄 Prochaines Étapes
 
-### Étape 2 : Configuration de Tina CMS
+### Étape 2 : Configuration Tina Cloud ⚠️ À FAIRE
 
-1. **Initialiser Tina CMS**
+**Guide complet** : `.cursor/plans/TINA-CLOUD-SETUP.md`
 
+#### Résumé Rapide
+
+1. **Créer un compte Tina Cloud** (https://app.tina.io)
+   - Se connecter avec GitHub
+   - Gratuit pour 2 utilisateurs
+
+2. **Créer un projet Tina**
+   - Sélectionner le repository : `tonakuaslb-web/tonaku-website`
+   - Choisir la branche : `pseudo-backend`
+
+3. **Récupérer les tokens**
+   - Client ID (NEXT_PUBLIC_TINA_CLIENT_ID)
+   - Read-only Token (TINA_TOKEN)
+
+4. **Configurer `.env.local`**
    ```bash
-   pnpm tinacms init
+   NEXT_PUBLIC_TINA_CLIENT_ID=votre_client_id
+   TINA_TOKEN=votre_token
    ```
 
-2. **Créer la structure de contenu**
+5. **Tester l'interface admin**
+   - `pnpm dev`
+   - Ouvrir http://localhost:3000/admin
+   - Se connecter avec GitHub
 
-   - Créer dossier `/content`
-   - Créer dossier `/content/pages`
-   - Créer dossier `/content/activities`
-   - Créer dossier `/content/team`
-   - Créer dossier `/public/uploads`
-
-3. **Configurer le schéma Tina**
-
-   - Définir le schéma dans `/tina/config.ts`
-   - Créer les collections (pages, activities, team)
-   - Configurer les champs pour chaque collection
-
-4. **Tester l'interface admin**
-   - Démarrer le serveur de développement
-   - Accéder à `/admin`
-   - Vérifier l'interface d'édition
+**Temps estimé** : 10-15 minutes
 
 ### Étape 3 : Développement des Composants
 
