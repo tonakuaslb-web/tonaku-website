@@ -1,0 +1,88 @@
+fragment PageParts on Page {
+  __typename
+  title
+  description
+  body
+}
+
+fragment HistoireParts on Histoire {
+  __typename
+  year
+  title
+  description
+  image
+  order
+}
+
+fragment TeamParts on Team {
+  __typename
+  name
+  role
+  country
+  location
+  phone
+  email
+  photo
+  bio
+}
+
+fragment MissionParts on Mission {
+  __typename
+  title
+  description
+  icon
+  order
+  active
+}
+
+fragment ProjectParts on Project {
+  __typename
+  title
+  year
+  status
+  description
+  image
+  location
+  details {
+    __typename
+    beneficiaries
+    budget
+    goal
+  }
+}
+
+fragment BookParts on Book {
+  __typename
+  title
+  author
+  year
+  isbn
+  cover
+  description
+  category
+  pages
+  availability {
+    __typename
+    ebook
+    ebookUrl
+    print
+    printUrl
+    price
+  }
+  featured
+}
+
+fragment ContactParts on Contact {
+  __typename
+  country
+  city
+  address
+  phone
+  email
+  hours {
+    __typename
+    weekdays
+    weekend
+  }
+  notes
+}
