@@ -5,6 +5,7 @@
 ### 1. Setup Initial du Projet (10 janvier 2026)
 
 #### Installation de Next.js
+
 - ✅ **Next.js 16.1.1** installé avec App Router
 - ✅ **React 19.2.3** et React DOM
 - ✅ **TypeScript 5.9.3** configuré
@@ -13,10 +14,12 @@
 - ✅ Gestionnaire de packages : **pnpm 10.18.2**
 
 #### Installation de Tina CMS
+
 - ✅ **tinacms 3.2.0** installé
 - ✅ **@tinacms/cli 2.0.7** installé
 
 #### Structure créée
+
 ```
 client-producte/
 ├── app/
@@ -38,6 +41,7 @@ client-producte/
 ```
 
 #### Repository Git
+
 - ✅ Repository Git initialisé automatiquement
 
 ---
@@ -47,11 +51,13 @@ client-producte/
 ### Étape 2 : Configuration de Tina CMS
 
 1. **Initialiser Tina CMS**
+
    ```bash
    pnpm tinacms init
    ```
 
 2. **Créer la structure de contenu**
+
    - Créer dossier `/content`
    - Créer dossier `/content/pages`
    - Créer dossier `/content/activities`
@@ -59,6 +65,7 @@ client-producte/
    - Créer dossier `/public/uploads`
 
 3. **Configurer le schéma Tina**
+
    - Définir le schéma dans `/tina/config.ts`
    - Créer les collections (pages, activities, team)
    - Configurer les champs pour chaque collection
@@ -70,12 +77,16 @@ client-producte/
 
 ### Étape 3 : Développement des Composants
 
-1. Créer composant **Hero** (section d'accueil)
-2. Créer composant **About** (à propos de l'association)
-3. Créer composant **Activities** (activités de l'association)
-4. Créer composant **Team** (équipe/membres)
-5. Créer composant **Contact** (formulaire et infos)
-6. Créer composant **Footer** (pied de page)
+1. Créer composant **Header** (logo TONAKU + menu navigation)
+2. Créer composant **Hero** (section "Qui sommes-nous ?")
+3. Créer composant **History** (Notre histoire 1992-2026 avec timeline)
+4. Créer composant **Team** (équipe multi-pays : Belgique, Suisse, Congo)
+5. Créer composant **Missions** (7 missions de l'association)
+6. Créer composant **Projects** (Projets 2026-2027)
+7. Créer composant **Support** (Soutenez-nous avec formulaire de dons)
+8. Créer composant **Resources** (Nos ressources - livres/ebooks)
+9. Créer composant **Contact** (contact multi-pays + formulaire)
+10. Créer composant **Footer** (mémoire de Robert Yava Mayonde)
 
 ### Étape 4 : Intégration et Design
 
@@ -102,6 +113,7 @@ client-producte/
 ## 📋 Commandes Utiles
 
 ### Développement
+
 ```bash
 # Démarrer le serveur de développement
 pnpm dev
@@ -117,6 +129,7 @@ pnpm lint
 ```
 
 ### Tina CMS
+
 ```bash
 # Initialiser Tina (à faire)
 pnpm tinacms init
@@ -132,16 +145,16 @@ pnpm tinacms build
 
 ## 📊 État Actuel
 
-| Tâche | Statut | Date |
-|-------|--------|------|
-| Installation Next.js | ✅ Complété | 10 jan 2026 |
-| Installation Tina CMS | ✅ Complété | 10 jan 2026 |
-| Configuration Tina | 🔄 En attente | - |
-| Création composants | 🔄 En attente | - |
-| Intégration contenu | 🔄 En attente | - |
-| Design & Responsive | 🔄 En attente | - |
-| Déploiement Vercel | 🔄 En attente | - |
-| Documentation client | 🔄 En attente | - |
+| Tâche                 | Statut        | Date        |
+| --------------------- | ------------- | ----------- |
+| Installation Next.js  | ✅ Complété   | 10 jan 2026 |
+| Installation Tina CMS | ✅ Complété   | 10 jan 2026 |
+| Configuration Tina    | 🔄 En attente | -           |
+| Création composants   | 🔄 En attente | -           |
+| Intégration contenu   | 🔄 En attente | -           |
+| Design & Responsive   | 🔄 En attente | -           |
+| Déploiement Vercel    | 🔄 En attente | -           |
+| Documentation client  | 🔄 En attente | -           |
 
 ---
 
