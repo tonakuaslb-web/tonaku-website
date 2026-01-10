@@ -1,36 +1,130 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tonaku - Site Web de l'Association
 
-## Getting Started
+Site web monopage pour l'association Tonaku, construit avec Next.js et Tina CMS pour permettre une gestion de contenu facile et gratuite.
 
-First, run the development server:
+## 🚀 Démarrage Rapide
+
+### Prérequis
+
+- Node.js 18+ installé
+- pnpm installé (`npm install -g pnpm`)
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Installer les dépendances
+pnpm install
+
+# Démarrer le serveur de développement
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur pour voir le site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Technologies Utilisées
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js 16.1.1** - Framework React avec App Router
+- **React 19.2.3** - Bibliothèque UI
+- **TypeScript 5.9.3** - Typage statique
+- **Tailwind CSS 4.1.18** - Framework CSS utility-first
+- **Tina CMS 3.2.0** - Système de gestion de contenu
+- **pnpm** - Gestionnaire de packages
 
-## Learn More
+## 📁 Structure du Projet
 
-To learn more about Next.js, take a look at the following resources:
+```
+client-producte/
+├── app/                    # App Router Next.js
+│   ├── page.tsx           # Page d'accueil
+│   ├── layout.tsx         # Layout principal
+│   └── admin/             # Routes admin Tina (à créer)
+├── components/            # Composants React (à créer)
+│   ├── Hero.tsx
+│   ├── About.tsx
+│   ├── Activities.tsx
+│   ├── Team.tsx
+│   ├── Contact.tsx
+│   └── Footer.tsx
+├── content/               # Contenu éditable via Tina (à créer)
+│   ├── pages/
+│   ├── activities/
+│   └── team/
+├── public/                # Assets statiques
+│   └── uploads/           # Images uploadées (à créer)
+├── tina/                  # Configuration Tina CMS (à créer)
+│   ├── config.ts
+│   └── schema.ts
+└── .cursor/plans/         # Documentation du projet
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 Scripts Disponibles
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Développement
+pnpm dev              # Démarrer en mode développement
 
-## Deploy on Vercel
+# Production
+pnpm build            # Builder le projet
+pnpm start            # Démarrer en mode production
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Qualité du code
+pnpm lint             # Linter le code
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎨 Design
+
+Le site est une monopage avec les sections suivantes :
+
+1. **Hero** - Bannière d'accueil avec image et slogan
+2. **About** - À propos de l'association Tonaku
+3. **Activities** - Activités et projets de l'association
+4. **Team** - Membres de l'équipe
+5. **Contact** - Formulaire de contact et informations
+6. **Footer** - Liens et mentions légales
+
+## 🔧 Configuration Tina CMS
+
+*À venir - En cours de configuration*
+
+L'interface d'administration sera accessible à `/admin` après configuration de Tina CMS.
+
+## 🌐 Déploiement
+
+### Vercel (Recommandé)
+
+1. Créer un compte sur [Vercel](https://vercel.com)
+2. Connecter votre repository GitHub
+3. Configurer les variables d'environnement (voir documentation Tina)
+4. Déployer automatiquement
+
+Le site sera hébergé gratuitement sur Vercel.
+
+## 📚 Documentation
+
+Pour plus d'informations sur le projet, consultez :
+
+- [Plan complet du projet](.cursor/plans/tonaku-projet.md)
+- [Progression et étapes](.cursor/plans/PROGRESSION.md)
+
+## 💰 Coûts
+
+**Total : 0€/mois**
+
+- Hébergement Vercel : Gratuit
+- Tina CMS : Gratuit (self-hosted)
+- Repository GitHub : Gratuit
+- Domaine personnalisé : Optionnel (~10-15€/an)
+
+## 🤝 Contribution
+
+Ce projet est développé pour l'association Tonaku.
+
+## 📄 Licence
+
+Propriété de l'association Tonaku.
+
+---
+
+**Date de création** : 10 janvier 2026  
+**Version** : 0.1.0  
+**Statut** : En développement 🔄
