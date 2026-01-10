@@ -1,4 +1,5 @@
 import { Navigation } from "./components/organisms";
+import { Section } from "./components/templates";
 
 const navItems = [
   { label: "Accueil", href: "#accueil" },
@@ -21,24 +22,29 @@ export default function HomePage() {
 
       <main className="pt-20">
         {/* Section Accueil / Hero */}
-        <section
+        <Section
           id="accueil"
-          className="min-h-screen flex items-center justify-center bg-primary-800 text-white"
+          fullHeight
+          background={{ type: "color", value: "bg-primary-800" }}
+          textColor="text-white"
+          className="flex items-center justify-center"
         >
-          <div className="container mx-auto px-6 text-center">
+          <div className="text-center">
             <h1 className="text-5xl md:text-7xl font-bold mb-6">TONAKU</h1>
             <p className="text-xl md:text-2xl mb-8 text-primary-100">
               Promouvoir la lecture auprès des jeunes en Afrique
             </p>
           </div>
-        </section>
+        </Section>
 
         {/* Section Notre Histoire */}
-        <section
+        <Section
           id="histoire"
-          className="min-h-screen flex items-center justify-center bg-background-100"
+          fullHeight
+          background={{ type: "color", value: "bg-background-100" }}
+          className="flex items-center justify-center"
         >
-          <div className="container mx-auto px-6 text-center">
+          <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
               Notre Histoire
             </h2>
@@ -46,14 +52,16 @@ export default function HomePage() {
               Depuis 1992, nous œuvrons pour la promotion de la lecture...
             </p>
           </div>
-        </section>
+        </Section>
 
         {/* Section Missions */}
-        <section
+        <Section
           id="missions"
-          className="min-h-screen flex items-center justify-center bg-accent-100"
+          fullHeight
+          background={{ type: "color", value: "bg-accent-100" }}
+          className="flex items-center justify-center"
         >
-          <div className="container mx-auto px-6 text-center">
+          <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
               Nos Missions
             </h2>
@@ -62,14 +70,16 @@ export default function HomePage() {
               ateliers...
             </p>
           </div>
-        </section>
+        </Section>
 
         {/* Section Projets */}
-        <section
+        <Section
           id="projets"
-          className="min-h-screen flex items-center justify-center bg-background-100"
+          fullHeight
+          background={{ type: "color", value: "bg-background-100" }}
+          className="flex items-center justify-center"
         >
-          <div className="container mx-auto px-6 text-center">
+          <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
               Nos Projets
             </h2>
@@ -77,14 +87,16 @@ export default function HomePage() {
               Réédition d&apos;ouvrages, soutien scolaire, récolte de fonds...
             </p>
           </div>
-        </section>
+        </Section>
 
         {/* Section Équipe */}
-        <section
+        <Section
           id="equipe"
-          className="min-h-screen flex items-center justify-center bg-accent-100"
+          fullHeight
+          background={{ type: "color", value: "bg-accent-100" }}
+          className="flex items-center justify-center"
         >
-          <div className="container mx-auto px-6 text-center">
+          <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
               Notre Équipe
             </h2>
@@ -93,14 +105,17 @@ export default function HomePage() {
               l&apos;Afrique...
             </p>
           </div>
-        </section>
+        </Section>
 
         {/* Section Soutien */}
-        <section
+        <Section
           id="soutien"
-          className="min-h-screen flex items-center justify-center bg-primary-600 text-white"
+          fullHeight
+          background={{ type: "color", value: "bg-primary-600" }}
+          textColor="text-white"
+          className="flex items-center justify-center"
         >
-          <div className="container mx-auto px-6 text-center">
+          <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Soutenez-nous
             </h2>
@@ -108,14 +123,16 @@ export default function HomePage() {
               Faites un don pour soutenir nos actions...
             </p>
           </div>
-        </section>
+        </Section>
 
         {/* Section Ressources */}
-        <section
+        <Section
           id="ressources"
-          className="min-h-screen flex items-center justify-center bg-background-100"
+          fullHeight
+          background={{ type: "color", value: "bg-background-100" }}
+          className="flex items-center justify-center"
         >
-          <div className="container mx-auto px-6 text-center">
+          <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
               Nos Ressources
             </h2>
@@ -123,14 +140,16 @@ export default function HomePage() {
               Découvrez nos livres et publications...
             </p>
           </div>
-        </section>
+        </Section>
 
         {/* Section Contact */}
-        <section
+        <Section
           id="contact"
-          className="min-h-screen flex items-center justify-center bg-accent-100"
+          fullHeight
+          background={{ type: "color", value: "bg-accent-100" }}
+          className="flex items-center justify-center"
         >
-          <div className="container mx-auto px-6 text-center">
+          <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
               Contactez-nous
             </h2>
@@ -138,7 +157,7 @@ export default function HomePage() {
               Belgique • Congo • Suisse
             </p>
           </div>
-        </section>
+        </Section>
       </main>
 
       {/* Footer - À développer */}
