@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
+/* ====================================
+   PALETTE TONAKU
+   ==================================== */
+
+@theme {
+  /* PRIMARY - Vert Forêt (couleur principale du site) */
+  --color-primary-50: #f0f9f6;
+  --color-primary-100: #daf0e9;
+  --color-primary-200: #b5e1d3;
+  --color-primary-300: #85ccb5;
+  --color-primary-400: #55b295;
+  --color-primary-500: #2a8770;
+  --color-primary-600: #1a6b5a;
+  --color-primary-700: #165548;
+  --color-primary-800: #0f5647;
+  --color-primary-900: #0c3f35;
+
+  /* SECONDARY - Or/Jaune (couleur secondaire, accents) */
+  --color-secondary-50: #fef9e7;
+  --color-secondary-100: #fdf0c8;
+  --color-secondary-200: #fbe293;
+  --color-secondary-300: #f7d05e;
+  --color-secondary-400: #f3bd38;
+  --color-secondary-500: #d4a024;
+  --color-secondary-600: #b88a1a;
+  --color-secondary-700: #936e15;
+  --color-secondary-800: #765812;
+  --color-secondary-900: #624810;
+
+  /* ACCENT - Menthe (couleur d'accent, backgrounds légers) */
+  --color-accent-50: #f2fcf8;
+  --color-accent-100: #d5f2e9;
+  --color-accent-200: #b8e6d5;
+  --color-accent-300: #8dd4bc;
+  --color-accent-400: #62bda0;
+  --color-accent-500: #42a287;
+  --color-accent-600: #32816c;
+  --color-accent-700: #296858;
+  --color-accent-800: #245348;
+  --color-accent-900: #21453c;
+
+  /* NEUTRAL - Gris (textes et éléments neutres) */
+  --color-neutral-50: #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #5a6b67;
+  --color-neutral-700: #4b5563;
+  --color-neutral-800: #2d3e3a;
+  --color-neutral-900: #1f2937;
+
+  /* BACKGROUND - Crème/Beige (backgrounds et surfaces) */
+  --color-background-50: #fdfcfb;
+  --color-background-100: #fef9f1;
+  --color-background-200: #fdf7eb;
+  --color-background-300: #fcf3e0;
+  --color-background-400: #faefd0;
+  --color-background-500: #f8e7b8;
+  --color-background-600: #e4c98a;
+  --color-background-700: #c8a860;
+  --color-background-800: #a08142;
+  --color-background-900: #826a38;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #fef9f1;
+  --foreground: #2d3e3a;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
 }
