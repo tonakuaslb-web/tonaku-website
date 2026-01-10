@@ -1,65 +1,154 @@
-import Image from "next/image";
+import { Navigation } from "./components/organisms";
 
-export default function Home() {
+const navItems = [
+  { label: "Accueil", href: "#accueil" },
+  { label: "Notre Histoire", href: "#histoire", article: "Notre" },
+  { label: "Missions", href: "#missions" },
+  { label: "Projets", href: "#projets" },
+  { label: "Équipe", href: "#equipe" },
+  { label: "Nos ressources", href: "#ressources", article: "Nos" },
+  { label: "Nous contacter", href: "#contact", article: "Nous" },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <Navigation
+        navItems={navItems}
+        ctaLabel="Soutenez-nous"
+        ctaTargetId="soutien"
+      />
+
+      <main className="pt-20">
+        {/* Section Accueil / Hero */}
+        <section
+          id="accueil"
+          className="min-h-screen flex items-center justify-center bg-primary-800 text-white"
+        >
+          <div className="container mx-auto px-6 text-center">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">TONAKU</h1>
+            <p className="text-xl md:text-2xl mb-8 text-primary-100">
+              Promouvoir la lecture auprès des jeunes en Afrique
+            </p>
+          </div>
+        </section>
+
+        {/* Section Notre Histoire */}
+        <section
+          id="histoire"
+          className="min-h-screen flex items-center justify-center bg-background-100"
+        >
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
+              Notre Histoire
+            </h2>
+            <p className="text-xl text-neutral-700">
+              Depuis 1992, nous œuvrons pour la promotion de la lecture...
+            </p>
+          </div>
+        </section>
+
+        {/* Section Missions */}
+        <section
+          id="missions"
+          className="min-h-screen flex items-center justify-center bg-accent-100"
+        >
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
+              Nos Missions
+            </h2>
+            <p className="text-xl text-neutral-700">
+              Promouvoir la lecture, éditer des livres, organiser des
+              ateliers...
+            </p>
+          </div>
+        </section>
+
+        {/* Section Projets */}
+        <section
+          id="projets"
+          className="min-h-screen flex items-center justify-center bg-background-100"
+        >
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
+              Nos Projets
+            </h2>
+            <p className="text-xl text-neutral-700">
+              Réédition d&apos;ouvrages, soutien scolaire, récolte de fonds...
+            </p>
+          </div>
+        </section>
+
+        {/* Section Équipe */}
+        <section
+          id="equipe"
+          className="min-h-screen flex items-center justify-center bg-accent-100"
+        >
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
+              Notre Équipe
+            </h2>
+            <p className="text-xl text-neutral-700">
+              Une équipe dévouée répartie entre l&apos;Europe et
+              l&apos;Afrique...
+            </p>
+          </div>
+        </section>
+
+        {/* Section Soutien */}
+        <section
+          id="soutien"
+          className="min-h-screen flex items-center justify-center bg-primary-600 text-white"
+        >
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Soutenez-nous
+            </h2>
+            <p className="text-xl mb-8">
+              Faites un don pour soutenir nos actions...
+            </p>
+          </div>
+        </section>
+
+        {/* Section Ressources */}
+        <section
+          id="ressources"
+          className="min-h-screen flex items-center justify-center bg-background-100"
+        >
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
+              Nos Ressources
+            </h2>
+            <p className="text-xl text-neutral-700">
+              Découvrez nos livres et publications...
+            </p>
+          </div>
+        </section>
+
+        {/* Section Contact */}
+        <section
+          id="contact"
+          className="min-h-screen flex items-center justify-center bg-accent-100"
+        >
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
+              Contactez-nous
+            </h2>
+            <p className="text-xl text-neutral-700">
+              Belgique • Congo • Suisse
+            </p>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer - À développer */}
+      <footer className="bg-primary-800 text-white py-12">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-primary-100">
+            © 2026 TONAKU - Tous droits réservés
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </footer>
+    </>
   );
 }

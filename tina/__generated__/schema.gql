@@ -54,8 +54,8 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
-  page(relativePath: String): Page!
-  pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
+  accueil(relativePath: String): Accueil!
+  accueilConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AccueilFilter): AccueilConnection!
   histoire(relativePath: String): Histoire!
   histoireConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HistoireFilter): HistoireConnection!
   team(relativePath: String): Team!
@@ -71,7 +71,7 @@ type Query {
 }
 
 input DocumentFilter {
-  page: PageFilter
+  accueil: AccueilFilter
   histoire: HistoireFilter
   team: TeamFilter
   mission: MissionFilter
@@ -103,9 +103,9 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Page | Histoire | Team | Mission | Project | Book | Contact | Folder
+union DocumentNode = Accueil | Histoire | Team | Mission | Project | Book | Contact | Folder
 
-type Page implements Node & Document {
+type Accueil implements Node & Document {
   title: String!
   description: String
   body: JSON
@@ -127,21 +127,21 @@ input RichTextFilter {
   exists: Boolean
 }
 
-input PageFilter {
+input AccueilFilter {
   title: StringFilter
   description: StringFilter
   body: RichTextFilter
 }
 
-type PageConnectionEdges {
+type AccueilConnectionEdges {
   cursor: String!
-  node: Page
+  node: Accueil
 }
 
-type PageConnection implements Connection {
+type AccueilConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [PageConnectionEdges]
+  edges: [AccueilConnectionEdges]
 }
 
 type Histoire implements Node & Document {
@@ -414,8 +414,8 @@ type Mutation {
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createFolder(collection: String, relativePath: String!): DocumentNode!
-  updatePage(relativePath: String!, params: PageMutation!): Page!
-  createPage(relativePath: String!, params: PageMutation!): Page!
+  updateAccueil(relativePath: String!, params: AccueilMutation!): Accueil!
+  createAccueil(relativePath: String!, params: AccueilMutation!): Accueil!
   updateHistoire(relativePath: String!, params: HistoireMutation!): Histoire!
   createHistoire(relativePath: String!, params: HistoireMutation!): Histoire!
   updateTeam(relativePath: String!, params: TeamMutation!): Team!
@@ -431,7 +431,7 @@ type Mutation {
 }
 
 input DocumentUpdateMutation {
-  page: PageMutation
+  accueil: AccueilMutation
   histoire: HistoireMutation
   team: TeamMutation
   mission: MissionMutation
@@ -442,7 +442,7 @@ input DocumentUpdateMutation {
 }
 
 input DocumentMutation {
-  page: PageMutation
+  accueil: AccueilMutation
   histoire: HistoireMutation
   team: TeamMutation
   mission: MissionMutation
@@ -451,7 +451,7 @@ input DocumentMutation {
   contact: ContactMutation
 }
 
-input PageMutation {
+input AccueilMutation {
   title: String
   description: String
   body: JSON

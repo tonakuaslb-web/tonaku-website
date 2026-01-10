@@ -64,6 +64,9 @@
   --color-background-700: #c8a860;
   --color-background-800: #a08142;
   --color-background-900: #826a38;
+
+  /* BLUE - Bleu du logo (texte TONAKU) */
+  --color-blue-logo: #1e3a5f;
 }
 
 :root {
@@ -76,4 +79,20 @@ body {
   color: var(--foreground);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
 }

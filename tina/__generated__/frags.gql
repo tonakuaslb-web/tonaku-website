@@ -1,4 +1,4 @@
-fragment PageParts on Page {
+fragment AccueilParts on Accueil {
   __typename
   title
   description

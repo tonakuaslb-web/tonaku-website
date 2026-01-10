@@ -82,8 +82,8 @@ export type Query = {
   collections: Array<Collection>;
   node: Node;
   document: DocumentNode;
-  page: Page;
-  pageConnection: PageConnection;
+  accueil: Accueil;
+  accueilConnection: AccueilConnection;
   histoire: Histoire;
   histoireConnection: HistoireConnection;
   team: Team;
@@ -120,18 +120,18 @@ export type QueryDocumentArgs = {
 };
 
 
-export type QueryPageArgs = {
+export type QueryAccueilArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QueryPageConnectionArgs = {
+export type QueryAccueilConnectionArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PageFilter>;
+  filter?: InputMaybe<AccueilFilter>;
 };
 
 
@@ -225,7 +225,7 @@ export type QueryContactConnectionArgs = {
 };
 
 export type DocumentFilter = {
-  page?: InputMaybe<PageFilter>;
+  accueil?: InputMaybe<AccueilFilter>;
   histoire?: InputMaybe<HistoireFilter>;
   team?: InputMaybe<TeamFilter>;
   mission?: InputMaybe<MissionFilter>;
@@ -271,10 +271,10 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Page | Histoire | Team | Mission | Project | Book | Contact | Folder;
+export type DocumentNode = Accueil | Histoire | Team | Mission | Project | Book | Contact | Folder;
 
-export type Page = Node & Document & {
-  __typename?: 'Page';
+export type Accueil = Node & Document & {
+  __typename?: 'Accueil';
   title: Scalars['String']['output'];
   description?: Maybe<Scalars['String']['output']>;
   body?: Maybe<Scalars['JSON']['output']>;
@@ -296,23 +296,23 @@ export type RichTextFilter = {
   exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type PageFilter = {
+export type AccueilFilter = {
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
   body?: InputMaybe<RichTextFilter>;
 };
 
-export type PageConnectionEdges = {
-  __typename?: 'PageConnectionEdges';
+export type AccueilConnectionEdges = {
+  __typename?: 'AccueilConnectionEdges';
   cursor: Scalars['String']['output'];
-  node?: Maybe<Page>;
+  node?: Maybe<Accueil>;
 };
 
-export type PageConnection = Connection & {
-  __typename?: 'PageConnection';
+export type AccueilConnection = Connection & {
+  __typename?: 'AccueilConnection';
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<PageConnectionEdges>>>;
+  edges?: Maybe<Array<Maybe<AccueilConnectionEdges>>>;
 };
 
 export type Histoire = Node & Document & {
@@ -607,8 +607,8 @@ export type Mutation = {
   deleteDocument: DocumentNode;
   createDocument: DocumentNode;
   createFolder: DocumentNode;
-  updatePage: Page;
-  createPage: Page;
+  updateAccueil: Accueil;
+  createAccueil: Accueil;
   updateHistoire: Histoire;
   createHistoire: Histoire;
   updateTeam: Team;
@@ -657,15 +657,15 @@ export type MutationCreateFolderArgs = {
 };
 
 
-export type MutationUpdatePageArgs = {
+export type MutationUpdateAccueilArgs = {
   relativePath: Scalars['String']['input'];
-  params: PageMutation;
+  params: AccueilMutation;
 };
 
 
-export type MutationCreatePageArgs = {
+export type MutationCreateAccueilArgs = {
   relativePath: Scalars['String']['input'];
-  params: PageMutation;
+  params: AccueilMutation;
 };
 
 
@@ -741,7 +741,7 @@ export type MutationCreateContactArgs = {
 };
 
 export type DocumentUpdateMutation = {
-  page?: InputMaybe<PageMutation>;
+  accueil?: InputMaybe<AccueilMutation>;
   histoire?: InputMaybe<HistoireMutation>;
   team?: InputMaybe<TeamMutation>;
   mission?: InputMaybe<MissionMutation>;
@@ -752,7 +752,7 @@ export type DocumentUpdateMutation = {
 };
 
 export type DocumentMutation = {
-  page?: InputMaybe<PageMutation>;
+  accueil?: InputMaybe<AccueilMutation>;
   histoire?: InputMaybe<HistoireMutation>;
   team?: InputMaybe<TeamMutation>;
   mission?: InputMaybe<MissionMutation>;
@@ -761,7 +761,7 @@ export type DocumentMutation = {
   contact?: InputMaybe<ContactMutation>;
 };
 
-export type PageMutation = {
+export type AccueilMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['JSON']['input']>;
@@ -846,7 +846,7 @@ export type ContactMutation = {
   notes?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type PagePartsFragment = { __typename: 'Page', title: string, description?: string | null, body?: any | null };
+export type AccueilPartsFragment = { __typename: 'Accueil', title: string, description?: string | null, body?: any | null };
 
 export type HistoirePartsFragment = { __typename: 'Histoire', year: string, title: string, description?: any | null, image?: string | null, order?: number | null };
 
@@ -860,24 +860,24 @@ export type BookPartsFragment = { __typename: 'Book', title: string, author?: st
 
 export type ContactPartsFragment = { __typename: 'Contact', country: string, city?: string | null, address?: string | null, phone?: string | null, email?: string | null, notes?: any | null, hours?: { __typename: 'ContactHours', weekdays?: string | null, weekend?: string | null } | null };
 
-export type PageQueryVariables = Exact<{
+export type AccueilQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type AccueilQuery = { __typename?: 'Query', accueil: { __typename: 'Accueil', id: string, title: string, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
-export type PageConnectionQueryVariables = Exact<{
+export type AccueilConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PageFilter>;
+  filter?: InputMaybe<AccueilFilter>;
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type AccueilConnectionQuery = { __typename?: 'Query', accueilConnection: { __typename?: 'AccueilConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AccueilConnectionEdges', cursor: string, node?: { __typename: 'Accueil', id: string, title: string, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type HistoireQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -993,8 +993,8 @@ export type ContactConnectionQueryVariables = Exact<{
 
 export type ContactConnectionQuery = { __typename?: 'Query', contactConnection: { __typename?: 'ContactConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactConnectionEdges', cursor: string, node?: { __typename: 'Contact', id: string, country: string, city?: string | null, address?: string | null, phone?: string | null, email?: string | null, notes?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hours?: { __typename: 'ContactHours', weekdays?: string | null, weekend?: string | null } | null } | null } | null> | null } };
 
-export const PagePartsFragmentDoc = gql`
-    fragment PageParts on Page {
+export const AccueilPartsFragmentDoc = gql`
+    fragment AccueilParts on Accueil {
   __typename
   title
   description
@@ -1089,9 +1089,9 @@ export const ContactPartsFragmentDoc = gql`
   notes
 }
     `;
-export const PageDocument = gql`
-    query page($relativePath: String!) {
-  page(relativePath: $relativePath) {
+export const AccueilDocument = gql`
+    query accueil($relativePath: String!) {
+  accueil(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -1104,13 +1104,13 @@ export const PageDocument = gql`
       }
       id
     }
-    ...PageParts
+    ...AccueilParts
   }
 }
-    ${PagePartsFragmentDoc}`;
-export const PageConnectionDocument = gql`
-    query pageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PageFilter) {
-  pageConnection(
+    ${AccueilPartsFragmentDoc}`;
+export const AccueilConnectionDocument = gql`
+    query accueilConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AccueilFilter) {
+  accueilConnection(
     before: $before
     after: $after
     first: $first
@@ -1140,12 +1140,12 @@ export const PageConnectionDocument = gql`
           }
           id
         }
-        ...PageParts
+        ...AccueilParts
       }
     }
   }
 }
-    ${PagePartsFragmentDoc}`;
+    ${AccueilPartsFragmentDoc}`;
 export const HistoireDocument = gql`
     query histoire($relativePath: String!) {
   histoire(relativePath: $relativePath) {
@@ -1491,11 +1491,11 @@ export const ContactConnectionDocument = gql`
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
-      page(variables: PageQueryVariables, options?: C): Promise<{data: PageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageQueryVariables, query: string}> {
-        return requester<{data: PageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageQueryVariables, query: string}, PageQueryVariables>(PageDocument, variables, options);
+      accueil(variables: AccueilQueryVariables, options?: C): Promise<{data: AccueilQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AccueilQueryVariables, query: string}> {
+        return requester<{data: AccueilQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AccueilQueryVariables, query: string}, AccueilQueryVariables>(AccueilDocument, variables, options);
       },
-    pageConnection(variables?: PageConnectionQueryVariables, options?: C): Promise<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}> {
-        return requester<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}, PageConnectionQueryVariables>(PageConnectionDocument, variables, options);
+    accueilConnection(variables?: AccueilConnectionQueryVariables, options?: C): Promise<{data: AccueilConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AccueilConnectionQueryVariables, query: string}> {
+        return requester<{data: AccueilConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AccueilConnectionQueryVariables, query: string}, AccueilConnectionQueryVariables>(AccueilConnectionDocument, variables, options);
       },
     histoire(variables: HistoireQueryVariables, options?: C): Promise<{data: HistoireQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HistoireQueryVariables, query: string}> {
         return requester<{data: HistoireQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HistoireQueryVariables, query: string}, HistoireQueryVariables>(HistoireDocument, variables, options);
