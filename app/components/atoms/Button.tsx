@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
+import { cn } from "@/app/lib/utils";
 
 type ButtonProps = Readonly<{
   variant?: "primary" | "secondary" | "outline";
@@ -35,7 +36,12 @@ export default function Button({
 
   return (
     <button
-      className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+      className={cn(
+        baseStyles,
+        variantStyles[variant],
+        sizeStyles[size],
+        className
+      )}
       {...props}
     >
       {children}

@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
+import { cn } from "@/app/lib/utils";
 
 type CardProps = Readonly<{
   children: ReactNode;
   variant?: "default" | "outlined" | "elevated";
   background?: string;
   className?: string;
-  onClick?: () => void;
 }>;
 
 const variantMap = {
@@ -19,21 +19,16 @@ export default function Card({
   variant = "default",
   background,
   className = "",
-  onClick,
 }: CardProps) {
   const bgClass = background || variantMap[variant];
-  
+
   return (
     <div
-      className={`
-        rounded-xl
-        p-6
-        transition-all duration-300
-        ${bgClass}
-        ${onClick ? "cursor-pointer hover:scale-105 hover:shadow-xl" : ""}
-        ${className}
-      `.trim()}
-      onClick={onClick}
+      className={cn(
+        "rounded-xl p-6 transition-all duration-300",
+        bgClass,
+        className
+      )}
     >
       {children}
     </div>

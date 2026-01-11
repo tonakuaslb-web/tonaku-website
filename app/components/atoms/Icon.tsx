@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { cn } from "@/app/lib/utils";
 
 type IconProps = Readonly<{
   children: ReactNode;
@@ -12,16 +13,18 @@ const sizeMap = {
   lg: "w-16 h-16 text-2xl",
 };
 
-export default function Icon({ children, size = "md", className = "" }: IconProps) {
+export default function Icon({
+  children,
+  size = "md",
+  className = "",
+}: IconProps) {
   return (
     <div
-      className={`
-        flex items-center justify-center
-        bg-accent-500
-        rounded-lg
-        ${sizeMap[size]}
-        ${className}
-      `.trim()}
+      className={cn(
+        "flex items-center justify-center bg-accent-500 rounded-lg",
+        sizeMap[size],
+        className
+      )}
     >
       {children}
     </div>

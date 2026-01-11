@@ -1,5 +1,7 @@
 "use client";
 
+import { cn } from "@/app/lib/utils";
+
 type NavLinkProps = Readonly<{
   href: string;
   children: React.ReactNode;
@@ -36,7 +38,10 @@ export default function NavLink({
     <a
       href={href}
       onClick={handleClick}
-      className={`text-neutral-700 hover:text-primary-600 transition-colors duration-200 font-medium ${className}`}
+      className={cn(
+        "text-neutral-700 hover:text-primary-600 transition-colors duration-200 font-medium",
+        className
+      )}
     >
       {article && (
         <span className="text-sm text-neutral-500 font-normal mr-1">
