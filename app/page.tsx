@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Navigation, Hero } from "./components/organisms";
 import { Section } from "./components/templates";
 import {
@@ -17,6 +18,9 @@ import {
   Calendar,
   CreditCard,
   Heart,
+  Mail,
+  Phone,
+  MapPin,
 } from "lucide-react";
 
 const navItems = [
@@ -338,31 +342,118 @@ export default function HomePage() {
             </p>
           </div>
         </Section>
-
-        {/* Section Contact */}
-        <Section
-          id="contact"
-          fullHeight
-          background={{ type: "color", value: "bg-accent-100" }}
-          className="flex items-center justify-center"
-        >
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
-              Contactez-nous
-            </h2>
-            <p className="text-xl text-neutral-700">
-              Belgique • Congo • Suisse
-            </p>
-          </div>
-        </Section>
       </main>
 
-      {/* Footer - À développer */}
-      <footer className="bg-primary-800 text-white py-12">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-primary-100">
-            © 2026 TONAKU - Tous droits réservés
-          </p>
+      {/* Footer avec Contact intégré */}
+      <footer id="contact" className="bg-primary-700 text-white py-16">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl md:text-5xl font-bold mb-12">
+            Nous contacter
+          </h2>
+
+          <div className="grid lg:grid-cols-3 gap-12 mb-12">
+            {/* Colonne 1 : Logo et devise */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <Image
+                  src="/logo.png"
+                  alt="TONAKU Logo"
+                  width={112}
+                  height={112}
+                  className="object-contain"
+                />
+                <h3 className="text-2xl font-bold">TONAKU</h3>
+              </div>
+              <p className="text-white/90 leading-relaxed">
+                Préserver les livres, favoriser l&apos;accès au savoir, soutenir
+                la scolarité des jeunes.
+              </p>
+            </div>
+
+            {/* Colonne 2 : Siège social (Belgique) */}
+            <div>
+              <div className="flex items-start gap-3 mb-4">
+                <MapPin size={20} className="text-secondary-500 mt-1" />
+                <h3 className="text-xl font-bold">Siège social (Belgique)</h3>
+              </div>
+
+              <div className="space-y-4 ml-8">
+                <div>
+                  <p className="text-sm text-white/70 mb-1">Adresse</p>
+                  <p className="text-white">Rue Les Tilleur 34</p>
+                  <p className="text-white">5651 Somzée</p>
+                  <p className="text-white">Belgique</p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Phone size={16} className="text-secondary-500" />
+                  <a
+                    href="tel:+3249729519"
+                    className="text-white hover:text-secondary-400 transition-colors"
+                  >
+                    (+32) 497 29 51 91
+                  </a>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Mail size={16} className="text-secondary-500" />
+                  <span className="text-white/70">[à compléter]</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Colonne 3 : Nos bureaux */}
+            <div>
+              <h3 className="text-xl font-bold mb-4">Nos bureaux</h3>
+
+              <div className="space-y-6">
+                <div>
+                  <p className="font-semibold mb-2">Kolwezi (Congo)</p>
+                  <div className="flex items-center gap-2">
+                    <Phone size={16} className="text-secondary-500" />
+                    <a
+                      href="tel:+243810314550"
+                      className="text-white hover:text-secondary-400 transition-colors"
+                    >
+                      (+243) 810 314 550
+                    </a>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-semibold mb-2">Zurich (Suisse)</p>
+                  <div className="flex items-center gap-2">
+                    <Phone size={16} className="text-secondary-500" />
+                    <a
+                      href="tel:+41798104106"
+                      className="text-white hover:text-secondary-400 transition-colors"
+                    >
+                      (+41) 79 810 41 06
+                    </a>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-semibold mb-2">Site web</p>
+                  <a
+                    href="https://www.tonakuasbl.be"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-secondary-500 hover:text-secondary-400 transition-colors"
+                  >
+                    www.tonakuasbl.be
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="border-t border-white/10 pt-8 text-center">
+            <p className="text-white/70">
+              © 2026 TONAKU ASBL. Tous droits réservés.
+            </p>
+          </div>
         </div>
       </footer>
     </>
