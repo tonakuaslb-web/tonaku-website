@@ -1,4 +1,4 @@
-import { Navigation } from "./components/organisms";
+import { Navigation, Hero } from "./components/organisms";
 import { Section } from "./components/templates";
 import { TimelineCard, ProjectCard, MissionCard } from "./components/molecules";
 import {
@@ -30,22 +30,15 @@ export default function HomePage() {
         ctaTargetId="soutien"
       />
 
-      <main className="pt-20">
+      <main>
         {/* Section Accueil / Hero */}
-        <Section
-          id="accueil"
-          fullHeight
-          background={{ type: "color", value: "bg-primary-800" }}
-          textColor="text-white"
-          className="flex items-center justify-center"
-        >
-          <div className="text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">TONAKU</h1>
-            <p className="text-xl md:text-2xl mb-8 text-primary-100">
-              Promouvoir la lecture auprès des jeunes en Afrique
-            </p>
-          </div>
-        </Section>
+        <section id="accueil">
+          <Hero
+            title="TONAKU"
+            subtitle="Promouvoir la lecture et l'accès aux livres auprès des jeunes en Afrique"
+            about="TONAKU est une association dédiée à la promotion de la lecture et à la transmission de la culture africaine. Fondée en 1992 par Robert Yava Mayonde, nous œuvrons pour l'éducation et l'épanouissement des jeunes à travers les livres et la culture."
+          />
+        </section>
 
         {/* Section Notre Histoire */}
         <Section
