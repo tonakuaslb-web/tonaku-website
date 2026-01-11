@@ -1,6 +1,11 @@
 import { Navigation, Hero } from "./components/organisms";
 import { Section } from "./components/templates";
-import { TimelineCard, ProjectCard, MissionCard } from "./components/molecules";
+import {
+  TimelineCard,
+  ProjectCard,
+  MissionCard,
+  TeamMemberCard,
+} from "./components/molecules";
 import {
   BookOpen,
   Users,
@@ -192,18 +197,34 @@ export default function HomePage() {
         {/* Section Équipe */}
         <Section
           id="equipe"
-          fullHeight
           background={{ type: "color", value: "bg-accent-100" }}
-          className="flex items-center justify-center"
+          paddingY="xl"
         >
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4 text-center">
               Notre Équipe
             </h2>
-            <p className="text-xl text-neutral-700">
-              Une équipe dévouée répartie entre l&apos;Europe et
-              l&apos;Afrique...
+            <p className="text-xl text-neutral-600 mb-12 text-center">
+              Une équipe dévouée répartie entre l&apos;Europe et l&apos;Afrique
             </p>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <TeamMemberCard
+                name="Sylvie Kasamba"
+                role="Présidente"
+                location="Belgique"
+              />
+              <TeamMemberCard
+                name="Jean Dupont"
+                role="Coordinateur Congo"
+                location="Congo (RDC)"
+              />
+              <TeamMemberCard
+                name="Marie Martin"
+                role="Trésorière"
+                location="Suisse"
+              />
+            </div>
           </div>
         </Section>
 
