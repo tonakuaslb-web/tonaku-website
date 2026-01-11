@@ -5,6 +5,7 @@ import {
   ProjectCard,
   MissionCard,
   TeamMemberCard,
+  DonationMethodCard,
 } from "./components/molecules";
 import {
   BookOpen,
@@ -14,6 +15,8 @@ import {
   ShoppingBag,
   GraduationCap,
   Calendar,
+  CreditCard,
+  Heart,
 } from "lucide-react";
 
 const navItems = [
@@ -231,18 +234,91 @@ export default function HomePage() {
         {/* Section Soutien */}
         <Section
           id="soutien"
-          fullHeight
-          background={{ type: "color", value: "bg-primary-600" }}
-          textColor="text-white"
-          className="flex items-center justify-center"
+          background={{ type: "color", value: "bg-primary-700" }}
+          paddingY="xl"
         >
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center">
               Soutenez-nous
             </h2>
-            <p className="text-xl mb-8">
-              Faites un don pour soutenir nos actions...
+            <p className="text-xl text-white/90 mb-12 text-center max-w-4xl mx-auto">
+              Vous pouvez soutenir TONAKU ASBL par vos dons pour développer nos
+              activités.
             </p>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Don en ligne */}
+              <DonationMethodCard
+                icon={<Heart size={28} strokeWidth={2} />}
+                title="Don en ligne"
+                description="Formulaire sécurisé"
+              >
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-3">
+                    <button className="bg-secondary-500 text-primary-800 font-bold py-3 px-6 rounded-lg hover:bg-secondary-400 transition-colors">
+                      5 €
+                    </button>
+                    <button className="bg-secondary-500 text-primary-800 font-bold py-3 px-6 rounded-lg hover:bg-secondary-400 transition-colors">
+                      10 €
+                    </button>
+                    <button className="bg-secondary-500 text-primary-800 font-bold py-3 px-6 rounded-lg hover:bg-secondary-400 transition-colors">
+                      20 €
+                    </button>
+                    <button className="bg-secondary-500 text-primary-800 font-bold py-3 px-6 rounded-lg hover:bg-secondary-400 transition-colors">
+                      30 €
+                    </button>
+                  </div>
+                </div>
+              </DonationMethodCard>
+
+              {/* Virement bancaire */}
+              <DonationMethodCard
+                icon={<CreditCard size={28} strokeWidth={2} />}
+                title="Virement bancaire"
+              >
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-white/80 text-sm mb-2">IBAN :</p>
+                    <div className="bg-primary-600/50 rounded-lg p-4">
+                      <p className="text-white font-mono">BE...</p>
+                    </div>
+                  </div>
+                  <p className="text-white/70 text-sm italic">
+                    Les coordonnées complètes seront communiquées sur demande
+                  </p>
+                </div>
+              </DonationMethodCard>
+
+              {/* Dons matériels */}
+              <DonationMethodCard
+                icon={<Package size={28} strokeWidth={2} />}
+                title="Dons matériels"
+              >
+                <div className="space-y-4">
+                  <p className="text-white/80 text-sm font-semibold">
+                    Fournitures scolaires :
+                  </p>
+                  <ul className="space-y-2 text-white/90">
+                    <li className="flex items-start gap-2">
+                      <span className="text-secondary-500 mt-1">•</span>
+                      <span>Cartables</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-secondary-500 mt-1">•</span>
+                      <span>Stylos et crayons</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-secondary-500 mt-1">•</span>
+                      <span>Cahiers</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-secondary-500 mt-1">•</span>
+                      <span>Matériel éducatif</span>
+                    </li>
+                  </ul>
+                </div>
+              </DonationMethodCard>
+            </div>
           </div>
         </Section>
 
