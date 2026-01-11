@@ -1,5 +1,15 @@
 import { Navigation } from "./components/organisms";
 import { Section } from "./components/templates";
+import { TimelineCard, ProjectCard, MissionCard } from "./components/molecules";
+import {
+  BookOpen,
+  Users,
+  FileText,
+  Package,
+  ShoppingBag,
+  GraduationCap,
+  Calendar,
+} from "lucide-react";
 
 const navItems = [
   { label: "Accueil", href: "#accueil" },
@@ -40,52 +50,149 @@ export default function HomePage() {
         {/* Section Notre Histoire */}
         <Section
           id="histoire"
-          fullHeight
           background={{ type: "color", value: "bg-background-100" }}
-          className="flex items-center justify-center"
+          paddingY="xl"
+          containerWidth="xl"
         >
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-12 text-center">
               Notre Histoire
             </h2>
-            <p className="text-xl text-neutral-700">
-              Depuis 1992, nous œuvrons pour la promotion de la lecture...
-            </p>
+
+            {/* Timeline avec ligne en dégradé - décalée vers la gauche */}
+            <div className="relative ml-4 md:ml-12 lg:ml-20 xl:ml-32">
+              {/* Ligne verticale en dégradé jaune -> vert -> bleu */}
+              <div
+                className="absolute left-[10px] top-0 bottom-0 w-0.5"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, #d4a024 0%, #2a8770 50%, #1e3a5f 100%)",
+                }}
+              />
+
+              {/* Cartes */}
+              <div className="space-y-0 relative z-10">
+                <TimelineCard
+                  year="1992"
+                  title="Il était une fois..."
+                  description="Robert Yava Mayonde crée le magasin socioculturel TONAKU, qui signifie en langue Ndembu « ouvre l'œil », un appel à la vigilance et à l'ouverture."
+                />
+                <TimelineCard
+                  year="2004"
+                  title="Naissance du magazine"
+                  description="Le 10 octobre 2004, TONAKU devient officiellement un magazine socioculturel agréé sous le numéro 500/10/2004, avec siège à Likasi. Passionné de lecture et d'écriture, Robert y consacre toute sa vie."
+                />
+                <TimelineCard
+                  year="2024"
+                  title="Une nouvelle ère"
+                  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                />
+              </div>
+
+              {/* Continuation de la ligne après le dernier point */}
+              <div className="flex gap-6 relative">
+                <div className="w-5 h-5 shrink-0" />
+                <div className="flex-1 pb-12">
+                  <p className="text-center text-neutral-500 italic">
+                    L&apos;histoire continue...
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </Section>
 
         {/* Section Missions */}
         <Section
           id="missions"
-          fullHeight
           background={{ type: "color", value: "bg-accent-100" }}
-          className="flex items-center justify-center"
+          paddingY="xl"
         >
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-12 text-center">
               Nos Missions
             </h2>
-            <p className="text-xl text-neutral-700">
-              Promouvoir la lecture, éditer des livres, organiser des
-              ateliers...
-            </p>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <MissionCard
+                icon={<BookOpen size={24} strokeWidth={2} />}
+                description="Promouvoir la lecture et l'accès aux livres auprès des jeunes en Afrique, particulièrement au Katanga"
+              />
+              <MissionCard
+                icon={<Users size={24} strokeWidth={2} />}
+                description="Valoriser et transmettre la culture africaine (histoire, traditions, rites, langues)"
+              />
+              <MissionCard
+                icon={<FileText size={24} strokeWidth={2} />}
+                description="Éditer, publier et diffuser en ebooks les ouvrages de Robert Yava Mayonde"
+              />
+              <MissionCard
+                icon={<Package size={24} strokeWidth={2} />}
+                description="Collecter et distribuer du matériel éducatif"
+              />
+              <MissionCard
+                icon={<ShoppingBag size={24} strokeWidth={2} />}
+                description="Vendre des produits dérivés (goodies) pour financer nos actions"
+              />
+              <MissionCard
+                icon={<GraduationCap size={24} strokeWidth={2} />}
+                description="Soutenir la scolarité des jeunes par des aides éducatives et financières"
+              />
+              <MissionCard
+                icon={<Calendar size={24} strokeWidth={2} />}
+                description="Organiser des événements culturels et littéraires (conférences, salons, ateliers)"
+              />
+            </div>
           </div>
         </Section>
 
         {/* Section Projets */}
         <Section
           id="projets"
-          fullHeight
           background={{ type: "color", value: "bg-background-100" }}
-          className="flex items-center justify-center"
+          paddingY="xl"
         >
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
-              Nos Projets
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4 text-center">
+              Projets 2026-2027
             </h2>
-            <p className="text-xl text-neutral-700">
-              Réédition d&apos;ouvrages, soutien scolaire, récolte de fonds...
+            <p className="text-xl text-neutral-600 mb-12 text-center">
+              Notre plan d&apos;action pour préserver l&apos;héritage de Robert
+              Yava Mayonde et soutenir l&apos;éducation des jeunes.
             </p>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              <ProjectCard
+                icon={<BookOpen size={32} strokeWidth={2} />}
+                title="Réédition de 3 ouvrages"
+                description="Ouvrages en cours de correction :"
+                items={[
+                  "Proverbes et adages Ndembu/Koza",
+                  "Connaissance des Minungu et Ndembu et de leur environnement socioculturel",
+                  "À qui appartient le plateau de Manika ?",
+                ]}
+                note="Diffusion en ebooks pour réduire les coûts"
+              />
+              <ProjectCard
+                icon={<GraduationCap size={32} strokeWidth={2} />}
+                title="Soutien scolaire et financier"
+                description="Accompagnement de 2 enfants (Kolwezi et Likasi) :"
+                items={[
+                  "Paiement des frais de scolarité",
+                  "Fourniture scolaire",
+                ]}
+              />
+              <ProjectCard
+                icon={<ShoppingBag size={32} strokeWidth={2} />}
+                title="Récolte de fonds"
+                description="Activités prévues :"
+                items={[
+                  "Vente de produits dérivés (T-shirts, bouteilles, stylos, sacs)",
+                  "Boissons à base de gingembre",
+                  "Organisation d'événements (ateliers de lecture, marchés, festivités)",
+                ]}
+              />
+            </div>
           </div>
         </Section>
 
