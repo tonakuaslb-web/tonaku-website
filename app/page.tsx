@@ -123,7 +123,7 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 grid-center-orphan">
+            <div className="flex flex-wrap justify-center gap-6">
               {missions.map((mission) => {
                 const mappedMission = mapMission(mission);
                 const Icon = mappedMission.icon as React.ComponentType<{ size?: number }>;
@@ -156,7 +156,7 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="flex flex-wrap justify-center gap-6">
               {projects.map((project) => {
                 const mappedProject = mapProject(project);
                 return (
@@ -167,6 +167,8 @@ export default async function HomePage() {
                     status={mappedProject.status}
                     location={mappedProject.location}
                     beneficiaries={mappedProject.beneficiaries}
+                    budget={mappedProject.budget}
+                    image={mappedProject.image}
                     description={mappedProject.description}
                   />
                 );

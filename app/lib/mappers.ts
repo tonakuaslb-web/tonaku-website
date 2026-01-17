@@ -51,6 +51,8 @@ export function mapProject(project: Project) {
     status: project.status,
     location: project.location || undefined,
     beneficiaries: project.details?.beneficiaries || undefined,
+    budget: project.details?.budget || undefined,
+    image: project.image || undefined,
     description: extractPlainText(project.description),
   };
 }

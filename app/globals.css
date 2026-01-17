@@ -127,20 +127,3 @@ h6 {
   animation-delay: 150ms;
 }
 
-/* Centrer automatiquement le dernier élément s'il est seul sur sa ligne */
-.grid-center-orphan > *:last-child:nth-child(3n+1) {
-  grid-column: 2 / 3;
-}
-
-@media (max-width: 1024px) {
-  .grid-center-orphan > *:last-child:nth-child(2n+1) {
-    grid-column: 1 / -1;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .grid-center-orphan > *:last-child:nth-child(3n+1) {
-    grid-column: auto;
-  }
-}

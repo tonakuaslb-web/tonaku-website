@@ -16,7 +16,10 @@ export default function MissionCard({
 }: MissionCardProps) {
   return (
     <div
-      className={cn("rounded-xl p-[2px] shadow-sm h-full", className)}
+      className={cn(
+        "rounded-xl p-[2px] shadow-sm h-full w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]",
+        className
+      )}
       style={{
         background: "linear-gradient(135deg, #fef9e7 0%, #d4a024 100%)",
       }}
