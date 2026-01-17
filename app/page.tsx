@@ -123,7 +123,7 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 grid-center-orphan">
               {missions.map((mission) => {
                 const mappedMission = mapMission(mission);
                 const Icon = mappedMission.icon as React.ComponentType<{ size?: number }>;
