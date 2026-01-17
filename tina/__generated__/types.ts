@@ -296,7 +296,6 @@ export type Accueil = Node & Document & {
   description?: Maybe<Scalars['String']['output']>;
   hero?: Maybe<AccueilHero>;
   sections?: Maybe<AccueilSections>;
-  body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -335,7 +334,6 @@ export type AccueilFilter = {
   description?: InputMaybe<StringFilter>;
   hero?: InputMaybe<AccueilHeroFilter>;
   sections?: InputMaybe<AccueilSectionsFilter>;
-  body?: InputMaybe<RichTextFilter>;
 };
 
 export type AccueilConnectionEdges = {
@@ -817,7 +815,6 @@ export type AccueilMutation = {
   description?: InputMaybe<Scalars['String']['input']>;
   hero?: InputMaybe<AccueilHeroMutation>;
   sections?: InputMaybe<AccueilSectionsMutation>;
-  body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 export type HistoireMutation = {
@@ -899,7 +896,7 @@ export type ContactMutation = {
   notes?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type AccueilPartsFragment = { __typename: 'Accueil', title: string, description?: string | null, body?: any | null, hero?: { __typename: 'AccueilHero', title: string, subtitle?: string | null, about?: any | null } | null, sections?: { __typename: 'AccueilSections', histoireSubtitle?: string | null, missionsSubtitle?: string | null, projetsSubtitle?: string | null, equipeSubtitle?: string | null, soutienSubtitle?: string | null, ressourcesSubtitle?: string | null } | null };
+export type AccueilPartsFragment = { __typename: 'Accueil', title: string, description?: string | null, hero?: { __typename: 'AccueilHero', title: string, subtitle?: string | null, about?: any | null } | null, sections?: { __typename: 'AccueilSections', histoireSubtitle?: string | null, missionsSubtitle?: string | null, projetsSubtitle?: string | null, equipeSubtitle?: string | null, soutienSubtitle?: string | null, ressourcesSubtitle?: string | null } | null };
 
 export type HistoirePartsFragment = { __typename: 'Histoire', year: string, title: string, description?: any | null, image?: string | null, order?: number | null };
 
@@ -918,7 +915,7 @@ export type AccueilQueryVariables = Exact<{
 }>;
 
 
-export type AccueilQuery = { __typename?: 'Query', accueil: { __typename: 'Accueil', id: string, title: string, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'AccueilHero', title: string, subtitle?: string | null, about?: any | null } | null, sections?: { __typename: 'AccueilSections', histoireSubtitle?: string | null, missionsSubtitle?: string | null, projetsSubtitle?: string | null, equipeSubtitle?: string | null, soutienSubtitle?: string | null, ressourcesSubtitle?: string | null } | null } };
+export type AccueilQuery = { __typename?: 'Query', accueil: { __typename: 'Accueil', id: string, title: string, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'AccueilHero', title: string, subtitle?: string | null, about?: any | null } | null, sections?: { __typename: 'AccueilSections', histoireSubtitle?: string | null, missionsSubtitle?: string | null, projetsSubtitle?: string | null, equipeSubtitle?: string | null, soutienSubtitle?: string | null, ressourcesSubtitle?: string | null } | null } };
 
 export type AccueilConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -930,7 +927,7 @@ export type AccueilConnectionQueryVariables = Exact<{
 }>;
 
 
-export type AccueilConnectionQuery = { __typename?: 'Query', accueilConnection: { __typename?: 'AccueilConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AccueilConnectionEdges', cursor: string, node?: { __typename: 'Accueil', id: string, title: string, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'AccueilHero', title: string, subtitle?: string | null, about?: any | null } | null, sections?: { __typename: 'AccueilSections', histoireSubtitle?: string | null, missionsSubtitle?: string | null, projetsSubtitle?: string | null, equipeSubtitle?: string | null, soutienSubtitle?: string | null, ressourcesSubtitle?: string | null } | null } | null } | null> | null } };
+export type AccueilConnectionQuery = { __typename?: 'Query', accueilConnection: { __typename?: 'AccueilConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AccueilConnectionEdges', cursor: string, node?: { __typename: 'Accueil', id: string, title: string, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'AccueilHero', title: string, subtitle?: string | null, about?: any | null } | null, sections?: { __typename: 'AccueilSections', histoireSubtitle?: string | null, missionsSubtitle?: string | null, projetsSubtitle?: string | null, equipeSubtitle?: string | null, soutienSubtitle?: string | null, ressourcesSubtitle?: string | null } | null } | null } | null> | null } };
 
 export type HistoireQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1066,7 +1063,6 @@ export const AccueilPartsFragmentDoc = gql`
     soutienSubtitle
     ressourcesSubtitle
   }
-  body
 }
     `;
 export const HistoirePartsFragmentDoc = gql`

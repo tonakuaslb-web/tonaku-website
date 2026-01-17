@@ -115,12 +115,6 @@ var config_default = defineConfig({
                 ui: { component: "textarea" }
               }
             ]
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Contenu additionnel",
-            isBody: true
           }
         ]
       },

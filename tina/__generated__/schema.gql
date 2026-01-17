@@ -125,7 +125,6 @@ type Accueil implements Node & Document {
   description: String
   hero: AccueilHero
   sections: AccueilSections
-  body: JSON
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -164,7 +163,6 @@ input AccueilFilter {
   description: StringFilter
   hero: AccueilHeroFilter
   sections: AccueilSectionsFilter
-  body: RichTextFilter
 }
 
 type AccueilConnectionEdges {
@@ -505,7 +503,6 @@ input AccueilMutation {
   description: String
   hero: AccueilHeroMutation
   sections: AccueilSectionsMutation
-  body: JSON
 }
 
 input HistoireMutation {

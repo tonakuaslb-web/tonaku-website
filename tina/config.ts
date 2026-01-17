@@ -124,12 +124,6 @@ export default defineConfig({
               },
             ],
           },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Contenu additionnel",
-            isBody: true,
-          },
         ],
       },
 

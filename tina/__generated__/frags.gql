@@ -17,7 +17,6 @@ fragment AccueilParts on Accueil {
     soutienSubtitle
     ressourcesSubtitle
   }
-  body
 }
 
 fragment HistoireParts on Histoire {
