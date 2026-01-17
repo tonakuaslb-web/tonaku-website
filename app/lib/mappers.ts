@@ -21,6 +21,7 @@ export function mapTimelineEvent(event: Histoire) {
     year: event.year,
     title: event.title,
     description: extractPlainText(event.description),
+    image: event.image || undefined,
   };
 }
 

@@ -98,6 +98,7 @@ export default async function HomePage() {
                       year={mappedEvent.year}
                       title={mappedEvent.title}
                       description={mappedEvent.description}
+                      image={mappedEvent.image}
                     />
                   );
                 })}

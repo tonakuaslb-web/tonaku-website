@@ -1,15 +1,18 @@
+import Image from "next/image";
 import Card from "./Card";
 
 type TimelineCardProps = Readonly<{
   year: string;
   title: string;
   description: string;
+  image?: string;
 }>;
 
 export default function TimelineCard({
   year,
   title,
   description,
+  image,
 }: TimelineCardProps) {
   return (
     <div className="relative pl-8 pb-8">
@@ -25,6 +28,19 @@ export default function TimelineCard({
           <div className="shrink-0">
             <h3 className="text-3xl font-bold text-blue-logo">{year}</h3>
           </div>
+
+          {/* Image optionnelle (entre année et texte) */}
+          {image && (
+            <div className="shrink-0 self-stretch">
+              <Image
+                src={image}
+                alt={title}
+                width={200}
+                height={300}
+                className="h-full w-32 rounded-lg object-cover shadow-sm"
+              />
+            </div>
+          )}
 
           {/* Contenu à droite */}
           <div className="flex-1 space-y-2">
