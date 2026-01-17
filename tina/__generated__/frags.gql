@@ -8,6 +8,15 @@ fragment AccueilParts on Accueil {
     subtitle
     about
   }
+  sections {
+    __typename
+    histoireSubtitle
+    missionsSubtitle
+    projetsSubtitle
+    equipeSubtitle
+    soutienSubtitle
+    ressourcesSubtitle
+  }
   body
 }
 

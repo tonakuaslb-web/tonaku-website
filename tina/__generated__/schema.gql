@@ -111,10 +111,20 @@ type AccueilHero {
   about: JSON
 }
 
+type AccueilSections {
+  histoireSubtitle: String
+  missionsSubtitle: String
+  projetsSubtitle: String
+  equipeSubtitle: String
+  soutienSubtitle: String
+  ressourcesSubtitle: String
+}
+
 type Accueil implements Node & Document {
   title: String!
   description: String
   hero: AccueilHero
+  sections: AccueilSections
   body: JSON
   id: ID!
   _sys: SystemInfo!
@@ -140,10 +150,20 @@ input AccueilHeroFilter {
   about: RichTextFilter
 }
 
+input AccueilSectionsFilter {
+  histoireSubtitle: StringFilter
+  missionsSubtitle: StringFilter
+  projetsSubtitle: StringFilter
+  equipeSubtitle: StringFilter
+  soutienSubtitle: StringFilter
+  ressourcesSubtitle: StringFilter
+}
+
 input AccueilFilter {
   title: StringFilter
   description: StringFilter
   hero: AccueilHeroFilter
+  sections: AccueilSectionsFilter
   body: RichTextFilter
 }
 
@@ -471,10 +491,20 @@ input AccueilHeroMutation {
   about: JSON
 }
 
+input AccueilSectionsMutation {
+  histoireSubtitle: String
+  missionsSubtitle: String
+  projetsSubtitle: String
+  equipeSubtitle: String
+  soutienSubtitle: String
+  ressourcesSubtitle: String
+}
+
 input AccueilMutation {
   title: String
   description: String
   hero: AccueilHeroMutation
+  sections: AccueilSectionsMutation
   body: JSON
 }
 

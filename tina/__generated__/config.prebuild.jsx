@@ -72,6 +72,50 @@ var config_default = defineConfig({
               }
             ]
           },
+          // Descriptions des sections
+          {
+            type: "object",
+            name: "sections",
+            label: "Descriptions des sections",
+            fields: [
+              {
+                type: "string",
+                name: "histoireSubtitle",
+                label: "Histoire - Sous-titre",
+                ui: { component: "textarea" }
+              },
+              {
+                type: "string",
+                name: "missionsSubtitle",
+                label: "Missions - Sous-titre",
+                ui: { component: "textarea" }
+              },
+              {
+                type: "string",
+                name: "projetsSubtitle",
+                label: "Projets - Sous-titre",
+                ui: { component: "textarea" }
+              },
+              {
+                type: "string",
+                name: "equipeSubtitle",
+                label: "\xC9quipe - Sous-titre",
+                ui: { component: "textarea" }
+              },
+              {
+                type: "string",
+                name: "soutienSubtitle",
+                label: "Soutien - Sous-titre",
+                ui: { component: "textarea" }
+              },
+              {
+                type: "string",
+                name: "ressourcesSubtitle",
+                label: "Ressources - Sous-titre",
+                ui: { component: "textarea" }
+              }
+            ]
+          },
           {
             type: "rich-text",
             name: "body",
