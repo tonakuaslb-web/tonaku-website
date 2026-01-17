@@ -2,6 +2,12 @@ fragment AccueilParts on Accueil {
   __typename
   title
   description
+  hero {
+    __typename
+    title
+    subtitle
+    about
+  }
   body
 }
 

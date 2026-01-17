@@ -38,22 +38,52 @@ export default defineConfig({
           {
             type: "string",
             name: "title",
-            label: "Titre",
+            label: "Titre de la page",
             isTitle: true,
             required: true,
           },
           {
             type: "string",
             name: "description",
-            label: "Description",
+            label: "Description SEO",
             ui: {
               component: "textarea",
             },
           },
+          // Section Hero
+          {
+            type: "object",
+            name: "hero",
+            label: "Section Hero (accueil)",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Titre principal",
+                description: "Le grand titre affiché en haut de la page",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Sous-titre",
+                description: "Texte sous le titre principal",
+                ui: {
+                  component: "textarea",
+                },
+              },
+              {
+                type: "rich-text",
+                name: "about",
+                label: "Paragraphe 'Qui sommes-nous?'",
+                description: "Texte de présentation sous le Hero",
+              },
+            ],
+          },
           {
             type: "rich-text",
             name: "body",
-            label: "Contenu",
+            label: "Contenu additionnel",
             isBody: true,
           },
         ],
@@ -178,8 +208,23 @@ export default defineConfig({
           {
             type: "string",
             name: "icon",
-            label: "Icône (emoji ou nom)",
-            description: "Ex: 📚, 🎓, 🌍",
+            label: "Icône Lucide",
+            description: "Nom de l'icône depuis lucide-react",
+            options: [
+              "BookOpen",
+              "GraduationCap",
+              "Globe",
+              "Users",
+              "Heart",
+              "Lightbulb",
+              "Target",
+              "BookMarked",
+              "Library",
+              "School",
+              "Languages",
+              "Sparkles",
+            ],
+            required: true,
           },
           {
             type: "number",
@@ -196,6 +241,7 @@ export default defineConfig({
         ],
         defaultItem: {
           active: true,
+          icon: "BookOpen",
         },
       },
 
@@ -305,7 +351,6 @@ export default defineConfig({
             name: "cover",
             label: "Couverture",
             description: "Image de couverture du livre",
-            required: true,
           },
           {
             type: "rich-text",

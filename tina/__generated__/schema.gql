@@ -105,9 +105,16 @@ type Collection {
 
 union DocumentNode = Accueil | Histoire | Team | Mission | Project | Book | Contact | Folder
 
+type AccueilHero {
+  title: String!
+  subtitle: String
+  about: JSON
+}
+
 type Accueil implements Node & Document {
   title: String!
   description: String
+  hero: AccueilHero
   body: JSON
   id: ID!
   _sys: SystemInfo!
@@ -127,9 +134,16 @@ input RichTextFilter {
   exists: Boolean
 }
 
+input AccueilHeroFilter {
+  title: StringFilter
+  subtitle: StringFilter
+  about: RichTextFilter
+}
+
 input AccueilFilter {
   title: StringFilter
   description: StringFilter
+  hero: AccueilHeroFilter
   body: RichTextFilter
 }
 
@@ -230,7 +244,7 @@ type TeamConnection implements Connection {
 type Mission implements Node & Document {
   title: String!
   description: JSON
-  icon: String
+  icon: String!
   order: Float!
   active: Boolean
   id: ID!
@@ -321,7 +335,7 @@ type Book implements Node & Document {
   author: String
   year: String
   isbn: String
-  cover: String!
+  cover: String
   description: JSON
   category: String
   pages: Float
@@ -451,9 +465,16 @@ input DocumentMutation {
   contact: ContactMutation
 }
 
+input AccueilHeroMutation {
+  title: String
+  subtitle: String
+  about: JSON
+}
+
 input AccueilMutation {
   title: String
   description: String
+  hero: AccueilHeroMutation
   body: JSON
 }
 
