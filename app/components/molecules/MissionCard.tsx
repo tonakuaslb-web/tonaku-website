@@ -17,7 +17,7 @@ export default function MissionCard({
   return (
     <div
       className={cn(
-        "rounded-xl p-[2px] shadow-sm h-full w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]",
+        "rounded-xl p-[2px] shadow-sm w-full",
         className
       )}
       style={{

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/app/lib/utils";
 import { MapPin } from "lucide-react";
 
@@ -5,6 +6,7 @@ type TeamMemberCardProps = Readonly<{
   name: string;
   role: string;
   location: string;
+  photo?: string;
   className?: string;
 }>;
 
@@ -12,6 +14,7 @@ export default function TeamMemberCard({
   name,
   role,
   location,
+  photo,
   className = "",
 }: TeamMemberCardProps) {
   // Extraire les initiales du nom complet
@@ -32,9 +35,19 @@ export default function TeamMemberCard({
         className
       )}
     >
-      {/* Cercle avec initiales */}
-      <div className="w-32 h-32 rounded-full bg-blue-logo shadow-md flex items-center justify-center mb-3">
-        <span className="text-white text-4xl font-bold">{initials}</span>
+      {/* Photo ou cercle avec initiales */}
+      <div className="w-32 h-32 rounded-full bg-blue-logo shadow-md flex items-center justify-center mb-3 overflow-hidden relative">
+        {photo ? (
+          <Image
+            src={photo}
+            alt={name}
+            fill
+            className="object-cover"
+            sizes="128px"
+          />
+        ) : (
+          <span className="text-white text-4xl font-bold">{initials}</span>
+        )}
       </div>
 
       {/* Nom */}

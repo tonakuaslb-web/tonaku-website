@@ -123,7 +123,7 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="flex flex-col gap-2 max-w-5xl mx-auto">
               {missions.map((mission) => {
                 const mappedMission = mapMission(mission);
                 const Icon = mappedMission.icon as React.ComponentType<{ size?: number }>;
