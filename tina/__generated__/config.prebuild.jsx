@@ -20,10 +20,10 @@ var config_default = defineConfig({
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
     collections: [
-      // Collection 1: Pages (Accueil, etc.)
+      // Collection 1: Page d'accueil
       {
-        name: "page",
-        label: "Pages",
+        name: "accueil",
+        label: "Accueil",
         path: "content/pages",
         format: "mdx",
         fields: [
