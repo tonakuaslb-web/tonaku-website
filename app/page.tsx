@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Navigation, Hero } from "./components/organisms";
+import { Navigation, Hero, Carousel } from "./components/organisms";
 import { Section } from "./components/templates";
 import {
   TimelineCard,
@@ -300,12 +300,12 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <div className="space-y-6">
+            <Carousel>
               {books.map((book) => {
                 const mappedBook = mapBook(book);
                 return <BookCard key={book.id} {...mappedBook} />;
               })}
-            </div>
+            </Carousel>
           </div>
         </Section>
       </main>
