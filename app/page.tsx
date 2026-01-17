@@ -7,6 +7,7 @@ import {
   MissionCard,
   TeamMemberCard,
   DonationMethodCard,
+  BookCard,
 } from "./components/molecules";
 import {
   BookOpen,
@@ -329,17 +330,51 @@ export default function HomePage() {
         {/* Section Ressources */}
         <Section
           id="ressources"
-          fullHeight
           background={{ type: "color", value: "bg-background-100" }}
-          className="flex items-center justify-center"
+          paddingY="xl"
         >
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
-              Nos Ressources
-            </h2>
-            <p className="text-xl text-neutral-700">
-              Découvrez nos livres et publications...
-            </p>
+          <div className="space-y-12">
+            {/* En-tête */}
+            <div className="text-center">
+              <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4">
+                Nos Ressources
+              </h2>
+              <p className="text-xl text-neutral-700 max-w-3xl mx-auto">
+                Découvrez nos publications et ouvrages dédiés à la préservation
+                du patrimoine culturel et linguistique africain
+              </p>
+            </div>
+
+            {/* Liste des livres */}
+            <div className="space-y-6">
+              {/* Livre mis en avant */}
+              <BookCard
+                title="Connaissances de Minungu et Ndembu et de leur environnement socioculturel (Tome 1)"
+                author="Robert Yava Mayonde"
+                year="2009"
+                category="Histoire"
+                description="Fruit de 45 années de recherche, cet ouvrage monumental explore en profondeur l'histoire, la culture et l'environnement socioculturel des peuples Minungu et Ndembu du Katanga."
+                featured
+              />
+
+              {/* Autres livres (exemples avec Lorem Ipsum) */}
+              <BookCard
+                title="Traditions orales et transmission du savoir en Afrique centrale"
+                author="Sylvie Kasamba"
+                year="2015"
+                category="Culture"
+                description="Une étude approfondie des méthodes traditionnelles de transmission du savoir et de la préservation de la mémoire collective dans les communautés d'Afrique centrale."
+              />
+
+              <BookCard
+                title="L'éducation comme vecteur de développement au Congo"
+                author="Jean-Pierre Mukendi"
+                year="2018"
+                category="Éducation"
+                description="Analyse des défis et opportunités de l'éducation en République démocratique du Congo, avec des propositions concrètes pour améliorer l'accès à l'enseignement."
+                downloadLink="/books/education-developpement.pdf"
+              />
+            </div>
           </div>
         </Section>
       </main>
