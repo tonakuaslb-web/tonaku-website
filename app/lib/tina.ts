@@ -99,10 +99,12 @@ export async function getTimelineEvents(): Promise<Histoire[]> {
   try {
     const response = await client.queries.histoireConnection();
 
-    const events =
-      response.data.histoireConnection.edges
-        ?.map((edge) => edge?.node)
-        .filter((node): node is Histoire => node !== null && node !== undefined) || [];
+    const edges = response.data.histoireConnection.edges || [];
+    const events = edges
+      .map((edge) => edge?.node)
+      .filter((node): node is NonNullable<typeof node> => 
+        node !== null && node !== undefined
+      ) as Histoire[];
 
     // Trier par ordre
     return events.sort((a, b) => (a.order || 0) - (b.order || 0));
@@ -119,12 +121,12 @@ export async function getMissions(): Promise<Mission[]> {
   try {
     const response = await client.queries.missionConnection();
 
-    const missions =
-      response.data.missionConnection.edges
-        ?.map((edge) => edge?.node)
-        .filter((node): node is Mission => 
-          node !== null && node !== undefined && node.active !== false
-        ) || [];
+    const edges = response.data.missionConnection.edges || [];
+    const missions = edges
+      .map((edge) => edge?.node)
+      .filter((node): node is NonNullable<typeof node> => 
+        node !== null && node !== undefined && node.active !== false
+      ) as Mission[];
 
     // Trier par ordre
     return missions.sort((a, b) => a.order - b.order);
@@ -141,10 +143,12 @@ export async function getProjects(): Promise<Project[]> {
   try {
     const response = await client.queries.projectConnection();
 
-    const projects =
-      response.data.projectConnection.edges
-        ?.map((edge) => edge?.node)
-        .filter((node): node is Project => node !== null && node !== undefined) || [];
+    const edges = response.data.projectConnection.edges || [];
+    const projects = edges
+      .map((edge) => edge?.node)
+      .filter((node): node is NonNullable<typeof node> => 
+        node !== null && node !== undefined
+      ) as Project[];
 
     return projects;
   } catch (error) {
@@ -160,10 +164,12 @@ export async function getTeamMembers(): Promise<Team[]> {
   try {
     const response = await client.queries.teamConnection();
 
-    const members =
-      response.data.teamConnection.edges
-        ?.map((edge) => edge?.node)
-        .filter((node): node is Team => node !== null && node !== undefined) || [];
+    const edges = response.data.teamConnection.edges || [];
+    const members = edges
+      .map((edge) => edge?.node)
+      .filter((node): node is NonNullable<typeof node> => 
+        node !== null && node !== undefined
+      ) as Team[];
 
     return members;
   } catch (error) {
@@ -179,10 +185,12 @@ export async function getBooks(): Promise<Book[]> {
   try {
     const response = await client.queries.bookConnection();
 
-    const books =
-      response.data.bookConnection.edges
-        ?.map((edge) => edge?.node)
-        .filter((node): node is Book => node !== null && node !== undefined) || [];
+    const edges = response.data.bookConnection.edges || [];
+    const books = edges
+      .map((edge) => edge?.node)
+      .filter((node): node is NonNullable<typeof node> => 
+        node !== null && node !== undefined
+      ) as Book[];
 
     // Trier : featured en premier, puis par année décroissante
     return books.sort((a, b) => {
@@ -203,10 +211,12 @@ export async function getContactLocations(): Promise<Contact[]> {
   try {
     const response = await client.queries.contactConnection();
 
-    const locations =
-      response.data.contactConnection.edges
-        ?.map((edge) => edge?.node)
-        .filter((node): node is Contact => node !== null && node !== undefined) || [];
+    const edges = response.data.contactConnection.edges || [];
+    const locations = edges
+      .map((edge) => edge?.node)
+      .filter((node): node is NonNullable<typeof node> => 
+        node !== null && node !== undefined
+      ) as Contact[];
 
     return locations;
   } catch (error) {
