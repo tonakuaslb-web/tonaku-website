@@ -37,6 +37,7 @@ export default function TimelineCard({
                 alt={title}
                 width={200}
                 height={300}
+                unoptimized
                 className="h-full min-h-[280px] w-40 rounded-lg object-cover shadow-sm cursor-pointer transition-all duration-300 group-hover/image:scale-150 group-hover/image:shadow-2xl group-hover/image:z-50 relative"
               />
             </div>

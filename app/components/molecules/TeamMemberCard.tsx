@@ -42,6 +42,7 @@ export default function TeamMemberCard({
             src={photo}
             alt={name}
             fill
+            unoptimized
             className="object-cover"
             sizes="128px"
           />
