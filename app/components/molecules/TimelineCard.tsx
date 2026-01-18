@@ -31,13 +31,13 @@ export default function TimelineCard({
 
           {/* Image optionnelle (entre année et texte) */}
           {image && (
-            <div className="shrink-0 self-stretch relative overflow-visible group/image">
+            <div className="shrink-0 self-stretch relative overflow-visible group/image min-h-[280px]">
               <Image
                 src={image}
                 alt={title}
                 width={200}
                 height={300}
-                className="h-full w-32 rounded-lg object-cover shadow-sm cursor-pointer transition-all duration-300 group-hover/image:scale-150 group-hover/image:shadow-2xl group-hover/image:z-50 relative"
+                className="h-full min-h-[280px] w-40 rounded-lg object-cover shadow-sm cursor-pointer transition-all duration-300 group-hover/image:scale-150 group-hover/image:shadow-2xl group-hover/image:z-50 relative"
               />
             </div>
           )}

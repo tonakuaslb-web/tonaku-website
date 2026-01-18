@@ -26,7 +26,7 @@ export default function ProjectCard({
   return (
     <div
       className={cn(
-        "group relative rounded-xl border-2 border-secondary-300 shadow-sm overflow-hidden min-h-[480px] w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex flex-col transition-all duration-300 hover:shadow-xl",
+        "group relative rounded-xl border-2 border-secondary-300 shadow-sm overflow-hidden min-h-[560px] w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex flex-col transition-all duration-300 hover:shadow-xl",
         className
       )}
       style={
