@@ -273,11 +273,29 @@ export type CollectionDocumentsArgs = {
 
 export type DocumentNode = Accueil | Histoire | Team | Mission | Project | Book | Contact | Folder;
 
+export type AccueilHero = {
+  __typename?: 'AccueilHero';
+  title: Scalars['String']['output'];
+  subtitle?: Maybe<Scalars['String']['output']>;
+  about?: Maybe<Scalars['JSON']['output']>;
+};
+
+export type AccueilSections = {
+  __typename?: 'AccueilSections';
+  histoireSubtitle?: Maybe<Scalars['String']['output']>;
+  missionsSubtitle?: Maybe<Scalars['String']['output']>;
+  projetsSubtitle?: Maybe<Scalars['String']['output']>;
+  equipeSubtitle?: Maybe<Scalars['String']['output']>;
+  soutienSubtitle?: Maybe<Scalars['String']['output']>;
+  ressourcesSubtitle?: Maybe<Scalars['String']['output']>;
+};
+
 export type Accueil = Node & Document & {
   __typename?: 'Accueil';
   title: Scalars['String']['output'];
   description?: Maybe<Scalars['String']['output']>;
-  body?: Maybe<Scalars['JSON']['output']>;
+  hero?: Maybe<AccueilHero>;
+  sections?: Maybe<AccueilSections>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -296,10 +314,26 @@ export type RichTextFilter = {
   exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type AccueilHeroFilter = {
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  about?: InputMaybe<RichTextFilter>;
+};
+
+export type AccueilSectionsFilter = {
+  histoireSubtitle?: InputMaybe<StringFilter>;
+  missionsSubtitle?: InputMaybe<StringFilter>;
+  projetsSubtitle?: InputMaybe<StringFilter>;
+  equipeSubtitle?: InputMaybe<StringFilter>;
+  soutienSubtitle?: InputMaybe<StringFilter>;
+  ressourcesSubtitle?: InputMaybe<StringFilter>;
+};
+
 export type AccueilFilter = {
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
-  body?: InputMaybe<RichTextFilter>;
+  hero?: InputMaybe<AccueilHeroFilter>;
+  sections?: InputMaybe<AccueilSectionsFilter>;
 };
 
 export type AccueilConnectionEdges = {
@@ -408,7 +442,7 @@ export type Mission = Node & Document & {
   __typename?: 'Mission';
   title: Scalars['String']['output'];
   description?: Maybe<Scalars['JSON']['output']>;
-  icon?: Maybe<Scalars['String']['output']>;
+  icon: Scalars['String']['output'];
   order: Scalars['Float']['output'];
   active?: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['ID']['output'];
@@ -507,7 +541,7 @@ export type Book = Node & Document & {
   author?: Maybe<Scalars['String']['output']>;
   year?: Maybe<Scalars['String']['output']>;
   isbn?: Maybe<Scalars['String']['output']>;
-  cover: Scalars['String']['output'];
+  cover?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['JSON']['output']>;
   category?: Maybe<Scalars['String']['output']>;
   pages?: Maybe<Scalars['Float']['output']>;
@@ -761,10 +795,26 @@ export type DocumentMutation = {
   contact?: InputMaybe<ContactMutation>;
 };
 
+export type AccueilHeroMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  about?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type AccueilSectionsMutation = {
+  histoireSubtitle?: InputMaybe<Scalars['String']['input']>;
+  missionsSubtitle?: InputMaybe<Scalars['String']['input']>;
+  projetsSubtitle?: InputMaybe<Scalars['String']['input']>;
+  equipeSubtitle?: InputMaybe<Scalars['String']['input']>;
+  soutienSubtitle?: InputMaybe<Scalars['String']['input']>;
+  ressourcesSubtitle?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type AccueilMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  body?: InputMaybe<Scalars['JSON']['input']>;
+  hero?: InputMaybe<AccueilHeroMutation>;
+  sections?: InputMaybe<AccueilSectionsMutation>;
 };
 
 export type HistoireMutation = {
@@ -846,17 +896,17 @@ export type ContactMutation = {
   notes?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type AccueilPartsFragment = { __typename: 'Accueil', title: string, description?: string | null, body?: any | null };
+export type AccueilPartsFragment = { __typename: 'Accueil', title: string, description?: string | null, hero?: { __typename: 'AccueilHero', title: string, subtitle?: string | null, about?: any | null } | null, sections?: { __typename: 'AccueilSections', histoireSubtitle?: string | null, missionsSubtitle?: string | null, projetsSubtitle?: string | null, equipeSubtitle?: string | null, soutienSubtitle?: string | null, ressourcesSubtitle?: string | null } | null };
 
 export type HistoirePartsFragment = { __typename: 'Histoire', year: string, title: string, description?: any | null, image?: string | null, order?: number | null };
 
 export type TeamPartsFragment = { __typename: 'Team', name: string, role: string, country: string, location?: string | null, phone?: string | null, email?: string | null, photo?: string | null, bio?: any | null };
 
-export type MissionPartsFragment = { __typename: 'Mission', title: string, description?: any | null, icon?: string | null, order: number, active?: boolean | null };
+export type MissionPartsFragment = { __typename: 'Mission', title: string, description?: any | null, icon: string, order: number, active?: boolean | null };
 
 export type ProjectPartsFragment = { __typename: 'Project', title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null };
 
-export type BookPartsFragment = { __typename: 'Book', title: string, author?: string | null, year?: string | null, isbn?: string | null, cover: string, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, availability?: { __typename: 'BookAvailability', ebook?: boolean | null, ebookUrl?: string | null, print?: boolean | null, printUrl?: string | null, price?: string | null } | null };
+export type BookPartsFragment = { __typename: 'Book', title: string, author?: string | null, year?: string | null, isbn?: string | null, cover?: string | null, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, availability?: { __typename: 'BookAvailability', ebook?: boolean | null, ebookUrl?: string | null, print?: boolean | null, printUrl?: string | null, price?: string | null } | null };
 
 export type ContactPartsFragment = { __typename: 'Contact', country: string, city?: string | null, address?: string | null, phone?: string | null, email?: string | null, notes?: any | null, hours?: { __typename: 'ContactHours', weekdays?: string | null, weekend?: string | null } | null };
 
@@ -865,7 +915,7 @@ export type AccueilQueryVariables = Exact<{
 }>;
 
 
-export type AccueilQuery = { __typename?: 'Query', accueil: { __typename: 'Accueil', id: string, title: string, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type AccueilQuery = { __typename?: 'Query', accueil: { __typename: 'Accueil', id: string, title: string, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'AccueilHero', title: string, subtitle?: string | null, about?: any | null } | null, sections?: { __typename: 'AccueilSections', histoireSubtitle?: string | null, missionsSubtitle?: string | null, projetsSubtitle?: string | null, equipeSubtitle?: string | null, soutienSubtitle?: string | null, ressourcesSubtitle?: string | null } | null } };
 
 export type AccueilConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -877,7 +927,7 @@ export type AccueilConnectionQueryVariables = Exact<{
 }>;
 
 
-export type AccueilConnectionQuery = { __typename?: 'Query', accueilConnection: { __typename?: 'AccueilConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AccueilConnectionEdges', cursor: string, node?: { __typename: 'Accueil', id: string, title: string, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type AccueilConnectionQuery = { __typename?: 'Query', accueilConnection: { __typename?: 'AccueilConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AccueilConnectionEdges', cursor: string, node?: { __typename: 'Accueil', id: string, title: string, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero?: { __typename: 'AccueilHero', title: string, subtitle?: string | null, about?: any | null } | null, sections?: { __typename: 'AccueilSections', histoireSubtitle?: string | null, missionsSubtitle?: string | null, projetsSubtitle?: string | null, equipeSubtitle?: string | null, soutienSubtitle?: string | null, ressourcesSubtitle?: string | null } | null } | null } | null> | null } };
 
 export type HistoireQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -922,7 +972,7 @@ export type MissionQueryVariables = Exact<{
 }>;
 
 
-export type MissionQuery = { __typename?: 'Query', mission: { __typename: 'Mission', id: string, title: string, description?: any | null, icon?: string | null, order: number, active?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type MissionQuery = { __typename?: 'Query', mission: { __typename: 'Mission', id: string, title: string, description?: any | null, icon: string, order: number, active?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type MissionConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -934,7 +984,7 @@ export type MissionConnectionQueryVariables = Exact<{
 }>;
 
 
-export type MissionConnectionQuery = { __typename?: 'Query', missionConnection: { __typename?: 'MissionConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'MissionConnectionEdges', cursor: string, node?: { __typename: 'Mission', id: string, title: string, description?: any | null, icon?: string | null, order: number, active?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type MissionConnectionQuery = { __typename?: 'Query', missionConnection: { __typename?: 'MissionConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'MissionConnectionEdges', cursor: string, node?: { __typename: 'Mission', id: string, title: string, description?: any | null, icon: string, order: number, active?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type ProjectQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -960,7 +1010,7 @@ export type BookQueryVariables = Exact<{
 }>;
 
 
-export type BookQuery = { __typename?: 'Query', book: { __typename: 'Book', id: string, title: string, author?: string | null, year?: string | null, isbn?: string | null, cover: string, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, availability?: { __typename: 'BookAvailability', ebook?: boolean | null, ebookUrl?: string | null, print?: boolean | null, printUrl?: string | null, price?: string | null } | null } };
+export type BookQuery = { __typename?: 'Query', book: { __typename: 'Book', id: string, title: string, author?: string | null, year?: string | null, isbn?: string | null, cover?: string | null, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, availability?: { __typename: 'BookAvailability', ebook?: boolean | null, ebookUrl?: string | null, print?: boolean | null, printUrl?: string | null, price?: string | null } | null } };
 
 export type BookConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -972,7 +1022,7 @@ export type BookConnectionQueryVariables = Exact<{
 }>;
 
 
-export type BookConnectionQuery = { __typename?: 'Query', bookConnection: { __typename?: 'BookConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'BookConnectionEdges', cursor: string, node?: { __typename: 'Book', id: string, title: string, author?: string | null, year?: string | null, isbn?: string | null, cover: string, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, availability?: { __typename: 'BookAvailability', ebook?: boolean | null, ebookUrl?: string | null, print?: boolean | null, printUrl?: string | null, price?: string | null } | null } | null } | null> | null } };
+export type BookConnectionQuery = { __typename?: 'Query', bookConnection: { __typename?: 'BookConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'BookConnectionEdges', cursor: string, node?: { __typename: 'Book', id: string, title: string, author?: string | null, year?: string | null, isbn?: string | null, cover?: string | null, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, availability?: { __typename: 'BookAvailability', ebook?: boolean | null, ebookUrl?: string | null, print?: boolean | null, printUrl?: string | null, price?: string | null } | null } | null } | null> | null } };
 
 export type ContactQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -998,7 +1048,21 @@ export const AccueilPartsFragmentDoc = gql`
   __typename
   title
   description
-  body
+  hero {
+    __typename
+    title
+    subtitle
+    about
+  }
+  sections {
+    __typename
+    histoireSubtitle
+    missionsSubtitle
+    projetsSubtitle
+    equipeSubtitle
+    soutienSubtitle
+    ressourcesSubtitle
+  }
 }
     `;
 export const HistoirePartsFragmentDoc = gql`

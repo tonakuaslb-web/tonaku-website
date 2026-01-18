@@ -1,14 +1,25 @@
 import { ReactNode } from "react";
+import { cn } from "@/app/lib/utils";
 
 type MissionCardProps = Readonly<{
   icon: ReactNode;
+  title: string;
   description: string;
+  className?: string;
 }>;
 
-export default function MissionCard({ icon, description }: MissionCardProps) {
+export default function MissionCard({
+  icon,
+  title,
+  description,
+  className = "",
+}: MissionCardProps) {
   return (
     <div
-      className="rounded-xl p-[2px] shadow-sm h-full"
+      className={cn(
+        "rounded-xl p-[2px] shadow-sm w-full",
+        className
+      )}
       style={{
         background: "linear-gradient(135deg, #fef9e7 0%, #d4a024 100%)",
       }}
@@ -20,8 +31,14 @@ export default function MissionCard({ icon, description }: MissionCardProps) {
             {icon}
           </div>
 
-          {/* Description en bleu foncé à droite */}
-          <p className="text-blue-logo leading-relaxed flex-1">{description}</p>
+          <div className="flex-1">
+            {/* Titre de la mission */}
+            <h3 className="text-lg font-bold text-blue-logo mb-2">{title}</h3>
+            {/* Description en bleu foncé */}
+            <p className="text-blue-logo/80 leading-relaxed text-sm">
+              {description}
+            </p>
+          </div>
         </div>
       </div>
     </div>

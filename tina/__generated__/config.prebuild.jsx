@@ -30,23 +30,91 @@ var config_default = defineConfig({
           {
             type: "string",
             name: "title",
-            label: "Titre",
+            label: "Titre de la page",
             isTitle: true,
             required: true
           },
           {
             type: "string",
             name: "description",
-            label: "Description",
+            label: "Description SEO",
             ui: {
               component: "textarea"
             }
           },
+          // Section Hero
           {
-            type: "rich-text",
-            name: "body",
-            label: "Contenu",
-            isBody: true
+            type: "object",
+            name: "hero",
+            label: "Section Hero (accueil)",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Titre principal",
+                description: "Le grand titre affich\xE9 en haut de la page",
+                required: true
+              },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Sous-titre",
+                description: "Texte sous le titre principal",
+                ui: {
+                  component: "textarea"
+                }
+              },
+              {
+                type: "rich-text",
+                name: "about",
+                label: "Paragraphe 'Qui sommes-nous?'",
+                description: "Texte de pr\xE9sentation sous le Hero"
+              }
+            ]
+          },
+          // Descriptions des sections
+          {
+            type: "object",
+            name: "sections",
+            label: "Descriptions des sections",
+            fields: [
+              {
+                type: "string",
+                name: "histoireSubtitle",
+                label: "Histoire - Sous-titre",
+                ui: { component: "textarea" }
+              },
+              {
+                type: "string",
+                name: "missionsSubtitle",
+                label: "Missions - Sous-titre",
+                ui: { component: "textarea" }
+              },
+              {
+                type: "string",
+                name: "projetsSubtitle",
+                label: "Projets - Sous-titre",
+                ui: { component: "textarea" }
+              },
+              {
+                type: "string",
+                name: "equipeSubtitle",
+                label: "\xC9quipe - Sous-titre",
+                ui: { component: "textarea" }
+              },
+              {
+                type: "string",
+                name: "soutienSubtitle",
+                label: "Soutien - Sous-titre",
+                ui: { component: "textarea" }
+              },
+              {
+                type: "string",
+                name: "ressourcesSubtitle",
+                label: "Ressources - Sous-titre",
+                ui: { component: "textarea" }
+              }
+            ]
           }
         ]
       },
@@ -167,8 +235,23 @@ var config_default = defineConfig({
           {
             type: "string",
             name: "icon",
-            label: "Ic\xF4ne (emoji ou nom)",
-            description: "Ex: \u{1F4DA}, \u{1F393}, \u{1F30D}"
+            label: "Ic\xF4ne Lucide",
+            description: "Nom de l'ic\xF4ne depuis lucide-react",
+            options: [
+              "BookOpen",
+              "GraduationCap",
+              "Globe",
+              "Users",
+              "Heart",
+              "Lightbulb",
+              "Target",
+              "BookMarked",
+              "Library",
+              "School",
+              "Languages",
+              "Sparkles"
+            ],
+            required: true
           },
           {
             type: "number",
@@ -184,7 +267,8 @@ var config_default = defineConfig({
           }
         ],
         defaultItem: {
-          active: true
+          active: true,
+          icon: "BookOpen"
         }
       },
       // Collection 5: Projets
@@ -291,8 +375,7 @@ var config_default = defineConfig({
             type: "image",
             name: "cover",
             label: "Couverture",
-            description: "Image de couverture du livre",
-            required: true
+            description: "Image de couverture du livre"
           },
           {
             type: "rich-text",

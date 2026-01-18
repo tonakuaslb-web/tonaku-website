@@ -28,7 +28,7 @@ export default function BookCard({
   return (
     <div
       className={cn(
-        "group relative bg-background-100 rounded-xl overflow-hidden transition-all duration-300",
+        "group relative bg-background-100 rounded-xl overflow-hidden transition-all duration-300 shrink-0 w-[92vw] max-w-6xl",
         "border-2 hover:shadow-xl",
         featured
           ? "border-secondary-400 shadow-lg"

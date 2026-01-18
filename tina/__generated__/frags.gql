@@ -2,7 +2,21 @@ fragment AccueilParts on Accueil {
   __typename
   title
   description
-  body
+  hero {
+    __typename
+    title
+    subtitle
+    about
+  }
+  sections {
+    __typename
+    histoireSubtitle
+    missionsSubtitle
+    projetsSubtitle
+    equipeSubtitle
+    soutienSubtitle
+    ressourcesSubtitle
+  }
 }
 
 fragment HistoireParts on Histoire {

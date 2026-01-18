@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Navigation, Hero } from "./components/organisms";
+import { Navigation, Hero, Carousel } from "./components/organisms";
 import { Section } from "./components/templates";
 import {
   TimelineCard,
@@ -10,19 +10,24 @@ import {
   BookCard,
 } from "./components/molecules";
 import {
-  BookOpen,
-  Users,
-  FileText,
   Package,
-  ShoppingBag,
-  GraduationCap,
-  Calendar,
   CreditCard,
   Heart,
   Mail,
   Phone,
   MapPin,
 } from "lucide-react";
+
+// Import des fonctions Tina et des mappers
+import { getAllPageData } from "./lib/tina";
+import {
+  mapTimelineEvent,
+  mapMission,
+  mapProject,
+  mapTeamMember,
+  mapBook,
+  mapContactLocation,
+} from "./lib/mappers";
 
 const navItems = [
   { label: "Accueil", href: "#accueil" },
@@ -34,7 +39,11 @@ const navItems = [
   { label: "Nous contacter", href: "#contact", article: "Nous" },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Récupérer toutes les données depuis Tina CMS
+  const { homeData, timeline, missions, projects, team, books, contact } =
+    await getAllPageData();
+
   return (
     <>
       <Navigation
@@ -44,236 +53,184 @@ export default function HomePage() {
       />
 
       <main>
-        {/* Section Accueil / Hero */}
+        {/* Section Accueil / Hero - DONNÉES DYNAMIQUES */}
         <section id="accueil">
           <Hero
-            title="TONAKU"
-            subtitle="Promouvoir la lecture et l'accès aux livres auprès des jeunes en Afrique"
-            about="TONAKU est une association dédiée à la promotion de la lecture et à la transmission de la culture africaine. Fondée en 1992 par Robert Yava Mayonde, nous œuvrons pour l'éducation et l'épanouissement des jeunes à travers les livres et la culture."
+            title={homeData.title}
+            subtitle={homeData.subtitle}
+            about={homeData.about || undefined}
           />
         </section>
 
-        {/* Section Notre Histoire */}
+        {/* Section Histoire - DONNÉES DYNAMIQUES */}
         <Section
           id="histoire"
-          background={{ type: "color", value: "bg-background-100" }}
+          background={{ type: "color", value: "bg-white" }}
           paddingY="xl"
-          containerWidth="xl"
         >
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-12 text-center">
-              Notre Histoire
-            </h2>
+          <div className="space-y-12">
+            <div className="text-center">
+              <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4">
+                Notre Histoire
+              </h2>
+              <p className="text-xl text-neutral-700">
+                {homeData.sections.histoireSubtitle}
+              </p>
+            </div>
 
-            {/* Timeline avec ligne en dégradé - décalée vers la gauche */}
-            <div className="relative ml-4 md:ml-12 lg:ml-20 xl:ml-32">
-              {/* Ligne verticale en dégradé jaune -> vert -> bleu */}
+            {/* Timeline avec données Tina */}
+            <div className="relative max-w-5xl mx-auto">
+              {/* Ligne dégradée verticale (jaune -> vert -> bleu) */}
               <div
-                className="absolute left-[10px] top-0 bottom-0 w-0.5"
+                className="absolute left-2 top-0 bottom-0 w-0.5 rounded-full"
                 style={{
                   background:
-                    "linear-gradient(to bottom, #d4a024 0%, #2a8770 50%, #1e3a5f 100%)",
+                    "linear-gradient(to bottom, #f59e0b 0%, #10b981 50%, #1e3a5f 100%)",
                 }}
               />
 
-              {/* Cartes */}
-              <div className="space-y-0 relative z-10">
-                <TimelineCard
-                  year="1992"
-                  title="Il était une fois..."
-                  description="Robert Yava Mayonde crée le magasin socioculturel TONAKU, qui signifie en langue Ndembu « ouvre l'œil », un appel à la vigilance et à l'ouverture."
-                />
-                <TimelineCard
-                  year="2004"
-                  title="Naissance du magazine"
-                  description="Le 10 octobre 2004, TONAKU devient officiellement un magazine socioculturel agréé sous le numéro 500/10/2004, avec siège à Likasi. Passionné de lecture et d'écriture, Robert y consacre toute sa vie."
-                />
-                <TimelineCard
-                  year="2024"
-                  title="Une nouvelle ère"
-                  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                />
-              </div>
-
-              {/* Continuation de la ligne après le dernier point */}
-              <div className="flex gap-6 relative">
-                <div className="w-5 h-5 shrink-0" />
-                <div className="flex-1 pb-12">
-                  <p className="text-center text-neutral-500 italic">
-                    L&apos;histoire continue...
-                  </p>
-                </div>
+              <div className="space-y-0">
+                {timeline.map((event) => {
+                  const mappedEvent = mapTimelineEvent(event);
+                  return (
+                    <TimelineCard
+                      key={event.id}
+                      year={mappedEvent.year}
+                      title={mappedEvent.title}
+                      description={mappedEvent.description}
+                      image={mappedEvent.image}
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
         </Section>
 
-        {/* Section Missions */}
+        {/* Section Missions - DONNÉES DYNAMIQUES */}
         <Section
           id="missions"
-          background={{ type: "color", value: "bg-accent-100" }}
-          paddingY="xl"
-        >
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-12 text-center">
-              Nos Missions
-            </h2>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <MissionCard
-                icon={<BookOpen size={24} strokeWidth={2} />}
-                description="Promouvoir la lecture et l'accès aux livres auprès des jeunes en Afrique, particulièrement au Katanga"
-              />
-              <MissionCard
-                icon={<Users size={24} strokeWidth={2} />}
-                description="Valoriser et transmettre la culture africaine (histoire, traditions, rites, langues)"
-              />
-              <MissionCard
-                icon={<FileText size={24} strokeWidth={2} />}
-                description="Éditer, publier et diffuser en ebooks les ouvrages de Robert Yava Mayonde"
-              />
-              <MissionCard
-                icon={<Package size={24} strokeWidth={2} />}
-                description="Collecter et distribuer du matériel éducatif"
-              />
-              <MissionCard
-                icon={<ShoppingBag size={24} strokeWidth={2} />}
-                description="Vendre des produits dérivés (goodies) pour financer nos actions"
-              />
-              <MissionCard
-                icon={<GraduationCap size={24} strokeWidth={2} />}
-                description="Soutenir la scolarité des jeunes par des aides éducatives et financières"
-              />
-              <MissionCard
-                icon={<Calendar size={24} strokeWidth={2} />}
-                description="Organiser des événements culturels et littéraires (conférences, salons, ateliers)"
-              />
-            </div>
-          </div>
-        </Section>
-
-        {/* Section Projets */}
-        <Section
-          id="projets"
           background={{ type: "color", value: "bg-background-100" }}
           paddingY="xl"
         >
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4 text-center">
-              Projets 2026-2027
-            </h2>
-            <p className="text-xl text-neutral-600 mb-12 text-center">
-              Notre plan d&apos;action pour préserver l&apos;héritage de Robert
-              Yava Mayonde et soutenir l&apos;éducation des jeunes.
-            </p>
+          <div className="space-y-12">
+            <div className="text-center">
+              <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4">
+                Nos Missions
+              </h2>
+              <p className="text-xl text-neutral-700">
+                {homeData.sections.missionsSubtitle}
+              </p>
+            </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              <ProjectCard
-                icon={<BookOpen size={32} strokeWidth={2} />}
-                title="Réédition de 3 ouvrages"
-                description="Ouvrages en cours de correction :"
-                items={[
-                  "Proverbes et adages Ndembu/Koza",
-                  "Connaissance des Minungu et Ndembu et de leur environnement socioculturel",
-                  "À qui appartient le plateau de Manika ?",
-                ]}
-                note="Diffusion en ebooks pour réduire les coûts"
-              />
-              <ProjectCard
-                icon={<GraduationCap size={32} strokeWidth={2} />}
-                title="Soutien scolaire et financier"
-                description="Accompagnement de 2 enfants (Kolwezi et Likasi) :"
-                items={[
-                  "Paiement des frais de scolarité",
-                  "Fourniture scolaire",
-                ]}
-              />
-              <ProjectCard
-                icon={<ShoppingBag size={32} strokeWidth={2} />}
-                title="Récolte de fonds"
-                description="Activités prévues :"
-                items={[
-                  "Vente de produits dérivés (T-shirts, bouteilles, stylos, sacs)",
-                  "Boissons à base de gingembre",
-                  "Organisation d'événements (ateliers de lecture, marchés, festivités)",
-                ]}
-              />
+            <div className="flex flex-col gap-2 max-w-5xl mx-auto">
+              {missions.map((mission) => {
+                const mappedMission = mapMission(mission);
+                const Icon = mappedMission.icon as React.ComponentType<{ size?: number }>;
+                return (
+                  <MissionCard
+                    key={mission.id}
+                    icon={<Icon size={24} />}
+                    title={mappedMission.title}
+                    description={mappedMission.description}
+                  />
+                );
+              })}
             </div>
           </div>
         </Section>
 
-        {/* Section Équipe */}
+        {/* Section Projets - DONNÉES DYNAMIQUES */}
         <Section
-          id="equipe"
-          background={{ type: "color", value: "bg-accent-100" }}
+          id="projets"
+          background={{ type: "color", value: "bg-white" }}
           paddingY="xl"
         >
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4 text-center">
-              Notre Équipe
-            </h2>
-            <p className="text-xl text-neutral-600 mb-12 text-center">
-              Une équipe dévouée répartie entre l&apos;Europe et l&apos;Afrique
-            </p>
+          <div className="space-y-12">
+            <div className="text-center">
+              <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4">
+                Nos Projets
+              </h2>
+              <p className="text-xl text-neutral-700">
+                {homeData.sections.projetsSubtitle}
+              </p>
+            </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <TeamMemberCard
-                name="Sylvie Kasamba"
-                role="Présidente"
-                location="Belgique"
-              />
-              <TeamMemberCard
-                name="Jean Dupont"
-                role="Coordinateur Congo"
-                location="Congo (RDC)"
-              />
-              <TeamMemberCard
-                name="Marie Martin"
-                role="Trésorière"
-                location="Suisse"
-              />
+            <div className="flex flex-wrap justify-center gap-6">
+              {projects.map((project) => {
+                const mappedProject = mapProject(project);
+                return (
+                  <ProjectCard
+                    key={project.id}
+                    title={mappedProject.title}
+                    year={mappedProject.year}
+                    status={mappedProject.status}
+                    location={mappedProject.location}
+                    beneficiaries={mappedProject.beneficiaries}
+                    budget={mappedProject.budget}
+                    image={mappedProject.image}
+                    description={mappedProject.description}
+                  />
+                );
+              })}
             </div>
           </div>
         </Section>
 
-        {/* Section Soutien */}
+        {/* Section Équipe - DONNÉES DYNAMIQUES */}
+        <Section
+          id="equipe"
+          background={{ type: "color", value: "bg-background-100" }}
+          paddingY="xl"
+        >
+          <div className="space-y-12">
+            <div className="text-center">
+              <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4">
+                Notre Équipe
+              </h2>
+              <p className="text-xl text-neutral-700">
+                {homeData.sections.equipeSubtitle}
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {team.map((member) => {
+                const mappedMember = mapTeamMember(member);
+                return (
+                  <TeamMemberCard key={member.id} {...mappedMember} />
+                );
+              })}
+            </div>
+          </div>
+        </Section>
+
+        {/* Section Soutien (statique pour le moment) */}
         <Section
           id="soutien"
           background={{ type: "color", value: "bg-primary-700" }}
           paddingY="xl"
+          textColor="text-white"
         >
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center">
-              Soutenez-nous
-            </h2>
-            <p className="text-xl text-white/90 mb-12 text-center max-w-4xl mx-auto">
-              Vous pouvez soutenir TONAKU ASBL par vos dons pour développer nos
-              activités.
-            </p>
+          <div className="space-y-12">
+            <div className="text-center">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                Soutenez-nous
+              </h2>
+              <p className="text-xl text-white/90 max-w-3xl mx-auto">
+                {homeData.sections.soutienSubtitle}
+              </p>
+            </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Don en ligne */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Dons financiers */}
               <DonationMethodCard
                 icon={<Heart size={28} strokeWidth={2} />}
-                title="Don en ligne"
-                description="Formulaire sécurisé"
+                title="Don financier"
               >
-                <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-3">
-                    <button className="bg-secondary-500 text-primary-800 font-bold py-3 px-6 rounded-lg hover:bg-secondary-400 transition-colors">
-                      5 €
-                    </button>
-                    <button className="bg-secondary-500 text-primary-800 font-bold py-3 px-6 rounded-lg hover:bg-secondary-400 transition-colors">
-                      10 €
-                    </button>
-                    <button className="bg-secondary-500 text-primary-800 font-bold py-3 px-6 rounded-lg hover:bg-secondary-400 transition-colors">
-                      20 €
-                    </button>
-                    <button className="bg-secondary-500 text-primary-800 font-bold py-3 px-6 rounded-lg hover:bg-secondary-400 transition-colors">
-                      30 €
-                    </button>
-                  </div>
-                </div>
+                <p className="text-white/90 text-sm">
+                  Soutenez directement nos projets avec un don libre ou
+                  récurrent.
+                </p>
               </DonationMethodCard>
 
               {/* Virement bancaire */}
@@ -327,59 +284,33 @@ export default function HomePage() {
           </div>
         </Section>
 
-        {/* Section Ressources */}
+        {/* Section Ressources - DONNÉES DYNAMIQUES */}
         <Section
           id="ressources"
           background={{ type: "color", value: "bg-background-100" }}
           paddingY="xl"
         >
           <div className="space-y-12">
-            {/* En-tête */}
             <div className="text-center">
               <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4">
                 Nos Ressources
               </h2>
               <p className="text-xl text-neutral-700 max-w-3xl mx-auto">
-                Découvrez nos publications et ouvrages dédiés à la préservation
-                du patrimoine culturel et linguistique africain
+                {homeData.sections.ressourcesSubtitle}
               </p>
             </div>
 
-            {/* Liste des livres */}
-            <div className="space-y-6">
-              {/* Livre mis en avant */}
-              <BookCard
-                title="Connaissances de Minungu et Ndembu et de leur environnement socioculturel (Tome 1)"
-                author="Robert Yava Mayonde"
-                year="2009"
-                category="Histoire"
-                description="Fruit de 45 années de recherche, cet ouvrage monumental explore en profondeur l'histoire, la culture et l'environnement socioculturel des peuples Minungu et Ndembu du Katanga."
-                featured
-              />
-
-              {/* Autres livres (exemples avec Lorem Ipsum) */}
-              <BookCard
-                title="Traditions orales et transmission du savoir en Afrique centrale"
-                author="Sylvie Kasamba"
-                year="2015"
-                category="Culture"
-                description="Une étude approfondie des méthodes traditionnelles de transmission du savoir et de la préservation de la mémoire collective dans les communautés d'Afrique centrale."
-              />
-
-              <BookCard
-                title="L'éducation comme vecteur de développement au Congo"
-                author="Jean-Pierre Mukendi"
-                year="2018"
-                category="Éducation"
-                description="Analyse des défis et opportunités de l'éducation en République démocratique du Congo, avec des propositions concrètes pour améliorer l'accès à l'enseignement."
-                downloadLink="/books/education-developpement.pdf"
-              />
-            </div>
+            <Carousel>
+              {books.map((book) => {
+                const mappedBook = mapBook(book);
+                return <BookCard key={book.id} {...mappedBook} />;
+              })}
+            </Carousel>
           </div>
         </Section>
       </main>
 
-      {/* Footer avec Contact intégré */}
+      {/* Footer avec Contact - DONNÉES DYNAMIQUES */}
       <footer id="contact" className="bg-primary-700 text-white py-16">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">
@@ -405,88 +336,45 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Colonne 2 : Siège social (Belgique) */}
-            <div>
-              <div className="flex items-start gap-3 mb-4">
-                <MapPin size={20} className="text-secondary-500 mt-1" />
-                <h3 className="text-xl font-bold">Siège social (Belgique)</h3>
-              </div>
-
-              <div className="space-y-4 ml-8">
-                <div>
-                  <p className="text-sm text-white/70 mb-1">Adresse</p>
-                  <p className="text-white">Rue Les Tilleur 34</p>
-                  <p className="text-white">5651 Somzée</p>
-                  <p className="text-white">Belgique</p>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <Phone size={16} className="text-secondary-500" />
-                  <a
-                    href="tel:+3249729519"
-                    className="text-white hover:text-secondary-400 transition-colors"
-                  >
-                    (+32) 497 29 51 91
-                  </a>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <Mail size={16} className="text-secondary-500" />
-                  <span className="text-white/70">[à compléter]</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Colonne 3 : Nos bureaux */}
-            <div>
-              <h3 className="text-xl font-bold mb-4">Nos bureaux</h3>
-
-              <div className="space-y-6">
-                <div>
-                  <p className="font-semibold mb-2">Kolwezi (Congo)</p>
-                  <div className="flex items-center gap-2">
-                    <Phone size={16} className="text-secondary-500" />
-                    <a
-                      href="tel:+243810314550"
-                      className="text-white hover:text-secondary-400 transition-colors"
-                    >
-                      (+243) 810 314 550
-                    </a>
+            {/* Colonnes 2 & 3 : Contacts dynamiques */}
+            {contact.map((location) => {
+              const mappedLocation = mapContactLocation(location);
+              return (
+                <div key={location.id}>
+                  <div className="flex items-start gap-3 mb-4">
+                    <MapPin size={20} className="text-secondary-500 mt-1" />
+                    <h3 className="text-xl font-bold">
+                      {mappedLocation.country}
+                      {mappedLocation.city && ` (${mappedLocation.city})`}
+                    </h3>
+                  </div>
+                  <div className="space-y-3">
+                    {mappedLocation.details.map((detail, idx) => (
+                      <div key={`${location.id}-${idx}`} className="flex items-start gap-2">
+                        {detail.label === "Téléphone" && (
+                          <Phone size={16} className="text-secondary-500 mt-1" />
+                        )}
+                        {detail.label === "Email" && (
+                          <Mail size={16} className="text-secondary-500 mt-1" />
+                        )}
+                        {detail.label === "Adresse" && (
+                          <MapPin size={16} className="text-secondary-500 mt-1" />
+                        )}
+                        <div>
+                          <p className="text-white/70 text-sm">{detail.label}</p>
+                          <p className="text-white/90">{detail.value}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-
-                <div>
-                  <p className="font-semibold mb-2">Zurich (Suisse)</p>
-                  <div className="flex items-center gap-2">
-                    <Phone size={16} className="text-secondary-500" />
-                    <a
-                      href="tel:+41798104106"
-                      className="text-white hover:text-secondary-400 transition-colors"
-                    >
-                      (+41) 79 810 41 06
-                    </a>
-                  </div>
-                </div>
-
-                <div>
-                  <p className="font-semibold mb-2">Site web</p>
-                  <a
-                    href="https://www.tonakuasbl.be"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-secondary-500 hover:text-secondary-400 transition-colors"
-                  >
-                    www.tonakuasbl.be
-                  </a>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
 
-          {/* Copyright */}
-          <div className="border-t border-white/10 pt-8 text-center">
+          <div className="border-t border-white/20 pt-8 text-center">
             <p className="text-white/70">
-              © 2026 TONAKU ASBL. Tous droits réservés.
+              © {new Date().getFullYear()} TONAKU ASBL. Tous droits réservés.
             </p>
           </div>
         </div>

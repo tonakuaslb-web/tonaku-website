@@ -56,9 +56,10 @@ export default function Hero({ title, subtitle, about }: HeroProps) {
             <h2 className="text-2xl md:text-3xl font-semibold text-blue-logo mb-4">
               Qui sommes-nous ?
             </h2>
-            <p className="text-base md:text-lg text-blue-logo/80 leading-relaxed">
-              {about}
-            </p>
+            <div 
+              className="text-base md:text-lg text-blue-logo/80 leading-relaxed prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{ __html: about }}
+            />
           </div>
         )}
 
