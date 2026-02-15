@@ -45,8 +45,8 @@ export default function TimelineCard({
 
           {/* Contenu à droite */}
           <div className="flex-1 space-y-2">
-            <h4 className="text-xl font-semibold text-blue-logo">{title}</h4>
-            <p className="text-blue-logo leading-relaxed">{description}</p>
+            <h4 className="text-xl font-semibold text-blue-logo text-left">{title}</h4>
+            <p className="text-blue-logo leading-relaxed text-left">{description}</p>
           </div>
         </div>
       </Card>

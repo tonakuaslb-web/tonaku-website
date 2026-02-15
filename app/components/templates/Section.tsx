@@ -110,7 +110,7 @@ export default function Section({
       {/* Overlay pour les images de background */}
       {background?.type === "image" && background.overlay && (
         <div
-          className="absolute inset-0 bg-black"
+          className="absolute inset-0 bg-blue-logo"
           style={{ opacity: background.overlayOpacity || 0.5 }}
         />
       )}

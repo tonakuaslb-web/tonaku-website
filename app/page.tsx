@@ -73,7 +73,9 @@ export default async function HomePage() {
               <h2 className="text-4xl md:text-5xl font-bold text-primary-800 mb-4">
                 Notre Histoire
               </h2>
-              <p className="text-xl text-neutral-700">
+            </div>
+            <div className="max-w-5xl mx-auto">
+              <p className="text-xl text-neutral-700 text-left">
                 {homeData.sections.histoireSubtitle}
               </p>
             </div>
