@@ -18,10 +18,10 @@ export default function Logo({ className = "" }: LogoProps) {
       <Image
         src="/logo-titre.png"
         alt="TONAKU"
-        width={90}
-        height={100}
+        width={140}
+        height={140}
         priority
-        className="object-contain"
+        className="object-contain h-24"
       />
     </Link>
   );

@@ -24,7 +24,7 @@ export default function Hero({ title, subtitle, about }: HeroProps) {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(254, 249, 241, 0.90) 100%)",
+            "linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(254, 249, 241, 0.75) 100%)",
         }}
       />
 
@@ -32,14 +32,14 @@ export default function Hero({ title, subtitle, about }: HeroProps) {
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
         {/* Logo et titre en vertical */}
         <div className="flex flex-col items-center justify-center gap-1 md:gap-2 mb-6 animate-fadeIn">
-          <Image
+          {/* <Image
             src="/logo.png"
             alt="Logo TONAKU"
             width={200}
             height={200}
             priority
             className="w-32 h-32 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain"
-          />
+          /> */}
           <h1 className="text-6xl md:text-8xl font-bold text-blue-logo">
             {title}
           </h1>
