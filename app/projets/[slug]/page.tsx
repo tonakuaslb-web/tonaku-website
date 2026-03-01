@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, MapPin, Users, DollarSign, Target } from "lucide-react";
 import Logo from "@/app/components/atoms/Logo";
+import Button from "@/app/components/atoms/Button";
 import client from "@/tina/__generated__/client";
 import { generateSlug, richTextToHTML } from "@/app/lib/utils";
 
@@ -63,18 +64,28 @@ export default async function ProjectPage({
     <div className="min-h-screen bg-white">
       {/* Navigation sticky */}
       <nav className="sticky top-0 z-50 bg-white border-b border-neutral-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 h-30 flex items-center justify-between">
+        <div className="container mx-auto px-6 h-30 flex items-center justify-between">
           {/* Logo à gauche */}
           <Logo />
           
-          {/* Lien retour à droite */}
-          <Link
-            href="/#projets"
-            className="inline-flex items-center gap-2 text-blue-logo hover:text-primary-600 transition-colors font-semibold"
-          >
-            <ChevronLeft size={20} />
-            <span>Retour aux projets</span>
-          </Link>
+          {/* Groupe à droite : Retour + Bouton */}
+          <div className="flex items-center gap-6">
+            {/* Lien retour */}
+            <Link
+              href="/#projets"
+              className="inline-flex items-center gap-2 text-blue-logo hover:text-primary-600 transition-colors font-semibold"
+            >
+              <ChevronLeft size={20} />
+              <span>Retour aux projets</span>
+            </Link>
+
+            {/* Bouton Soutenez-nous (le plus à droite) */}
+            <Link href="/#soutenez-nous">
+              <Button variant="primary" size="sm">
+                Soutenez-nous
+              </Button>
+            </Link>
+          </div>
         </div>
       </nav>
 
@@ -344,14 +355,6 @@ export default async function ProjectPage({
             </div>
           </div>
         )}
-
-        {/* Citation finale */}
-        <div className="bg-primary-700 rounded-2xl p-12 text-center mb-16">
-          <blockquote className="text-2xl text-white font-light italic">
-            "TONAKU asbl marche à leurs côtés pour que leurs rêves deviennent des
-            projets solides, et leurs projets, des réalités."
-          </blockquote>
-        </div>
 
         {/* Navigation vers autres projets */}
         {otherProjects.length > 0 && (
