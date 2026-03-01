@@ -338,6 +338,52 @@ var config_default = defineConfig({
                 label: "Objectif"
               }
             ]
+          },
+          {
+            type: "object",
+            name: "beneficiaryProfiles",
+            label: "Profils des b\xE9n\xE9ficiaires",
+            description: "Photos et histoires des b\xE9n\xE9ficiaires du projet",
+            list: true,
+            fields: [
+              {
+                type: "string",
+                name: "name",
+                label: "Nom complet",
+                required: true
+              },
+              {
+                type: "number",
+                name: "age",
+                label: "\xC2ge"
+              },
+              {
+                type: "image",
+                name: "photo",
+                label: "Photo"
+              },
+              {
+                type: "rich-text",
+                name: "story",
+                label: "Son histoire",
+                description: "Pr\xE9sentation du b\xE9n\xE9ficiaire, son parcours"
+              },
+              {
+                type: "string",
+                name: "dream",
+                label: "Son r\xEAve / Ses aspirations",
+                ui: {
+                  component: "textarea"
+                }
+              }
+            ]
+          },
+          {
+            type: "image",
+            name: "gallery",
+            label: "Galerie d'images",
+            description: "Photos suppl\xE9mentaires du projet",
+            list: true
           }
         ]
       },

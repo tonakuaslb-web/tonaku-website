@@ -3,12 +3,14 @@
 import { useState, useEffect } from "react";
 import Logo from "../atoms/Logo";
 import Button from "../atoms/Button";
-import { NavMenu, MobileMenuButton } from "../molecules";
+import NavLink from "../atoms/NavLink";
+import { NavDropdown, MobileMenuButton } from "../molecules";
 
 type NavItem = Readonly<{
   label: string;
   href: string;
   article?: string;
+  dropdown?: Array<{ label: string; href: string }>;
 }>;
 
 type NavigationProps = Readonly<{
@@ -47,7 +49,29 @@ export default function Navigation({
 
           {/* Navigation Desktop + CTA */}
           <div className="hidden lg:flex items-center gap-8">
-            <NavMenu items={navItems} className="flex items-center space-x-8" />
+            <div className="flex items-center space-x-8">
+              {navItems.map((item) =>
+                item.dropdown && item.dropdown.length > 0 ? (
+                  <NavDropdown
+                    key={item.href}
+                    label={item.label}
+                    mainHref={item.href}
+                    items={item.dropdown}
+                    article={item.article}
+                  />
+                ) : (
+                  <NavLink
+                    key={item.href}
+                    href={item.href}
+                    article={item.article}
+                  >
+                    {item.article
+                      ? item.label.replace(item.article + " ", "")
+                      : item.label}
+                  </NavLink>
+                )
+              )}
+            </div>
 
             <Button
               variant="primary"
@@ -71,11 +95,31 @@ export default function Navigation({
         {/* Menu Mobile */}
         {isMobileMenuOpen && (
           <div className="lg:hidden pb-6 animate-fadeIn border-t border-neutral-200 mt-4 pt-4">
-            <NavMenu
-              items={navItems}
-              onItemClick={() => setIsMobileMenuOpen(false)}
-              className="flex flex-col space-y-4"
-            />
+            <div className="flex flex-col space-y-4">
+              {navItems.map((item) =>
+                item.dropdown && item.dropdown.length > 0 ? (
+                  <NavDropdown
+                    key={item.href}
+                    label={item.label}
+                    mainHref={item.href}
+                    items={item.dropdown}
+                    article={item.article}
+                    onItemClick={() => setIsMobileMenuOpen(false)}
+                  />
+                ) : (
+                  <NavLink
+                    key={item.href}
+                    href={item.href}
+                    article={item.article}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.article
+                      ? item.label.replace(item.article + " ", "")
+                      : item.label}
+                  </NavLink>
+                )
+              )}
+            </div>
             <Button
               variant="primary"
               size="md"

@@ -351,6 +351,52 @@ export default defineConfig({
               },
             ],
           },
+          {
+            type: "object",
+            name: "beneficiaryProfiles",
+            label: "Profils des bénéficiaires",
+            description: "Photos et histoires des bénéficiaires du projet",
+            list: true,
+            fields: [
+              {
+                type: "string",
+                name: "name",
+                label: "Nom complet",
+                required: true,
+              },
+              {
+                type: "number",
+                name: "age",
+                label: "Âge",
+              },
+              {
+                type: "image",
+                name: "photo",
+                label: "Photo",
+              },
+              {
+                type: "rich-text",
+                name: "story",
+                label: "Son histoire",
+                description: "Présentation du bénéficiaire, son parcours",
+              },
+              {
+                type: "string",
+                name: "dream",
+                label: "Son rêve / Ses aspirations",
+                ui: {
+                  component: "textarea",
+                },
+              },
+            ],
+          },
+          {
+            type: "image",
+            name: "gallery",
+            label: "Galerie d'images",
+            description: "Photos supplémentaires du projet",
+            list: true,
+          },
         ],
       },
 

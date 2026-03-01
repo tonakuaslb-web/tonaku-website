@@ -300,6 +300,14 @@ type ProjectDetails {
   goal: String
 }
 
+type ProjectBeneficiaryProfiles {
+  name: String!
+  age: Float
+  photo: String
+  story: JSON
+  dream: String
+}
+
 type Project implements Node & Document {
   title: String!
   year: String!
@@ -308,6 +316,8 @@ type Project implements Node & Document {
   image: String
   location: String
   details: ProjectDetails
+  beneficiaryProfiles: [ProjectBeneficiaryProfiles]
+  gallery: [String]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -319,6 +329,14 @@ input ProjectDetailsFilter {
   goal: StringFilter
 }
 
+input ProjectBeneficiaryProfilesFilter {
+  name: StringFilter
+  age: NumberFilter
+  photo: ImageFilter
+  story: RichTextFilter
+  dream: StringFilter
+}
+
 input ProjectFilter {
   title: StringFilter
   year: StringFilter
@@ -327,6 +345,8 @@ input ProjectFilter {
   image: ImageFilter
   location: StringFilter
   details: ProjectDetailsFilter
+  beneficiaryProfiles: ProjectBeneficiaryProfilesFilter
+  gallery: ImageFilter
 }
 
 type ProjectConnectionEdges {
@@ -538,6 +558,14 @@ input ProjectDetailsMutation {
   goal: String
 }
 
+input ProjectBeneficiaryProfilesMutation {
+  name: String
+  age: Float
+  photo: String
+  story: JSON
+  dream: String
+}
+
 input ProjectMutation {
   title: String
   year: String
@@ -546,6 +574,8 @@ input ProjectMutation {
   image: String
   location: String
   details: ProjectDetailsMutation
+  beneficiaryProfiles: [ProjectBeneficiaryProfilesMutation]
+  gallery: [String]
 }
 
 input BookAvailabilityMutation {

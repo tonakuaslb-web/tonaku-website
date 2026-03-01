@@ -63,6 +63,15 @@ fragment ProjectParts on Project {
     budget
     goal
   }
+  beneficiaryProfiles {
+    __typename
+    name
+    age
+    photo
+    story
+    dream
+  }
+  gallery
 }
 
 fragment BookParts on Book {

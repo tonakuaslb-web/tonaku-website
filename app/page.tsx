@@ -28,21 +28,32 @@ import {
   mapBook,
   mapContactLocation,
 } from "./lib/mappers";
-
-const navItems = [
-  { label: "Accueil", href: "#accueil" },
-  { label: "Notre Histoire", href: "#histoire", article: "Notre" },
-  { label: "Missions", href: "#missions" },
-  { label: "Projets", href: "#projets" },
-  { label: "Équipe", href: "#equipe" },
-  { label: "Nos ressources", href: "#ressources", article: "Nos" },
-  { label: "Nous contacter", href: "#contact", article: "Nous" },
-];
+import { generateSlug } from "./lib/utils";
 
 export default async function HomePage() {
   // Récupérer toutes les données depuis Tina CMS
   const { homeData, timeline, missions, projects, team, books, contact } =
     await getAllPageData();
+
+  // Créer le dropdown des projets pour la navigation
+  const projectsDropdown = projects.map((project) => ({
+    label: project.title,
+    href: `/projets/${generateSlug(project.title)}`,
+  }));
+
+  const navItems = [
+    { label: "Accueil", href: "#accueil" },
+    { label: "Notre Histoire", href: "#histoire", article: "Notre" },
+    { label: "Missions", href: "#missions" },
+    { 
+      label: "Projets", 
+      href: "#projets",
+      dropdown: projectsDropdown,
+    },
+    { label: "Équipe", href: "#equipe" },
+    { label: "Nos ressources", href: "#ressources", article: "Nos" },
+    { label: "Nous contacter", href: "#contact", article: "Nous" },
+  ];
 
   return (
     <>
