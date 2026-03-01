@@ -483,13 +483,12 @@ export type ProjectDetails = {
   goal?: Maybe<Scalars['String']['output']>;
 };
 
-export type ProjectBeneficiaryProfiles = {
-  __typename?: 'ProjectBeneficiaryProfiles';
-  name: Scalars['String']['output'];
-  age?: Maybe<Scalars['Float']['output']>;
-  photo?: Maybe<Scalars['String']['output']>;
-  story?: Maybe<Scalars['JSON']['output']>;
-  dream?: Maybe<Scalars['String']['output']>;
+export type ProjectContentSections = {
+  __typename?: 'ProjectContentSections';
+  sectionTitle?: Maybe<Scalars['String']['output']>;
+  layout: Scalars['String']['output'];
+  image?: Maybe<Scalars['String']['output']>;
+  content: Scalars['JSON']['output'];
 };
 
 export type Project = Node & Document & {
@@ -500,8 +499,11 @@ export type Project = Node & Document & {
   description?: Maybe<Scalars['JSON']['output']>;
   image?: Maybe<Scalars['String']['output']>;
   location?: Maybe<Scalars['String']['output']>;
+  introTitle?: Maybe<Scalars['String']['output']>;
+  introText?: Maybe<Scalars['JSON']['output']>;
   details?: Maybe<ProjectDetails>;
-  beneficiaryProfiles?: Maybe<Array<Maybe<ProjectBeneficiaryProfiles>>>;
+  contentSections?: Maybe<Array<Maybe<ProjectContentSections>>>;
+  conclusionText?: Maybe<Scalars['JSON']['output']>;
   gallery?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -514,12 +516,11 @@ export type ProjectDetailsFilter = {
   goal?: InputMaybe<StringFilter>;
 };
 
-export type ProjectBeneficiaryProfilesFilter = {
-  name?: InputMaybe<StringFilter>;
-  age?: InputMaybe<NumberFilter>;
-  photo?: InputMaybe<ImageFilter>;
-  story?: InputMaybe<RichTextFilter>;
-  dream?: InputMaybe<StringFilter>;
+export type ProjectContentSectionsFilter = {
+  sectionTitle?: InputMaybe<StringFilter>;
+  layout?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  content?: InputMaybe<RichTextFilter>;
 };
 
 export type ProjectFilter = {
@@ -529,8 +530,11 @@ export type ProjectFilter = {
   description?: InputMaybe<RichTextFilter>;
   image?: InputMaybe<ImageFilter>;
   location?: InputMaybe<StringFilter>;
+  introTitle?: InputMaybe<StringFilter>;
+  introText?: InputMaybe<RichTextFilter>;
   details?: InputMaybe<ProjectDetailsFilter>;
-  beneficiaryProfiles?: InputMaybe<ProjectBeneficiaryProfilesFilter>;
+  contentSections?: InputMaybe<ProjectContentSectionsFilter>;
+  conclusionText?: InputMaybe<RichTextFilter>;
   gallery?: InputMaybe<ImageFilter>;
 };
 
@@ -871,12 +875,11 @@ export type ProjectDetailsMutation = {
   goal?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type ProjectBeneficiaryProfilesMutation = {
-  name?: InputMaybe<Scalars['String']['input']>;
-  age?: InputMaybe<Scalars['Float']['input']>;
-  photo?: InputMaybe<Scalars['String']['input']>;
-  story?: InputMaybe<Scalars['JSON']['input']>;
-  dream?: InputMaybe<Scalars['String']['input']>;
+export type ProjectContentSectionsMutation = {
+  sectionTitle?: InputMaybe<Scalars['String']['input']>;
+  layout?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 export type ProjectMutation = {
@@ -886,8 +889,11 @@ export type ProjectMutation = {
   description?: InputMaybe<Scalars['JSON']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   location?: InputMaybe<Scalars['String']['input']>;
+  introTitle?: InputMaybe<Scalars['String']['input']>;
+  introText?: InputMaybe<Scalars['JSON']['input']>;
   details?: InputMaybe<ProjectDetailsMutation>;
-  beneficiaryProfiles?: InputMaybe<Array<InputMaybe<ProjectBeneficiaryProfilesMutation>>>;
+  contentSections?: InputMaybe<Array<InputMaybe<ProjectContentSectionsMutation>>>;
+  conclusionText?: InputMaybe<Scalars['JSON']['input']>;
   gallery?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -935,7 +941,7 @@ export type TeamPartsFragment = { __typename: 'Team', name: string, role: string
 
 export type MissionPartsFragment = { __typename: 'Mission', title: string, description?: any | null, icon: string, order: number, active?: boolean | null };
 
-export type ProjectPartsFragment = { __typename: 'Project', title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, gallery?: Array<string | null> | null, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, beneficiaryProfiles?: Array<{ __typename: 'ProjectBeneficiaryProfiles', name: string, age?: number | null, photo?: string | null, story?: any | null, dream?: string | null } | null> | null };
+export type ProjectPartsFragment = { __typename: 'Project', title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, content: any } | null> | null };
 
 export type BookPartsFragment = { __typename: 'Book', title: string, author?: string | null, year?: string | null, isbn?: string | null, cover?: string | null, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, availability?: { __typename: 'BookAvailability', ebook?: boolean | null, ebookUrl?: string | null, print?: boolean | null, printUrl?: string | null, price?: string | null } | null };
 
@@ -1022,7 +1028,7 @@ export type ProjectQueryVariables = Exact<{
 }>;
 
 
-export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, beneficiaryProfiles?: Array<{ __typename: 'ProjectBeneficiaryProfiles', name: string, age?: number | null, photo?: string | null, story?: any | null, dream?: string | null } | null> | null } };
+export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, content: any } | null> | null } };
 
 export type ProjectConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1034,7 +1040,7 @@ export type ProjectConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, beneficiaryProfiles?: Array<{ __typename: 'ProjectBeneficiaryProfiles', name: string, age?: number | null, photo?: string | null, story?: any | null, dream?: string | null } | null> | null } | null } | null> | null } };
+export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, content: any } | null> | null } | null } | null> | null } };
 
 export type BookQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1138,20 +1144,22 @@ export const ProjectPartsFragmentDoc = gql`
   description
   image
   location
+  introTitle
+  introText
   details {
     __typename
     beneficiaries
     budget
     goal
   }
-  beneficiaryProfiles {
+  contentSections {
     __typename
-    name
-    age
-    photo
-    story
-    dream
+    sectionTitle
+    layout
+    image
+    content
   }
+  conclusionText
   gallery
 }
     `;

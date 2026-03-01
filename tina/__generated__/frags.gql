@@ -57,20 +57,22 @@ fragment ProjectParts on Project {
   description
   image
   location
+  introTitle
+  introText
   details {
     __typename
     beneficiaries
     budget
     goal
   }
-  beneficiaryProfiles {
+  contentSections {
     __typename
-    name
-    age
-    photo
-    story
-    dream
+    sectionTitle
+    layout
+    image
+    content
   }
+  conclusionText
   gallery
 }
 

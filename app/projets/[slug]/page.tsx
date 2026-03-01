@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, MapPin, Users, DollarSign, Target } from "lucide-react";
+import Logo from "@/app/components/atoms/Logo";
 import client from "@/tina/__generated__/client";
 import { generateSlug, richTextToHTML } from "@/app/lib/utils";
 
@@ -62,7 +63,11 @@ export default async function ProjectPage({
     <div className="min-h-screen bg-white">
       {/* Navigation sticky */}
       <nav className="sticky top-0 z-50 bg-white border-b border-neutral-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-6 h-30 flex items-center justify-between">
+          {/* Logo à gauche */}
+          <Logo />
+          
+          {/* Lien retour à droite */}
           <Link
             href="/#projets"
             className="inline-flex items-center gap-2 text-blue-logo hover:text-primary-600 transition-colors font-semibold"
@@ -147,7 +152,7 @@ export default async function ProjectPage({
           )}
         </div>
 
-        {/* Description détaillée */}
+        {/* Description détaillée du projet */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-blue-logo mb-6">
             À propos du projet
@@ -160,75 +165,155 @@ export default async function ProjectPage({
           />
         </div>
 
-        {/* Section Bénéficiaires avec photos */}
-        {project.beneficiaryProfiles && project.beneficiaryProfiles.length > 0 && (
+        {/* Titre et introduction de la page (optionnels) */}
+        {(project.introTitle || project.introText) && (
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-blue-logo mb-4">
-              Nos bénéficiaires en images
-            </h2>
-            <p className="text-lg text-neutral-600 mb-8">
-              Des visages, des rêves, un héritage qui se transmet
-            </p>
+            {project.introTitle && (
+              <h2 className="text-3xl font-bold text-blue-logo mb-6">
+                {project.introTitle}
+              </h2>
+            )}
+            {project.introText && (
+              <div
+                className="prose prose-lg max-w-none text-neutral-700 leading-relaxed"
+                dangerouslySetInnerHTML={{
+                  __html: richTextToHTML(project.introText),
+                }}
+              />
+            )}
+          </div>
+        )}
 
-            <div className="space-y-12">
-              {project.beneficiaryProfiles.map((person, idx) => {
-                if (!person) return null;
-                return (
-                  <article
-                    key={idx}
-                    className="bg-accent-50 rounded-2xl overflow-hidden border border-accent-200 hover:shadow-xl transition-shadow"
-                  >
-                    <div className="flex flex-col md:flex-row">
-                      {/* Photo */}
-                      {person.photo && (
-                        <div className="md:w-1/3 relative h-80 md:h-auto">
+        {/* Sections de contenu */}
+        {project.contentSections && project.contentSections.length > 0 && (
+          <div className="space-y-12 mb-16">
+            {project.contentSections.map((section, idx) => {
+              if (!section) return null;
+              
+              const layoutType = section.layout || "text-only";
+
+              return (
+                <div key={idx} className="space-y-6">
+                  {/* Titre optionnel de la section */}
+                  {section.sectionTitle && (
+                    <h3 className="text-2xl font-bold text-blue-logo">
+                      {section.sectionTitle}
+                    </h3>
+                  )}
+
+                  {/* Layout: Paragraphe de texte seul */}
+                  {layoutType === "text-only" && section.content && (
+                    <div
+                      className="prose prose-lg max-w-none text-neutral-700"
+                      dangerouslySetInnerHTML={{
+                        __html: richTextToHTML(section.content),
+                      }}
+                    />
+                  )}
+
+                  {/* Layout: Citation */}
+                  {layoutType === "quote" && section.content && (
+                    <div className="bg-accent-50 border-l-4 border-accent-400 p-8 rounded-r-xl">
+                      <blockquote
+                        className="text-xl italic text-blue-logo leading-relaxed"
+                        dangerouslySetInnerHTML={{
+                          __html: richTextToHTML(section.content),
+                        }}
+                      />
+                    </div>
+                  )}
+
+                  {/* Layout: Image à gauche + Texte */}
+                  {layoutType === "text-image-left" && (
+                    <div className="flex flex-col md:flex-row gap-8 items-start">
+                      {section.image && (
+                        <div className="md:w-1/2 shrink-0">
                           <Image
-                            src={person.photo}
-                            alt={person.name || "Bénéficiaire"}
-                            fill
-                            className="object-cover"
+                            src={section.image}
+                            alt={section.sectionTitle || "Image"}
+                            width={600}
+                            height={800}
+                            className="rounded-xl shadow-lg w-full h-auto object-cover"
                           />
                         </div>
                       )}
-
-                      {/* Contenu */}
-                      <div className="md:w-2/3 p-8">
-                        <h3 className="text-2xl font-bold text-blue-logo mb-1">
-                          {person.name}
-                        </h3>
-                        {person.age && (
-                          <p className="text-accent-600 font-medium mb-4">
-                            {person.age} ans
-                          </p>
-                        )}
-
-                        {person.story && (
-                          <div className="prose prose-blue max-w-none mb-6">
-                            <div
-                              className="text-neutral-700 leading-relaxed"
-                              dangerouslySetInnerHTML={{
-                                __html: richTextToHTML(person.story),
-                              }}
-                            />
-                          </div>
-                        )}
-
-                        {person.dream && (
-                          <blockquote className="bg-white p-6 rounded-lg border-l-4 border-secondary-500">
-                            <p className="text-sm font-semibold text-secondary-700 mb-2">
-                              💭 Son rêve :
-                            </p>
-                            <p className="text-blue-logo italic text-lg">
-                              "{person.dream}"
-                            </p>
-                          </blockquote>
-                        )}
-                      </div>
+                      {section.content && (
+                        <div className="md:w-1/2">
+                          <div
+                            className="prose prose-lg max-w-none text-neutral-700"
+                            dangerouslySetInnerHTML={{
+                              __html: richTextToHTML(section.content),
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
-                  </article>
-                );
-              })}
-            </div>
+                  )}
+
+                  {/* Layout: Texte + Image à droite */}
+                  {layoutType === "text-image-right" && (
+                    <div className="flex flex-col md:flex-row-reverse gap-8 items-start">
+                      {section.image && (
+                        <div className="md:w-1/2 shrink-0">
+                          <Image
+                            src={section.image}
+                            alt={section.sectionTitle || "Image"}
+                            width={600}
+                            height={800}
+                            className="rounded-xl shadow-lg w-full h-auto object-cover"
+                          />
+                        </div>
+                      )}
+                      {section.content && (
+                        <div className="md:w-1/2">
+                          <div
+                            className="prose prose-lg max-w-none text-neutral-700"
+                            dangerouslySetInnerHTML={{
+                              __html: richTextToHTML(section.content),
+                            }}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Layout: Image en haut + Texte */}
+                  {layoutType === "image-top" && (
+                    <div className="space-y-6">
+                      {section.image && (
+                        <Image
+                          src={section.image}
+                          alt={section.sectionTitle || "Image"}
+                          width={1200}
+                          height={600}
+                          className="rounded-xl shadow-lg w-full h-auto"
+                        />
+                      )}
+                      {section.content && (
+                        <div
+                          className="prose prose-lg max-w-none text-neutral-700"
+                          dangerouslySetInnerHTML={{
+                            __html: richTextToHTML(section.content),
+                          }}
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Paragraphe de conclusion de la page (optionnel) */}
+        {project.conclusionText && (
+          <div className="mb-16">
+            <div
+              className="prose prose-lg max-w-none text-neutral-700 leading-relaxed"
+              dangerouslySetInnerHTML={{
+                __html: richTextToHTML(project.conclusionText),
+              }}
+            />
           </div>
         )}
 

@@ -26,6 +26,7 @@ export default function NavDropdown({
 }: NavDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Fermer le dropdown en cliquant à l'extérieur
   useEffect(() => {
@@ -39,8 +40,30 @@ export default function NavDropdown({
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      // Nettoyer le timeout si le composant est démonté
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
   }, []);
+
+  const handleMouseEnter = () => {
+    // Annuler tout timeout de fermeture en cours
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    // Ajouter un délai avant la fermeture pour permettre le déplacement vers le menu
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 200); // 200ms de délai
+  };
 
   const displayLabel = article
     ? label.replace(article + " ", "")
@@ -50,8 +73,8 @@ export default function NavDropdown({
     <div 
       className="relative" 
       ref={dropdownRef}
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Bouton principal avec dropdown */}
       <div className="flex items-center gap-1">
@@ -95,7 +118,7 @@ export default function NavDropdown({
 
       {/* Menu déroulant */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-neutral-200 py-2 z-50 animate-fadeIn">
+        <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-xl border border-neutral-200 py-2 z-50 animate-fadeIn">
           {items.map((item) => (
             <Link
               key={item.href}

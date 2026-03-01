@@ -48,7 +48,7 @@ export default function ProjectCard({
         }
       >
         {/* Overlay de base pour la lisibilité (toujours présent) */}
-        <div className="absolute inset-0 bg-background-100/70 backdrop-blur-[1px] transition-all duration-300 group-hover:bg-secondary-500/75 group-focus-within:bg-secondary-500/75" />
+        <div className="absolute inset-0 bg-background-100/60 backdrop-blur-[0.5px] transition-all duration-300 group-hover:bg-secondary-500/75 group-focus-within:bg-secondary-500/75" />
 
         {/* Contenu */}
         <div className="relative z-10 p-6 flex-1 flex flex-col justify-end transition-transform duration-300 group-hover:-translate-y-12">

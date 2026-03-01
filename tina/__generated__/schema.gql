@@ -300,12 +300,11 @@ type ProjectDetails {
   goal: String
 }
 
-type ProjectBeneficiaryProfiles {
-  name: String!
-  age: Float
-  photo: String
-  story: JSON
-  dream: String
+type ProjectContentSections {
+  sectionTitle: String
+  layout: String!
+  image: String
+  content: JSON!
 }
 
 type Project implements Node & Document {
@@ -315,8 +314,11 @@ type Project implements Node & Document {
   description: JSON
   image: String
   location: String
+  introTitle: String
+  introText: JSON
   details: ProjectDetails
-  beneficiaryProfiles: [ProjectBeneficiaryProfiles]
+  contentSections: [ProjectContentSections]
+  conclusionText: JSON
   gallery: [String]
   id: ID!
   _sys: SystemInfo!
@@ -329,12 +331,11 @@ input ProjectDetailsFilter {
   goal: StringFilter
 }
 
-input ProjectBeneficiaryProfilesFilter {
-  name: StringFilter
-  age: NumberFilter
-  photo: ImageFilter
-  story: RichTextFilter
-  dream: StringFilter
+input ProjectContentSectionsFilter {
+  sectionTitle: StringFilter
+  layout: StringFilter
+  image: ImageFilter
+  content: RichTextFilter
 }
 
 input ProjectFilter {
@@ -344,8 +345,11 @@ input ProjectFilter {
   description: RichTextFilter
   image: ImageFilter
   location: StringFilter
+  introTitle: StringFilter
+  introText: RichTextFilter
   details: ProjectDetailsFilter
-  beneficiaryProfiles: ProjectBeneficiaryProfilesFilter
+  contentSections: ProjectContentSectionsFilter
+  conclusionText: RichTextFilter
   gallery: ImageFilter
 }
 
@@ -558,12 +562,11 @@ input ProjectDetailsMutation {
   goal: String
 }
 
-input ProjectBeneficiaryProfilesMutation {
-  name: String
-  age: Float
-  photo: String
-  story: JSON
-  dream: String
+input ProjectContentSectionsMutation {
+  sectionTitle: String
+  layout: String
+  image: String
+  content: JSON
 }
 
 input ProjectMutation {
@@ -573,8 +576,11 @@ input ProjectMutation {
   description: JSON
   image: String
   location: String
+  introTitle: String
+  introText: JSON
   details: ProjectDetailsMutation
-  beneficiaryProfiles: [ProjectBeneficiaryProfilesMutation]
+  contentSections: [ProjectContentSectionsMutation]
+  conclusionText: JSON
   gallery: [String]
 }
 

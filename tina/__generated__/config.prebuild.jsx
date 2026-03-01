@@ -317,6 +317,18 @@ var config_default = defineConfig({
             description: "Ex: Kolwezi, Likasi"
           },
           {
+            type: "string",
+            name: "introTitle",
+            label: "Titre d'introduction de la page",
+            description: "Ex: 'Nos b\xE9n\xE9ficiaires en images' (optionnel)"
+          },
+          {
+            type: "rich-text",
+            name: "introText",
+            label: "Paragraphe d'introduction de la page",
+            description: "Texte d'introduction qui appara\xEEt au d\xE9but (optionnel)"
+          },
+          {
             type: "object",
             name: "details",
             label: "D\xE9tails suppl\xE9mentaires",
@@ -341,42 +353,50 @@ var config_default = defineConfig({
           },
           {
             type: "object",
-            name: "beneficiaryProfiles",
-            label: "Profils des b\xE9n\xE9ficiaires",
-            description: "Photos et histoires des b\xE9n\xE9ficiaires du projet",
+            name: "contentSections",
+            label: "Sections de contenu du projet",
+            description: "Blocs de contenu vari\xE9s (texte, image+texte, citations...)",
             list: true,
             fields: [
               {
                 type: "string",
-                name: "name",
-                label: "Nom complet",
-                required: true
-              },
-              {
-                type: "number",
-                name: "age",
-                label: "\xC2ge"
-              },
-              {
-                type: "image",
-                name: "photo",
-                label: "Photo"
-              },
-              {
-                type: "rich-text",
-                name: "story",
-                label: "Son histoire",
-                description: "Pr\xE9sentation du b\xE9n\xE9ficiaire, son parcours"
+                name: "sectionTitle",
+                label: "Titre de la section (optionnel)",
+                description: "Un titre pour cette section sp\xE9cifique"
               },
               {
                 type: "string",
-                name: "dream",
-                label: "Son r\xEAve / Ses aspirations",
-                ui: {
-                  component: "textarea"
-                }
+                name: "layout",
+                label: "Type de contenu",
+                options: [
+                  { value: "text-only", label: "\u{1F4DD} Paragraphe de texte" },
+                  { value: "text-image-left", label: "\u{1F5BC}\uFE0F \u2190 Image \xE0 gauche + Texte" },
+                  { value: "text-image-right", label: "\u{1F5BC}\uFE0F Texte + Image \xE0 droite \u2192" },
+                  { value: "image-top", label: "\u{1F5BC}\uFE0F Image en haut + Texte" },
+                  { value: "quote", label: "\u{1F4AC} Citation / T\xE9moignage" }
+                ],
+                required: true
+              },
+              {
+                type: "image",
+                name: "image",
+                label: "Image",
+                description: "Image utilis\xE9e selon le type de contenu choisi"
+              },
+              {
+                type: "rich-text",
+                name: "content",
+                label: "Contenu / Description",
+                description: "Le texte principal de cette section",
+                required: true
               }
             ]
+          },
+          {
+            type: "rich-text",
+            name: "conclusionText",
+            label: "Paragraphe de conclusion de la page",
+            description: "Texte final qui appara\xEEt \xE0 la fin de la page (optionnel)"
           },
           {
             type: "image",
