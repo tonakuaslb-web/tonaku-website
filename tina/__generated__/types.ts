@@ -90,6 +90,8 @@ export type Query = {
   teamConnection: TeamConnection;
   mission: Mission;
   missionConnection: MissionConnection;
+  support: Support;
+  supportConnection: SupportConnection;
   project: Project;
   projectConnection: ProjectConnection;
   book: Book;
@@ -180,6 +182,21 @@ export type QueryMissionConnectionArgs = {
 };
 
 
+export type QuerySupportArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QuerySupportConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SupportFilter>;
+};
+
+
 export type QueryProjectArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -229,6 +246,7 @@ export type DocumentFilter = {
   histoire?: InputMaybe<HistoireFilter>;
   team?: InputMaybe<TeamFilter>;
   mission?: InputMaybe<MissionFilter>;
+  support?: InputMaybe<SupportFilter>;
   project?: InputMaybe<ProjectFilter>;
   book?: InputMaybe<BookFilter>;
   contact?: InputMaybe<ContactFilter>;
@@ -271,7 +289,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Accueil | Histoire | Team | Mission | Project | Book | Contact | Folder;
+export type DocumentNode = Accueil | Histoire | Team | Mission | Support | Project | Book | Contact | Folder;
 
 export type AccueilHero = {
   __typename?: 'AccueilHero';
@@ -476,11 +494,155 @@ export type MissionConnection = Connection & {
   edges?: Maybe<Array<Maybe<MissionConnectionEdges>>>;
 };
 
+export type SupportImpactItems = {
+  __typename?: 'SupportImpactItems';
+  text: Scalars['String']['output'];
+};
+
+export type SupportBankTransfer = {
+  __typename?: 'SupportBankTransfer';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  accountName?: Maybe<Scalars['String']['output']>;
+  iban?: Maybe<Scalars['String']['output']>;
+  bic?: Maybe<Scalars['String']['output']>;
+  communication?: Maybe<Scalars['String']['output']>;
+};
+
+export type SupportProducts = {
+  __typename?: 'SupportProducts';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  item1?: Maybe<Scalars['String']['output']>;
+  item2?: Maybe<Scalars['String']['output']>;
+  item3?: Maybe<Scalars['String']['output']>;
+  contactName?: Maybe<Scalars['String']['output']>;
+  contactPhone?: Maybe<Scalars['String']['output']>;
+};
+
+export type SupportMaterialDonations = {
+  __typename?: 'SupportMaterialDonations';
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  item1?: Maybe<Scalars['String']['output']>;
+  item2?: Maybe<Scalars['String']['output']>;
+  item3?: Maybe<Scalars['String']['output']>;
+  item4?: Maybe<Scalars['String']['output']>;
+};
+
+export type SupportMembership = {
+  __typename?: 'SupportMembership';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  benefit1?: Maybe<Scalars['String']['output']>;
+  benefit2?: Maybe<Scalars['String']['output']>;
+  benefit3?: Maybe<Scalars['String']['output']>;
+  benefit4?: Maybe<Scalars['String']['output']>;
+  contactEmail?: Maybe<Scalars['String']['output']>;
+};
+
+export type Support = Node & Document & {
+  __typename?: 'Support';
+  mainTitle: Scalars['String']['output'];
+  whyTitle: Scalars['String']['output'];
+  whyDescription: Scalars['String']['output'];
+  impactListTitle: Scalars['String']['output'];
+  impactItems?: Maybe<Array<Maybe<SupportImpactItems>>>;
+  impactMessage: Scalars['String']['output'];
+  impactDescription: Scalars['String']['output'];
+  howToTitle: Scalars['String']['output'];
+  bankTransfer?: Maybe<SupportBankTransfer>;
+  products?: Maybe<SupportProducts>;
+  materialDonations?: Maybe<SupportMaterialDonations>;
+  membership?: Maybe<SupportMembership>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type SupportImpactItemsFilter = {
+  text?: InputMaybe<StringFilter>;
+};
+
+export type SupportBankTransferFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  accountName?: InputMaybe<StringFilter>;
+  iban?: InputMaybe<StringFilter>;
+  bic?: InputMaybe<StringFilter>;
+  communication?: InputMaybe<StringFilter>;
+};
+
+export type SupportProductsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  item1?: InputMaybe<StringFilter>;
+  item2?: InputMaybe<StringFilter>;
+  item3?: InputMaybe<StringFilter>;
+  contactName?: InputMaybe<StringFilter>;
+  contactPhone?: InputMaybe<StringFilter>;
+};
+
+export type SupportMaterialDonationsFilter = {
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  item1?: InputMaybe<StringFilter>;
+  item2?: InputMaybe<StringFilter>;
+  item3?: InputMaybe<StringFilter>;
+  item4?: InputMaybe<StringFilter>;
+};
+
+export type SupportMembershipFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  benefit1?: InputMaybe<StringFilter>;
+  benefit2?: InputMaybe<StringFilter>;
+  benefit3?: InputMaybe<StringFilter>;
+  benefit4?: InputMaybe<StringFilter>;
+  contactEmail?: InputMaybe<StringFilter>;
+};
+
+export type SupportFilter = {
+  mainTitle?: InputMaybe<StringFilter>;
+  whyTitle?: InputMaybe<StringFilter>;
+  whyDescription?: InputMaybe<StringFilter>;
+  impactListTitle?: InputMaybe<StringFilter>;
+  impactItems?: InputMaybe<SupportImpactItemsFilter>;
+  impactMessage?: InputMaybe<StringFilter>;
+  impactDescription?: InputMaybe<StringFilter>;
+  howToTitle?: InputMaybe<StringFilter>;
+  bankTransfer?: InputMaybe<SupportBankTransferFilter>;
+  products?: InputMaybe<SupportProductsFilter>;
+  materialDonations?: InputMaybe<SupportMaterialDonationsFilter>;
+  membership?: InputMaybe<SupportMembershipFilter>;
+};
+
+export type SupportConnectionEdges = {
+  __typename?: 'SupportConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Support>;
+};
+
+export type SupportConnection = Connection & {
+  __typename?: 'SupportConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<SupportConnectionEdges>>>;
+};
+
 export type ProjectDetails = {
   __typename?: 'ProjectDetails';
   beneficiaries?: Maybe<Scalars['String']['output']>;
   budget?: Maybe<Scalars['String']['output']>;
   goal?: Maybe<Scalars['String']['output']>;
+};
+
+export type ProjectContentSections = {
+  __typename?: 'ProjectContentSections';
+  sectionTitle?: Maybe<Scalars['String']['output']>;
+  layout: Scalars['String']['output'];
+  image?: Maybe<Scalars['String']['output']>;
+  content: Scalars['JSON']['output'];
 };
 
 export type Project = Node & Document & {
@@ -491,7 +653,12 @@ export type Project = Node & Document & {
   description?: Maybe<Scalars['JSON']['output']>;
   image?: Maybe<Scalars['String']['output']>;
   location?: Maybe<Scalars['String']['output']>;
+  introTitle?: Maybe<Scalars['String']['output']>;
+  introText?: Maybe<Scalars['JSON']['output']>;
   details?: Maybe<ProjectDetails>;
+  contentSections?: Maybe<Array<Maybe<ProjectContentSections>>>;
+  conclusionText?: Maybe<Scalars['JSON']['output']>;
+  gallery?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -503,6 +670,13 @@ export type ProjectDetailsFilter = {
   goal?: InputMaybe<StringFilter>;
 };
 
+export type ProjectContentSectionsFilter = {
+  sectionTitle?: InputMaybe<StringFilter>;
+  layout?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  content?: InputMaybe<RichTextFilter>;
+};
+
 export type ProjectFilter = {
   title?: InputMaybe<StringFilter>;
   year?: InputMaybe<StringFilter>;
@@ -510,7 +684,12 @@ export type ProjectFilter = {
   description?: InputMaybe<RichTextFilter>;
   image?: InputMaybe<ImageFilter>;
   location?: InputMaybe<StringFilter>;
+  introTitle?: InputMaybe<StringFilter>;
+  introText?: InputMaybe<RichTextFilter>;
   details?: InputMaybe<ProjectDetailsFilter>;
+  contentSections?: InputMaybe<ProjectContentSectionsFilter>;
+  conclusionText?: InputMaybe<RichTextFilter>;
+  gallery?: InputMaybe<ImageFilter>;
 };
 
 export type ProjectConnectionEdges = {
@@ -649,6 +828,8 @@ export type Mutation = {
   createTeam: Team;
   updateMission: Mission;
   createMission: Mission;
+  updateSupport: Support;
+  createSupport: Support;
   updateProject: Project;
   createProject: Project;
   updateBook: Book;
@@ -739,6 +920,18 @@ export type MutationCreateMissionArgs = {
 };
 
 
+export type MutationUpdateSupportArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SupportMutation;
+};
+
+
+export type MutationCreateSupportArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SupportMutation;
+};
+
+
 export type MutationUpdateProjectArgs = {
   relativePath: Scalars['String']['input'];
   params: ProjectMutation;
@@ -779,6 +972,7 @@ export type DocumentUpdateMutation = {
   histoire?: InputMaybe<HistoireMutation>;
   team?: InputMaybe<TeamMutation>;
   mission?: InputMaybe<MissionMutation>;
+  support?: InputMaybe<SupportMutation>;
   project?: InputMaybe<ProjectMutation>;
   book?: InputMaybe<BookMutation>;
   contact?: InputMaybe<ContactMutation>;
@@ -790,6 +984,7 @@ export type DocumentMutation = {
   histoire?: InputMaybe<HistoireMutation>;
   team?: InputMaybe<TeamMutation>;
   mission?: InputMaybe<MissionMutation>;
+  support?: InputMaybe<SupportMutation>;
   project?: InputMaybe<ProjectMutation>;
   book?: InputMaybe<BookMutation>;
   contact?: InputMaybe<ContactMutation>;
@@ -844,10 +1039,74 @@ export type MissionMutation = {
   active?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type SupportImpactItemsMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SupportBankTransferMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  accountName?: InputMaybe<Scalars['String']['input']>;
+  iban?: InputMaybe<Scalars['String']['input']>;
+  bic?: InputMaybe<Scalars['String']['input']>;
+  communication?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SupportProductsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  item1?: InputMaybe<Scalars['String']['input']>;
+  item2?: InputMaybe<Scalars['String']['input']>;
+  item3?: InputMaybe<Scalars['String']['input']>;
+  contactName?: InputMaybe<Scalars['String']['input']>;
+  contactPhone?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SupportMaterialDonationsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  item1?: InputMaybe<Scalars['String']['input']>;
+  item2?: InputMaybe<Scalars['String']['input']>;
+  item3?: InputMaybe<Scalars['String']['input']>;
+  item4?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SupportMembershipMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  benefit1?: InputMaybe<Scalars['String']['input']>;
+  benefit2?: InputMaybe<Scalars['String']['input']>;
+  benefit3?: InputMaybe<Scalars['String']['input']>;
+  benefit4?: InputMaybe<Scalars['String']['input']>;
+  contactEmail?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SupportMutation = {
+  mainTitle?: InputMaybe<Scalars['String']['input']>;
+  whyTitle?: InputMaybe<Scalars['String']['input']>;
+  whyDescription?: InputMaybe<Scalars['String']['input']>;
+  impactListTitle?: InputMaybe<Scalars['String']['input']>;
+  impactItems?: InputMaybe<Array<InputMaybe<SupportImpactItemsMutation>>>;
+  impactMessage?: InputMaybe<Scalars['String']['input']>;
+  impactDescription?: InputMaybe<Scalars['String']['input']>;
+  howToTitle?: InputMaybe<Scalars['String']['input']>;
+  bankTransfer?: InputMaybe<SupportBankTransferMutation>;
+  products?: InputMaybe<SupportProductsMutation>;
+  materialDonations?: InputMaybe<SupportMaterialDonationsMutation>;
+  membership?: InputMaybe<SupportMembershipMutation>;
+};
+
 export type ProjectDetailsMutation = {
   beneficiaries?: InputMaybe<Scalars['String']['input']>;
   budget?: InputMaybe<Scalars['String']['input']>;
   goal?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ProjectContentSectionsMutation = {
+  sectionTitle?: InputMaybe<Scalars['String']['input']>;
+  layout?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 export type ProjectMutation = {
@@ -857,7 +1116,12 @@ export type ProjectMutation = {
   description?: InputMaybe<Scalars['JSON']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   location?: InputMaybe<Scalars['String']['input']>;
+  introTitle?: InputMaybe<Scalars['String']['input']>;
+  introText?: InputMaybe<Scalars['JSON']['input']>;
   details?: InputMaybe<ProjectDetailsMutation>;
+  contentSections?: InputMaybe<Array<InputMaybe<ProjectContentSectionsMutation>>>;
+  conclusionText?: InputMaybe<Scalars['JSON']['input']>;
+  gallery?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type BookAvailabilityMutation = {
@@ -904,7 +1168,9 @@ export type TeamPartsFragment = { __typename: 'Team', name: string, role: string
 
 export type MissionPartsFragment = { __typename: 'Mission', title: string, description?: any | null, icon: string, order: number, active?: boolean | null };
 
-export type ProjectPartsFragment = { __typename: 'Project', title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null };
+export type SupportPartsFragment = { __typename: 'Support', mainTitle: string, whyTitle: string, whyDescription: string, impactListTitle: string, impactMessage: string, impactDescription: string, howToTitle: string, impactItems?: Array<{ __typename: 'SupportImpactItems', text: string } | null> | null, bankTransfer?: { __typename: 'SupportBankTransfer', title?: string | null, description?: string | null, accountName?: string | null, iban?: string | null, bic?: string | null, communication?: string | null } | null, products?: { __typename: 'SupportProducts', title?: string | null, description?: string | null, item1?: string | null, item2?: string | null, item3?: string | null, contactName?: string | null, contactPhone?: string | null } | null, materialDonations?: { __typename: 'SupportMaterialDonations', title?: string | null, subtitle?: string | null, item1?: string | null, item2?: string | null, item3?: string | null, item4?: string | null } | null, membership?: { __typename: 'SupportMembership', title?: string | null, description?: string | null, benefit1?: string | null, benefit2?: string | null, benefit3?: string | null, benefit4?: string | null, contactEmail?: string | null } | null };
+
+export type ProjectPartsFragment = { __typename: 'Project', title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, content: any } | null> | null };
 
 export type BookPartsFragment = { __typename: 'Book', title: string, author?: string | null, year?: string | null, isbn?: string | null, cover?: string | null, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, availability?: { __typename: 'BookAvailability', ebook?: boolean | null, ebookUrl?: string | null, print?: boolean | null, printUrl?: string | null, price?: string | null } | null };
 
@@ -986,12 +1252,31 @@ export type MissionConnectionQueryVariables = Exact<{
 
 export type MissionConnectionQuery = { __typename?: 'Query', missionConnection: { __typename?: 'MissionConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'MissionConnectionEdges', cursor: string, node?: { __typename: 'Mission', id: string, title: string, description?: any | null, icon: string, order: number, active?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
+export type SupportQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type SupportQuery = { __typename?: 'Query', support: { __typename: 'Support', id: string, mainTitle: string, whyTitle: string, whyDescription: string, impactListTitle: string, impactMessage: string, impactDescription: string, howToTitle: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, impactItems?: Array<{ __typename: 'SupportImpactItems', text: string } | null> | null, bankTransfer?: { __typename: 'SupportBankTransfer', title?: string | null, description?: string | null, accountName?: string | null, iban?: string | null, bic?: string | null, communication?: string | null } | null, products?: { __typename: 'SupportProducts', title?: string | null, description?: string | null, item1?: string | null, item2?: string | null, item3?: string | null, contactName?: string | null, contactPhone?: string | null } | null, materialDonations?: { __typename: 'SupportMaterialDonations', title?: string | null, subtitle?: string | null, item1?: string | null, item2?: string | null, item3?: string | null, item4?: string | null } | null, membership?: { __typename: 'SupportMembership', title?: string | null, description?: string | null, benefit1?: string | null, benefit2?: string | null, benefit3?: string | null, benefit4?: string | null, contactEmail?: string | null } | null } };
+
+export type SupportConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SupportFilter>;
+}>;
+
+
+export type SupportConnectionQuery = { __typename?: 'Query', supportConnection: { __typename?: 'SupportConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SupportConnectionEdges', cursor: string, node?: { __typename: 'Support', id: string, mainTitle: string, whyTitle: string, whyDescription: string, impactListTitle: string, impactMessage: string, impactDescription: string, howToTitle: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, impactItems?: Array<{ __typename: 'SupportImpactItems', text: string } | null> | null, bankTransfer?: { __typename: 'SupportBankTransfer', title?: string | null, description?: string | null, accountName?: string | null, iban?: string | null, bic?: string | null, communication?: string | null } | null, products?: { __typename: 'SupportProducts', title?: string | null, description?: string | null, item1?: string | null, item2?: string | null, item3?: string | null, contactName?: string | null, contactPhone?: string | null } | null, materialDonations?: { __typename: 'SupportMaterialDonations', title?: string | null, subtitle?: string | null, item1?: string | null, item2?: string | null, item3?: string | null, item4?: string | null } | null, membership?: { __typename: 'SupportMembership', title?: string | null, description?: string | null, benefit1?: string | null, benefit2?: string | null, benefit3?: string | null, benefit4?: string | null, contactEmail?: string | null } | null } | null } | null> | null } };
+
 export type ProjectQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null } };
+export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, content: any } | null> | null } };
 
 export type ProjectConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1003,7 +1288,7 @@ export type ProjectConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null } | null } | null> | null } };
+export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, content: any } | null> | null } | null } | null> | null } };
 
 export type BookQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1098,6 +1383,60 @@ export const MissionPartsFragmentDoc = gql`
   active
 }
     `;
+export const SupportPartsFragmentDoc = gql`
+    fragment SupportParts on Support {
+  __typename
+  mainTitle
+  whyTitle
+  whyDescription
+  impactListTitle
+  impactItems {
+    __typename
+    text
+  }
+  impactMessage
+  impactDescription
+  howToTitle
+  bankTransfer {
+    __typename
+    title
+    description
+    accountName
+    iban
+    bic
+    communication
+  }
+  products {
+    __typename
+    title
+    description
+    item1
+    item2
+    item3
+    contactName
+    contactPhone
+  }
+  materialDonations {
+    __typename
+    title
+    subtitle
+    item1
+    item2
+    item3
+    item4
+  }
+  membership {
+    __typename
+    title
+    description
+    benefit1
+    benefit2
+    benefit3
+    benefit4
+    contactEmail
+  }
+}
+    `;
 export const ProjectPartsFragmentDoc = gql`
     fragment ProjectParts on Project {
   __typename
@@ -1107,12 +1446,23 @@ export const ProjectPartsFragmentDoc = gql`
   description
   image
   location
+  introTitle
+  introText
   details {
     __typename
     beneficiaries
     budget
     goal
   }
+  contentSections {
+    __typename
+    sectionTitle
+    layout
+    image
+    content
+  }
+  conclusionText
+  gallery
 }
     `;
 export const BookPartsFragmentDoc = gql`
@@ -1381,6 +1731,63 @@ export const MissionConnectionDocument = gql`
   }
 }
     ${MissionPartsFragmentDoc}`;
+export const SupportDocument = gql`
+    query support($relativePath: String!) {
+  support(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...SupportParts
+  }
+}
+    ${SupportPartsFragmentDoc}`;
+export const SupportConnectionDocument = gql`
+    query supportConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SupportFilter) {
+  supportConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...SupportParts
+      }
+    }
+  }
+}
+    ${SupportPartsFragmentDoc}`;
 export const ProjectDocument = gql`
     query project($relativePath: String!) {
   project(relativePath: $relativePath) {
@@ -1578,6 +1985,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     missionConnection(variables?: MissionConnectionQueryVariables, options?: C): Promise<{data: MissionConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MissionConnectionQueryVariables, query: string}> {
         return requester<{data: MissionConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MissionConnectionQueryVariables, query: string}, MissionConnectionQueryVariables>(MissionConnectionDocument, variables, options);
+      },
+    support(variables: SupportQueryVariables, options?: C): Promise<{data: SupportQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SupportQueryVariables, query: string}> {
+        return requester<{data: SupportQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SupportQueryVariables, query: string}, SupportQueryVariables>(SupportDocument, variables, options);
+      },
+    supportConnection(variables?: SupportConnectionQueryVariables, options?: C): Promise<{data: SupportConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SupportConnectionQueryVariables, query: string}> {
+        return requester<{data: SupportConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SupportConnectionQueryVariables, query: string}, SupportConnectionQueryVariables>(SupportConnectionDocument, variables, options);
       },
     project(variables: ProjectQueryVariables, options?: C): Promise<{data: ProjectQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectQueryVariables, query: string}> {
         return requester<{data: ProjectQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectQueryVariables, query: string}, ProjectQueryVariables>(ProjectDocument, variables, options);

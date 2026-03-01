@@ -205,6 +205,46 @@ export async function getBooks(): Promise<Book[]> {
 }
 
 /**
+ * Récupérer les données de la section Soutien
+ */
+export async function getSupportData() {
+  try {
+    const response = await client.queries.support({
+      relativePath: "soutenez-nous.mdx",
+    });
+
+    const support = response.data.support;
+
+    return {
+      mainTitle: support.mainTitle || "Soutenez-nous !",
+      whyTitle: support.whyTitle || "Pourquoi nous soutenir ?",
+      whyDescription: support.whyDescription || "",
+      impactListTitle: support.impactListTitle || "Avec votre soutien, nous pouvons :",
+      impactItems: support.impactItems || [],
+      impactMessage: support.impactMessage || "Vos dons changent réellement des vies.",
+      impactDescription: support.impactDescription || "",
+      howToTitle: support.howToTitle || "Comment faire un don ?",
+      bankTransfer: support.bankTransfer || undefined,
+      products: support.products || undefined,
+      materialDonations: support.materialDonations || undefined,
+      membership: support.membership || undefined,
+    };
+  } catch (error) {
+    console.error("Error fetching support data:", error);
+    return {
+      mainTitle: "Soutenez-nous !",
+      whyTitle: "Pourquoi nous soutenir ?",
+      whyDescription: "",
+      impactListTitle: "Avec votre soutien, nous pouvons :",
+      impactItems: [],
+      impactMessage: "Vos dons changent réellement des vies.",
+      impactDescription: "",
+      howToTitle: "Comment faire un don ?",
+    };
+  }
+}
+
+/**
  * Récupérer toutes les informations de contact
  */
 export async function getContactLocations(): Promise<Contact[]> {
@@ -236,6 +276,50 @@ export type AllPageData = {
   team: Team[];
   books: Book[];
   contact: Contact[];
+  support: {
+    mainTitle: string;
+    whyTitle: string;
+    whyDescription: string;
+    impactListTitle: string;
+    impactItems?: Array<{ text: string }>;
+    impactMessage: string;
+    impactDescription: string;
+    howToTitle: string;
+    bankTransfer?: {
+      title?: string;
+      description?: string;
+      accountName?: string;
+      iban?: string;
+      bic?: string;
+      communication?: string;
+    };
+    products?: {
+      title?: string;
+      description?: string;
+      item1?: string;
+      item2?: string;
+      item3?: string;
+      contactName?: string;
+      contactPhone?: string;
+    };
+    materialDonations?: {
+      title?: string;
+      subtitle?: string;
+      item1?: string;
+      item2?: string;
+      item3?: string;
+      item4?: string;
+    };
+    membership?: {
+      title?: string;
+      description?: string;
+      benefit1?: string;
+      benefit2?: string;
+      benefit3?: string;
+      benefit4?: string;
+      contactEmail?: string;
+    };
+  };
 };
 
 /**
@@ -243,7 +327,7 @@ export type AllPageData = {
  */
 export async function getAllPageData(): Promise<AllPageData> {
   try {
-    const [homeData, timeline, missions, projects, team, books, contact] =
+    const [homeData, timeline, missions, projects, team, books, contact, support] =
       await Promise.all([
         getHomeData(),
         getTimelineEvents(),
@@ -252,6 +336,7 @@ export async function getAllPageData(): Promise<AllPageData> {
         getTeamMembers(),
         getBooks(),
         getContactLocations(),
+        getSupportData(),
       ]);
 
     return {
@@ -262,6 +347,7 @@ export async function getAllPageData(): Promise<AllPageData> {
       team,
       books,
       contact,
+      support,
     };
   } catch (error) {
     console.error("Error fetching all page data:", error);

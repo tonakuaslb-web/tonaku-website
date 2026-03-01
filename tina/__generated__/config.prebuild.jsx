@@ -271,7 +271,239 @@ var config_default = defineConfig({
           icon: "BookOpen"
         }
       },
-      // Collection 5: Projets
+      // Collection 5: Soutien
+      {
+        name: "support",
+        label: "Soutien",
+        path: "content/support",
+        format: "mdx",
+        fields: [
+          {
+            type: "string",
+            name: "mainTitle",
+            label: "Titre principal",
+            isTitle: true,
+            required: true
+          },
+          {
+            type: "string",
+            name: "whyTitle",
+            label: "Titre 'Pourquoi nous soutenir'",
+            required: true
+          },
+          {
+            type: "string",
+            name: "whyDescription",
+            label: "Description 'Pourquoi nous soutenir'",
+            ui: { component: "textarea" },
+            required: true
+          },
+          {
+            type: "string",
+            name: "impactListTitle",
+            label: "Titre de la liste d'impacts",
+            required: true
+          },
+          {
+            type: "object",
+            name: "impactItems",
+            label: "Points d'impact",
+            description: "Les actions que votre soutien permet de r\xE9aliser",
+            list: true,
+            fields: [
+              {
+                type: "string",
+                name: "text",
+                label: "Description de l'impact",
+                ui: { component: "textarea" },
+                required: true
+              }
+            ]
+          },
+          {
+            type: "string",
+            name: "impactMessage",
+            label: "Message d'impact principal",
+            required: true
+          },
+          {
+            type: "string",
+            name: "impactDescription",
+            label: "Description d'impact",
+            ui: { component: "textarea" },
+            required: true
+          },
+          {
+            type: "string",
+            name: "howToTitle",
+            label: "Titre 'Comment faire un don'",
+            required: true
+          },
+          // Méthode 1: Versement bancaire
+          {
+            type: "object",
+            name: "bankTransfer",
+            label: "Versement bancaire",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Titre"
+              },
+              {
+                type: "string",
+                name: "description",
+                label: "Description"
+              },
+              {
+                type: "string",
+                name: "accountName",
+                label: "Nom du compte"
+              },
+              {
+                type: "string",
+                name: "iban",
+                label: "IBAN"
+              },
+              {
+                type: "string",
+                name: "bic",
+                label: "BIC"
+              },
+              {
+                type: "string",
+                name: "communication",
+                label: "Communication"
+              }
+            ]
+          },
+          // Méthode 2: Produits Tonaku
+          {
+            type: "object",
+            name: "products",
+            label: "Produits Tonaku",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Titre"
+              },
+              {
+                type: "string",
+                name: "description",
+                label: "Description"
+              },
+              {
+                type: "string",
+                name: "item1",
+                label: "Produit 1"
+              },
+              {
+                type: "string",
+                name: "item2",
+                label: "Produit 2"
+              },
+              {
+                type: "string",
+                name: "item3",
+                label: "Produit 3"
+              },
+              {
+                type: "string",
+                name: "contactName",
+                label: "Nom du contact"
+              },
+              {
+                type: "string",
+                name: "contactPhone",
+                label: "T\xE9l\xE9phone"
+              }
+            ]
+          },
+          // Méthode 3: Dons matériels
+          {
+            type: "object",
+            name: "materialDonations",
+            label: "Dons mat\xE9riels",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Titre"
+              },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Sous-titre"
+              },
+              {
+                type: "string",
+                name: "item1",
+                label: "Item 1"
+              },
+              {
+                type: "string",
+                name: "item2",
+                label: "Item 2"
+              },
+              {
+                type: "string",
+                name: "item3",
+                label: "Item 3"
+              },
+              {
+                type: "string",
+                name: "item4",
+                label: "Item 4"
+              }
+            ]
+          },
+          // Méthode 4: Devenir membre
+          {
+            type: "object",
+            name: "membership",
+            label: "Devenir membre",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Titre"
+              },
+              {
+                type: "string",
+                name: "description",
+                label: "Description"
+              },
+              {
+                type: "string",
+                name: "benefit1",
+                label: "Avantage 1"
+              },
+              {
+                type: "string",
+                name: "benefit2",
+                label: "Avantage 2"
+              },
+              {
+                type: "string",
+                name: "benefit3",
+                label: "Avantage 3"
+              },
+              {
+                type: "string",
+                name: "benefit4",
+                label: "Avantage 4"
+              },
+              {
+                type: "string",
+                name: "contactEmail",
+                label: "Email de contact"
+              }
+            ]
+          }
+        ]
+      },
+      // Collection 6: Projets
       {
         name: "project",
         label: "Projets",
@@ -317,6 +549,18 @@ var config_default = defineConfig({
             description: "Ex: Kolwezi, Likasi"
           },
           {
+            type: "string",
+            name: "introTitle",
+            label: "Titre d'introduction de la page",
+            description: "Ex: 'Nos b\xE9n\xE9ficiaires en images' (optionnel)"
+          },
+          {
+            type: "rich-text",
+            name: "introText",
+            label: "Paragraphe d'introduction de la page",
+            description: "Texte d'introduction qui appara\xEEt au d\xE9but (optionnel)"
+          },
+          {
             type: "object",
             name: "details",
             label: "D\xE9tails suppl\xE9mentaires",
@@ -338,10 +582,64 @@ var config_default = defineConfig({
                 label: "Objectif"
               }
             ]
+          },
+          {
+            type: "object",
+            name: "contentSections",
+            label: "Sections de contenu du projet",
+            description: "Blocs de contenu vari\xE9s (texte, image+texte, citations...)",
+            list: true,
+            fields: [
+              {
+                type: "string",
+                name: "sectionTitle",
+                label: "Titre de la section (optionnel)",
+                description: "Un titre pour cette section sp\xE9cifique"
+              },
+              {
+                type: "string",
+                name: "layout",
+                label: "Type de contenu",
+                options: [
+                  { value: "text-only", label: "\u{1F4DD} Paragraphe de texte" },
+                  { value: "text-image-left", label: "\u{1F5BC}\uFE0F \u2190 Image \xE0 gauche + Texte" },
+                  { value: "text-image-right", label: "\u{1F5BC}\uFE0F Texte + Image \xE0 droite \u2192" },
+                  { value: "image-top", label: "\u{1F5BC}\uFE0F Image en haut + Texte" },
+                  { value: "quote", label: "\u{1F4AC} Citation / T\xE9moignage" }
+                ],
+                required: true
+              },
+              {
+                type: "image",
+                name: "image",
+                label: "Image",
+                description: "Image utilis\xE9e selon le type de contenu choisi"
+              },
+              {
+                type: "rich-text",
+                name: "content",
+                label: "Contenu / Description",
+                description: "Le texte principal de cette section",
+                required: true
+              }
+            ]
+          },
+          {
+            type: "rich-text",
+            name: "conclusionText",
+            label: "Paragraphe de conclusion de la page",
+            description: "Texte final qui appara\xEEt \xE0 la fin de la page (optionnel)"
+          },
+          {
+            type: "image",
+            name: "gallery",
+            label: "Galerie d'images",
+            description: "Photos suppl\xE9mentaires du projet",
+            list: true
           }
         ]
       },
-      // Collection 6: Livres/Ressources
+      // Collection 7: Livres/Ressources
       {
         name: "book",
         label: "Livres",
@@ -446,7 +744,7 @@ var config_default = defineConfig({
           featured: false
         }
       },
-      // Collection 7: Contact
+      // Collection 8: Contact
       {
         name: "contact",
         label: "Contact",

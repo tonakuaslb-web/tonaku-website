@@ -1,4 +1,5 @@
 export { default as NavMenu } from "./NavMenu";
+export { default as NavDropdown } from "./NavDropdown";
 export { default as MobileMenuButton } from "./MobileMenuButton";
 export { default as Card } from "./Card";
 export { default as TimelineCard } from "./TimelineCard";
@@ -8,3 +9,5 @@ export { default as TeamMemberCard } from "./TeamMemberCard";
 export { default as DonationMethodCard } from "./DonationMethodCard";
 export { default as ContactCard } from "./ContactCard";
 export { default as BookCard } from "./BookCard";
+export { default as ProjectInfoCard } from "./ProjectInfoCard";
+export { default as ProjectGallery } from "./ProjectGallery";
