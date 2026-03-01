@@ -1,3 +1,14 @@
 export { default as Navigation } from "./Navigation";
 export { default as Hero } from "./Hero";
 export { default as Carousel } from "./Carousel";
+export { default as ProjectNavigation } from "./ProjectNavigation";
+export { default as ProjectHero } from "./ProjectHero";
+export { default as ProjectContentSection } from "./ProjectContentSection";
+export { default as RelatedProjects } from "./RelatedProjects";
+export { default as TimelineSection } from "./TimelineSection";
+export { default as MissionsSection } from "./MissionsSection";
+export { default as ProjectsSection } from "./ProjectsSection";
+export { default as TeamSection } from "./TeamSection";
+export { default as SupportSection } from "./SupportSection";
+export { default as ResourcesSection } from "./ResourcesSection";
+export { default as Footer } from "./Footer";

@@ -9,3 +9,5 @@ export { default as TeamMemberCard } from "./TeamMemberCard";
 export { default as DonationMethodCard } from "./DonationMethodCard";
 export { default as ContactCard } from "./ContactCard";
 export { default as BookCard } from "./BookCard";
+export { default as ProjectInfoCard } from "./ProjectInfoCard";
+export { default as ProjectGallery } from "./ProjectGallery";
