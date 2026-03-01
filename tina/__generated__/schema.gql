@@ -62,6 +62,8 @@ type Query {
   teamConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TeamFilter): TeamConnection!
   mission(relativePath: String): Mission!
   missionConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: MissionFilter): MissionConnection!
+  support(relativePath: String): Support!
+  supportConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SupportFilter): SupportConnection!
   project(relativePath: String): Project!
   projectConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProjectFilter): ProjectConnection!
   book(relativePath: String): Book!
@@ -75,6 +77,7 @@ input DocumentFilter {
   histoire: HistoireFilter
   team: TeamFilter
   mission: MissionFilter
+  support: SupportFilter
   project: ProjectFilter
   book: BookFilter
   contact: ContactFilter
@@ -103,7 +106,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Accueil | Histoire | Team | Mission | Project | Book | Contact | Folder
+union DocumentNode = Accueil | Histoire | Team | Mission | Support | Project | Book | Contact | Folder
 
 type AccueilHero {
   title: String!
@@ -294,6 +297,134 @@ type MissionConnection implements Connection {
   edges: [MissionConnectionEdges]
 }
 
+type SupportImpactItems {
+  text: String!
+}
+
+type SupportBankTransfer {
+  title: String
+  description: String
+  accountName: String
+  iban: String
+  bic: String
+  communication: String
+}
+
+type SupportProducts {
+  title: String
+  description: String
+  item1: String
+  item2: String
+  item3: String
+  contactName: String
+  contactPhone: String
+}
+
+type SupportMaterialDonations {
+  title: String
+  subtitle: String
+  item1: String
+  item2: String
+  item3: String
+  item4: String
+}
+
+type SupportMembership {
+  title: String
+  description: String
+  benefit1: String
+  benefit2: String
+  benefit3: String
+  benefit4: String
+  contactEmail: String
+}
+
+type Support implements Node & Document {
+  mainTitle: String!
+  whyTitle: String!
+  whyDescription: String!
+  impactListTitle: String!
+  impactItems: [SupportImpactItems]
+  impactMessage: String!
+  impactDescription: String!
+  howToTitle: String!
+  bankTransfer: SupportBankTransfer
+  products: SupportProducts
+  materialDonations: SupportMaterialDonations
+  membership: SupportMembership
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input SupportImpactItemsFilter {
+  text: StringFilter
+}
+
+input SupportBankTransferFilter {
+  title: StringFilter
+  description: StringFilter
+  accountName: StringFilter
+  iban: StringFilter
+  bic: StringFilter
+  communication: StringFilter
+}
+
+input SupportProductsFilter {
+  title: StringFilter
+  description: StringFilter
+  item1: StringFilter
+  item2: StringFilter
+  item3: StringFilter
+  contactName: StringFilter
+  contactPhone: StringFilter
+}
+
+input SupportMaterialDonationsFilter {
+  title: StringFilter
+  subtitle: StringFilter
+  item1: StringFilter
+  item2: StringFilter
+  item3: StringFilter
+  item4: StringFilter
+}
+
+input SupportMembershipFilter {
+  title: StringFilter
+  description: StringFilter
+  benefit1: StringFilter
+  benefit2: StringFilter
+  benefit3: StringFilter
+  benefit4: StringFilter
+  contactEmail: StringFilter
+}
+
+input SupportFilter {
+  mainTitle: StringFilter
+  whyTitle: StringFilter
+  whyDescription: StringFilter
+  impactListTitle: StringFilter
+  impactItems: SupportImpactItemsFilter
+  impactMessage: StringFilter
+  impactDescription: StringFilter
+  howToTitle: StringFilter
+  bankTransfer: SupportBankTransferFilter
+  products: SupportProductsFilter
+  materialDonations: SupportMaterialDonationsFilter
+  membership: SupportMembershipFilter
+}
+
+type SupportConnectionEdges {
+  cursor: String!
+  node: Support
+}
+
+type SupportConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [SupportConnectionEdges]
+}
+
 type ProjectDetails {
   beneficiaries: String
   budget: String
@@ -478,6 +609,8 @@ type Mutation {
   createTeam(relativePath: String!, params: TeamMutation!): Team!
   updateMission(relativePath: String!, params: MissionMutation!): Mission!
   createMission(relativePath: String!, params: MissionMutation!): Mission!
+  updateSupport(relativePath: String!, params: SupportMutation!): Support!
+  createSupport(relativePath: String!, params: SupportMutation!): Support!
   updateProject(relativePath: String!, params: ProjectMutation!): Project!
   createProject(relativePath: String!, params: ProjectMutation!): Project!
   updateBook(relativePath: String!, params: BookMutation!): Book!
@@ -491,6 +624,7 @@ input DocumentUpdateMutation {
   histoire: HistoireMutation
   team: TeamMutation
   mission: MissionMutation
+  support: SupportMutation
   project: ProjectMutation
   book: BookMutation
   contact: ContactMutation
@@ -502,6 +636,7 @@ input DocumentMutation {
   histoire: HistoireMutation
   team: TeamMutation
   mission: MissionMutation
+  support: SupportMutation
   project: ProjectMutation
   book: BookMutation
   contact: ContactMutation
@@ -554,6 +689,63 @@ input MissionMutation {
   icon: String
   order: Float
   active: Boolean
+}
+
+input SupportImpactItemsMutation {
+  text: String
+}
+
+input SupportBankTransferMutation {
+  title: String
+  description: String
+  accountName: String
+  iban: String
+  bic: String
+  communication: String
+}
+
+input SupportProductsMutation {
+  title: String
+  description: String
+  item1: String
+  item2: String
+  item3: String
+  contactName: String
+  contactPhone: String
+}
+
+input SupportMaterialDonationsMutation {
+  title: String
+  subtitle: String
+  item1: String
+  item2: String
+  item3: String
+  item4: String
+}
+
+input SupportMembershipMutation {
+  title: String
+  description: String
+  benefit1: String
+  benefit2: String
+  benefit3: String
+  benefit4: String
+  contactEmail: String
+}
+
+input SupportMutation {
+  mainTitle: String
+  whyTitle: String
+  whyDescription: String
+  impactListTitle: String
+  impactItems: [SupportImpactItemsMutation]
+  impactMessage: String
+  impactDescription: String
+  howToTitle: String
+  bankTransfer: SupportBankTransferMutation
+  products: SupportProductsMutation
+  materialDonations: SupportMaterialDonationsMutation
+  membership: SupportMembershipMutation
 }
 
 input ProjectDetailsMutation {

@@ -49,6 +49,59 @@ fragment MissionParts on Mission {
   active
 }
 
+fragment SupportParts on Support {
+  __typename
+  mainTitle
+  whyTitle
+  whyDescription
+  impactListTitle
+  impactItems {
+    __typename
+    text
+  }
+  impactMessage
+  impactDescription
+  howToTitle
+  bankTransfer {
+    __typename
+    title
+    description
+    accountName
+    iban
+    bic
+    communication
+  }
+  products {
+    __typename
+    title
+    description
+    item1
+    item2
+    item3
+    contactName
+    contactPhone
+  }
+  materialDonations {
+    __typename
+    title
+    subtitle
+    item1
+    item2
+    item3
+    item4
+  }
+  membership {
+    __typename
+    title
+    description
+    benefit1
+    benefit2
+    benefit3
+    benefit4
+    contactEmail
+  }
+}
+
 fragment ProjectParts on Project {
   __typename
   title
