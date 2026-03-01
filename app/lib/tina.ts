@@ -215,19 +215,57 @@ export async function getSupportData() {
 
     const support = response.data.support;
 
+    // Helper function pour convertir null en undefined
+    const nullToUndefined = <T,>(value: T | null | undefined): T | undefined => 
+      value === null ? undefined : value;
+
     return {
       mainTitle: support.mainTitle || "Soutenez-nous !",
       whyTitle: support.whyTitle || "Pourquoi nous soutenir ?",
       whyDescription: support.whyDescription || "",
       impactListTitle: support.impactListTitle || "Avec votre soutien, nous pouvons :",
-      impactItems: support.impactItems || [],
+      impactItems: support.impactItems 
+        ? support.impactItems
+            .filter((item): item is NonNullable<typeof support.impactItems[number]> => item !== null)
+            .map(item => ({ text: item.text }))
+        : [],
       impactMessage: support.impactMessage || "Vos dons changent réellement des vies.",
       impactDescription: support.impactDescription || "",
       howToTitle: support.howToTitle || "Comment faire un don ?",
-      bankTransfer: support.bankTransfer || undefined,
-      products: support.products || undefined,
-      materialDonations: support.materialDonations || undefined,
-      membership: support.membership || undefined,
+      bankTransfer: support.bankTransfer ? {
+        title: nullToUndefined(support.bankTransfer.title),
+        description: nullToUndefined(support.bankTransfer.description),
+        accountName: nullToUndefined(support.bankTransfer.accountName),
+        iban: nullToUndefined(support.bankTransfer.iban),
+        bic: nullToUndefined(support.bankTransfer.bic),
+        communication: nullToUndefined(support.bankTransfer.communication),
+      } : undefined,
+      products: support.products ? {
+        title: nullToUndefined(support.products.title),
+        description: nullToUndefined(support.products.description),
+        item1: nullToUndefined(support.products.item1),
+        item2: nullToUndefined(support.products.item2),
+        item3: nullToUndefined(support.products.item3),
+        contactName: nullToUndefined(support.products.contactName),
+        contactPhone: nullToUndefined(support.products.contactPhone),
+      } : undefined,
+      materialDonations: support.materialDonations ? {
+        title: nullToUndefined(support.materialDonations.title),
+        subtitle: nullToUndefined(support.materialDonations.subtitle),
+        item1: nullToUndefined(support.materialDonations.item1),
+        item2: nullToUndefined(support.materialDonations.item2),
+        item3: nullToUndefined(support.materialDonations.item3),
+        item4: nullToUndefined(support.materialDonations.item4),
+      } : undefined,
+      membership: support.membership ? {
+        title: nullToUndefined(support.membership.title),
+        description: nullToUndefined(support.membership.description),
+        benefit1: nullToUndefined(support.membership.benefit1),
+        benefit2: nullToUndefined(support.membership.benefit2),
+        benefit3: nullToUndefined(support.membership.benefit3),
+        benefit4: nullToUndefined(support.membership.benefit4),
+        contactEmail: nullToUndefined(support.membership.contactEmail),
+      } : undefined,
     };
   } catch (error) {
     console.error("Error fetching support data:", error);
