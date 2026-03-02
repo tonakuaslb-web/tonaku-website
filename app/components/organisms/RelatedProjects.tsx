@@ -38,6 +38,7 @@ export default function RelatedProjects({ projects }: RelatedProjectsProps) {
                     src={project.image}
                     alt={project.title}
                     fill
+                    unoptimized
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                 )}

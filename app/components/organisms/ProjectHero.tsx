@@ -23,6 +23,7 @@ export default function ProjectHero({
           src={image}
           alt={title}
           fill
+          unoptimized
           className="object-cover"
           priority
         />

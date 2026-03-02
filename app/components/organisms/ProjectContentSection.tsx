@@ -58,6 +58,7 @@ export default function ProjectContentSection({
                 alt={section.sectionTitle || "Image"}
                 width={600}
                 height={800}
+                unoptimized
                 className="rounded-xl shadow-lg w-full h-auto object-cover"
               />
             </div>
@@ -85,6 +86,7 @@ export default function ProjectContentSection({
                 alt={section.sectionTitle || "Image"}
                 width={600}
                 height={800}
+                unoptimized
                 className="rounded-xl shadow-lg w-full h-auto object-cover"
               />
             </div>
@@ -111,6 +113,7 @@ export default function ProjectContentSection({
               alt={section.sectionTitle || "Image"}
               width={1200}
               height={600}
+              unoptimized
               className="rounded-xl shadow-lg w-full h-auto"
             />
           )}

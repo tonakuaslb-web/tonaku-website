@@ -25,6 +25,7 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
                 alt={`Photo ${idx + 1}`}
                 width={400}
                 height={400}
+                unoptimized
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
             </div>
