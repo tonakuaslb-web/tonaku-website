@@ -123,6 +123,7 @@ fragment ProjectParts on Project {
     sectionTitle
     layout
     image
+    imagePosition
     content
   }
   conclusionText
