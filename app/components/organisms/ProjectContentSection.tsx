@@ -6,6 +6,15 @@ type ContentSection = {
   layout?: string | null;
   content?: any;
   image?: string | null;
+  imagePosition?: string | null;
+};
+
+const IMAGE_POSITION_CLASS: Record<string, string> = {
+  top: "object-top",
+  center: "object-center",
+  bottom: "object-bottom",
+  left: "object-left",
+  right: "object-right",
 };
 
 type ProjectContentSectionProps = Readonly<{
@@ -16,6 +25,7 @@ export default function ProjectContentSection({
   section,
 }: ProjectContentSectionProps) {
   const layoutType = section.layout || "text-only";
+  const imgPositionClass = IMAGE_POSITION_CLASS[section.imagePosition ?? ""] ?? "object-center";
 
   return (
     <div className="space-y-6">
@@ -120,6 +130,30 @@ export default function ProjectContentSection({
           {section.content && (
             <div
               className="prose prose-lg max-w-none text-neutral-700"
+              dangerouslySetInnerHTML={{
+                __html: richTextToHTML(section.content),
+              }}
+            />
+          )}
+        </div>
+      )}
+
+      {/* Layout: Carte image + légende (plusieurs côte à côte) */}
+      {layoutType === "image-card" && (
+        <div className="flex flex-col gap-3">
+          {section.image && (
+            <Image
+              src={section.image}
+              alt={section.sectionTitle || "Image"}
+              width={400}
+              height={300}
+              unoptimized
+              className={`rounded-xl shadow-md w-full h-80 object-cover ${imgPositionClass}`}
+            />
+          )}
+          {section.content && (
+            <div
+              className="prose prose-sm max-w-none text-neutral-600"
               dangerouslySetInnerHTML={{
                 __html: richTextToHTML(section.content),
               }}

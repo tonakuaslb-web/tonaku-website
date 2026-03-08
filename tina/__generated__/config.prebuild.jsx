@@ -605,6 +605,7 @@ var config_default = defineConfig({
                   { value: "text-image-left", label: "\u{1F5BC}\uFE0F \u2190 Image \xE0 gauche + Texte" },
                   { value: "text-image-right", label: "\u{1F5BC}\uFE0F Texte + Image \xE0 droite \u2192" },
                   { value: "image-top", label: "\u{1F5BC}\uFE0F Image en haut + Texte" },
+                  { value: "image-card", label: "\u{1F0CF} Carte image + l\xE9gende (plusieurs c\xF4te \xE0 c\xF4te)" },
                   { value: "quote", label: "\u{1F4AC} Citation / T\xE9moignage" }
                 ],
                 required: true
@@ -614,6 +615,19 @@ var config_default = defineConfig({
                 name: "image",
                 label: "Image",
                 description: "Image utilis\xE9e selon le type de contenu choisi"
+              },
+              {
+                type: "string",
+                name: "imagePosition",
+                label: "Position du cadrage de l'image",
+                description: "Choisissez quelle partie de l'image mettre en avant (utile pour les portraits)",
+                options: [
+                  { value: "center", label: "\u2B1C Centre (d\xE9faut)" },
+                  { value: "top", label: "\u2B06\uFE0F Haut (visages, portraits)" },
+                  { value: "bottom", label: "\u2B07\uFE0F Bas" },
+                  { value: "left", label: "\u2B05\uFE0F Gauche" },
+                  { value: "right", label: "\u27A1\uFE0F Droite" }
+                ]
               },
               {
                 type: "rich-text",

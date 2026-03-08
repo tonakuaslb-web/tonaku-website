@@ -435,6 +435,7 @@ type ProjectContentSections {
   sectionTitle: String
   layout: String!
   image: String
+  imagePosition: String
   content: JSON!
 }
 
@@ -466,6 +467,7 @@ input ProjectContentSectionsFilter {
   sectionTitle: StringFilter
   layout: StringFilter
   image: ImageFilter
+  imagePosition: StringFilter
   content: RichTextFilter
 }
 
@@ -758,6 +760,7 @@ input ProjectContentSectionsMutation {
   sectionTitle: String
   layout: String
   image: String
+  imagePosition: String
   content: JSON
 }
 

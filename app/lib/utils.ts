@@ -34,7 +34,7 @@ type RichTextChild = {
   text?: string;
   bold?: boolean;
   italic?: boolean;
-  children?: Array<RichTextTextNode>;
+  children?: Array<RichTextChild | RichTextTextNode>;
 };
 
 type RichTextNode = {
@@ -75,13 +75,25 @@ export function richTextToHTML(richText: TinaRichText): string {
           const tag = child.type;
           const items = child.children
             ?.map((li: RichTextChild) => {
-              const text = li.children
-                ?.map((c: RichTextTextNode) => c.text || "")
+              // Structure TinaCMS : li → lic (list item content) → texte
+              // Il faut descendre deux niveaux pour atteindre le texte
+              const text = (li.children as RichTextChild[])
+                ?.map((lic) => {
+                  return (lic.children as RichTextTextNode[] ?? [])
+                    .map((c) => {
+                      let content = c.text || "";
+                      if (c.bold) content = `<strong>${content}</strong>`;
+                      if (c.italic) content = `<em>${content}</em>`;
+                      return content;
+                    })
+                    .join("") || lic.text || "";
+                })
                 .join("");
               return `<li>${text}</li>`;
             })
             .join("");
-          return `<${tag}>${items}</${tag}>`;
+          const listClass = tag === "ul" ? "list-disc pl-5 space-y-1 my-2" : "list-decimal pl-5 space-y-1 my-2";
+          return `<${tag} class="${listClass}">${items}</${tag}>`;
         }
         return "";
       })

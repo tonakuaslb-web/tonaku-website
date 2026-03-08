@@ -618,6 +618,7 @@ export default defineConfig({
                   { value: "text-image-left", label: "🖼️ ← Image à gauche + Texte" },
                   { value: "text-image-right", label: "🖼️ Texte + Image à droite →" },
                   { value: "image-top", label: "🖼️ Image en haut + Texte" },
+                  { value: "image-card", label: "🃏 Carte image + légende (plusieurs côte à côte)" },
                   { value: "quote", label: "💬 Citation / Témoignage" },
                 ],
                 required: true,
@@ -627,6 +628,19 @@ export default defineConfig({
                 name: "image",
                 label: "Image",
                 description: "Image utilisée selon le type de contenu choisi",
+              },
+              {
+                type: "string",
+                name: "imagePosition",
+                label: "Position du cadrage de l'image",
+                description: "Choisissez quelle partie de l'image mettre en avant (utile pour les portraits)",
+                options: [
+                  { value: "center", label: "⬜ Centre (défaut)" },
+                  { value: "top", label: "⬆️ Haut (visages, portraits)" },
+                  { value: "bottom", label: "⬇️ Bas" },
+                  { value: "left", label: "⬅️ Gauche" },
+                  { value: "right", label: "➡️ Droite" },
+                ],
               },
               {
                 type: "rich-text",

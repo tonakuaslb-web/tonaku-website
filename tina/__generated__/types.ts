@@ -642,6 +642,7 @@ export type ProjectContentSections = {
   sectionTitle?: Maybe<Scalars['String']['output']>;
   layout: Scalars['String']['output'];
   image?: Maybe<Scalars['String']['output']>;
+  imagePosition?: Maybe<Scalars['String']['output']>;
   content: Scalars['JSON']['output'];
 };
 
@@ -674,6 +675,7 @@ export type ProjectContentSectionsFilter = {
   sectionTitle?: InputMaybe<StringFilter>;
   layout?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
+  imagePosition?: InputMaybe<StringFilter>;
   content?: InputMaybe<RichTextFilter>;
 };
 
@@ -1106,6 +1108,7 @@ export type ProjectContentSectionsMutation = {
   sectionTitle?: InputMaybe<Scalars['String']['input']>;
   layout?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
+  imagePosition?: InputMaybe<Scalars['String']['input']>;
   content?: InputMaybe<Scalars['JSON']['input']>;
 };
 
@@ -1170,7 +1173,7 @@ export type MissionPartsFragment = { __typename: 'Mission', title: string, descr
 
 export type SupportPartsFragment = { __typename: 'Support', mainTitle: string, whyTitle: string, whyDescription: string, impactListTitle: string, impactMessage: string, impactDescription: string, howToTitle: string, impactItems?: Array<{ __typename: 'SupportImpactItems', text: string } | null> | null, bankTransfer?: { __typename: 'SupportBankTransfer', title?: string | null, description?: string | null, accountName?: string | null, iban?: string | null, bic?: string | null, communication?: string | null } | null, products?: { __typename: 'SupportProducts', title?: string | null, description?: string | null, item1?: string | null, item2?: string | null, item3?: string | null, contactName?: string | null, contactPhone?: string | null } | null, materialDonations?: { __typename: 'SupportMaterialDonations', title?: string | null, subtitle?: string | null, item1?: string | null, item2?: string | null, item3?: string | null, item4?: string | null } | null, membership?: { __typename: 'SupportMembership', title?: string | null, description?: string | null, benefit1?: string | null, benefit2?: string | null, benefit3?: string | null, benefit4?: string | null, contactEmail?: string | null } | null };
 
-export type ProjectPartsFragment = { __typename: 'Project', title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, content: any } | null> | null };
+export type ProjectPartsFragment = { __typename: 'Project', title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, imagePosition?: string | null, content: any } | null> | null };
 
 export type BookPartsFragment = { __typename: 'Book', title: string, author?: string | null, year?: string | null, isbn?: string | null, cover?: string | null, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, availability?: { __typename: 'BookAvailability', ebook?: boolean | null, ebookUrl?: string | null, print?: boolean | null, printUrl?: string | null, price?: string | null } | null };
 
@@ -1276,7 +1279,7 @@ export type ProjectQueryVariables = Exact<{
 }>;
 
 
-export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, content: any } | null> | null } };
+export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, imagePosition?: string | null, content: any } | null> | null } };
 
 export type ProjectConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1288,7 +1291,7 @@ export type ProjectConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, content: any } | null> | null } | null } | null> | null } };
+export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, imagePosition?: string | null, content: any } | null> | null } | null } | null> | null } };
 
 export type BookQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1459,6 +1462,7 @@ export const ProjectPartsFragmentDoc = gql`
     sectionTitle
     layout
     image
+    imagePosition
     content
   }
   conclusionText
