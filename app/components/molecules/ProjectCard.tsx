@@ -28,11 +28,11 @@ export default function ProjectCard({
   const slug = generateSlug(title);
 
   return (
-    <Link 
-      href={`/projets/${slug}`} 
+    <Link
+      href={`/projets/${slug}`}
       className={cn(
         "block w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]",
-        className
+        className,
       )}
     >
       <div
@@ -90,9 +90,10 @@ export default function ProjectCard({
 
             {/* Description */}
             {description && (
-              <p className="text-blue-logo/80 text-sm leading-relaxed group-hover:text-white/90 group-focus-within:text-white/90 transition-colors line-clamp-3">
-                {description}
-              </p>
+              <div
+                className="text-blue-logo/80 text-sm leading-relaxed group-hover:text-white/90 group-focus-within:text-white/90 transition-colors line-clamp-3"
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
             )}
           </div>
         </div>

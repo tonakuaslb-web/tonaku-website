@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 type HeroProps = Readonly<{
   title: string;
   subtitle: string;
@@ -9,7 +7,6 @@ type HeroProps = Readonly<{
 }>;
 
 export default function Hero({ title, subtitle, about }: HeroProps) {
-
   return (
     <div
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
@@ -19,12 +16,12 @@ export default function Hero({ title, subtitle, about }: HeroProps) {
         backgroundSize: "50px 50px",
       }}
     >
-      {/* Overlay avec dégradé blanc-crème pour améliorer la lisibilité */}
+      {/* Overlay en bulle : opacité maximale au centre (1.0), dégradé ultra-doux vers les bords (0.50) */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(254, 249, 241, 0.75) 100%)",
+            "radial-gradient(ellipse 95% 85% at 50% 50%, rgba(255, 255, 255, 1.0) 0%, rgba(255, 255, 255, 0.97) 15%, rgba(255, 255, 255, 0.93) 28%, rgba(254, 249, 241, 0.88) 38%, rgba(254, 249, 241, 0.82) 48%, rgba(254, 249, 241, 0.75) 58%, rgba(254, 249, 241, 0.68) 68%, rgba(254, 249, 241, 0.61) 78%, rgba(254, 249, 241, 0.55) 88%, rgba(254, 249, 241, 0.50) 100%)",
         }}
       />
 
@@ -32,14 +29,6 @@ export default function Hero({ title, subtitle, about }: HeroProps) {
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
         {/* Logo et titre en vertical */}
         <div className="flex flex-col items-center justify-center gap-1 md:gap-2 mb-6 animate-fadeIn">
-          {/* <Image
-            src="/logo.png"
-            alt="Logo TONAKU"
-            width={200}
-            height={200}
-            priority
-            className="w-32 h-32 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain"
-          /> */}
           <h1 className="text-6xl md:text-8xl font-bold text-blue-logo">
             {title}
           </h1>
@@ -56,8 +45,8 @@ export default function Hero({ title, subtitle, about }: HeroProps) {
             <h2 className="text-2xl md:text-3xl font-semibold text-blue-logo mb-4">
               Qui sommes-nous ?
             </h2>
-            <div 
-              className="text-base md:text-lg text-blue-logo/80 leading-relaxed prose prose-lg max-w-none"
+            <div
+              className="text-base md:text-lg text-blue-logo/80 leading-relaxed prose prose-lg max-w-none font-medium"
               dangerouslySetInnerHTML={{ __html: about }}
             />
           </div>
