@@ -33,7 +33,7 @@ export default function BookCard({
         featured
           ? "border-secondary-400 shadow-lg"
           : "border-primary-300 hover:border-primary-400",
-        className
+        className,
       )}
     >
       {/* Badge Featured */}
@@ -49,7 +49,7 @@ export default function BookCard({
           <div
             className={cn(
               "relative w-40 h-56 rounded-lg overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-105",
-              "bg-linear-to-br from-primary-200 to-primary-400"
+              "bg-linear-to-br from-primary-200 to-primary-400",
             )}
           >
             {coverImage ? (
@@ -99,9 +99,10 @@ export default function BookCard({
 
             {/* Description */}
             {description && (
-              <p className="text-neutral-700 text-sm leading-relaxed line-clamp-3">
-                {description}
-              </p>
+              <div
+                className="text-neutral-700 text-sm leading-relaxed line-clamp-3"
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
             )}
           </div>
 
@@ -110,7 +111,7 @@ export default function BookCard({
             <button
               className={cn(
                 "flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300",
-                "bg-primary-600 text-white hover:bg-primary-700 hover:shadow-md"
+                "bg-primary-600 text-white hover:bg-primary-700 hover:shadow-md",
               )}
             >
               <BookOpen size={18} />
@@ -121,7 +122,7 @@ export default function BookCard({
               <button
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300",
-                  "border-2 border-secondary-400 text-blue-logo hover:bg-secondary-100 hover:shadow-md"
+                  "border-2 border-secondary-400 text-blue-logo hover:bg-secondary-100 hover:shadow-md",
                 )}
               >
                 <Download size={18} />

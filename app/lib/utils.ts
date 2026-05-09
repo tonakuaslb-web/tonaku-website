@@ -21,84 +21,109 @@ export function generateSlug(title: string): string {
 }
 
 /**
- * Type pour le rich-text Tina (objet JSON)
+ * Types pour le rich-text Tina (objet JSON)
  */
-type RichTextTextNode = {
-  text?: string;
-  bold?: boolean;
-  italic?: boolean;
-};
-
-type RichTextChild = {
+type RichTextLeaf = {
   type?: string;
   text?: string;
   bold?: boolean;
   italic?: boolean;
-  children?: Array<RichTextChild | RichTextTextNode>;
+  underline?: boolean;
+  url?: string;
+  children?: RichTextLeaf[];
 };
 
 type RichTextNode = {
   type: string;
-  children?: Array<RichTextChild>;
+  children?: RichTextLeaf[];
 };
 
-type TinaRichText = string | RichTextNode | Record<string, unknown> | null | undefined;
+type TinaRichText =
+  | string
+  | RichTextNode
+  | Record<string, unknown>
+  | null
+  | undefined;
 
 /**
- * Convertir un objet rich-text en HTML simple
- * Utile pour afficher le contenu riche dans les pages de détail
+ * Rendre les enfants inline (text leaves) en HTML.
+ * Applique gras, italique, souligné sans modifier la taille ou la couleur du texte.
+ */
+function renderInlineLeaves(children: RichTextLeaf[] | undefined): string {
+  if (!children) return "";
+  return children
+    .map((c) => {
+      if (c.type === "br") return "<br />";
+      let content = (c.text || "").replace(/\n/g, "<br />");
+      if (!content) return "";
+      if (c.bold) content = `<strong>${content}</strong>`;
+      if (c.italic) content = `<em>${content}</em>`;
+      if (c.underline) content = `<u style="text-underline-offset:2px">${content}</u>`;
+      return content;
+    })
+    .join("");
+}
+
+/**
+ * Rendre les enfants d'un li (structure Tina : li → lic → text leaves)
+ */
+function renderListItemChildren(li: RichTextLeaf): string {
+  return (li.children ?? [])
+    .map((lic) => {
+      if (lic.type === "lic") return renderInlineLeaves(lic.children);
+      return renderInlineLeaves([lic]);
+    })
+    .join("");
+}
+
+/**
+ * Convertir un objet rich-text Tina en HTML.
+ * Utilise des styles inline uniquement : n'interfère pas avec les classes
+ * du conteneur parent (taille, couleur, etc.).
+ *
+ * Supporte :
+ * - Sauts de ligne entre paragraphes
+ * - Gras, italique, souligné
+ * - Citations (blockquote)
+ * - Listes à puces et numérotées
  */
 export function richTextToHTML(richText: TinaRichText): string {
   if (!richText) return "";
-
-  // Si c'est déjà une string, la retourner
   if (typeof richText === "string") return richText;
 
-  // Si c'est un objet rich-text Tina avec la structure attendue
-  const richTextNode = richText as RichTextNode;
-  if (richTextNode.children && Array.isArray(richTextNode.children)) {
-    return richTextNode.children
-      .map((child) => {
-        if (child.type === "p") {
-          const text = child.children
-            ?.map((c) => {
-              let content = c.text || "";
-              // Gestion du formatage
-              if (c.bold) content = `<strong>${content}</strong>`;
-              if (c.italic) content = `<em>${content}</em>`;
-              return content;
-            })
-            .join("");
-          return `<p>${text}</p>`;
-        }
-        if (child.type === "ul" || child.type === "ol") {
-          const tag = child.type;
-          const items = child.children
-            ?.map((li: RichTextChild) => {
-              // Structure TinaCMS : li → lic (list item content) → texte
-              // Il faut descendre deux niveaux pour atteindre le texte
-              const text = (li.children as RichTextChild[])
-                ?.map((lic) => {
-                  return (lic.children as RichTextTextNode[] ?? [])
-                    .map((c) => {
-                      let content = c.text || "";
-                      if (c.bold) content = `<strong>${content}</strong>`;
-                      if (c.italic) content = `<em>${content}</em>`;
-                      return content;
-                    })
-                    .join("") || lic.text || "";
-                })
-                .join("");
-              return `<li>${text}</li>`;
-            })
-            .join("");
-          const listClass = tag === "ul" ? "list-disc pl-5 space-y-1 my-2" : "list-decimal pl-5 space-y-1 my-2";
-          return `<${tag} class="${listClass}">${items}</${tag}>`;
-        }
-        return "";
-      })
-      .join("");
-  }
+  const node = richText as RichTextNode;
+  if (!node.children || !Array.isArray(node.children)) return "";
 
-  return "";
+  return node.children
+    .map((child) => {
+      const type = child.type;
+
+      // Paragraphe : marge verticale en inline style pour ne pas perturber le reste
+      if (type === "p") {
+        const inner = renderInlineLeaves(child.children);
+        if (!inner) return "";
+        return `<p style="margin:0.5em 0">${inner}</p>`;
+      }
+
+      // Citation / Blockquote
+      if (type === "blockquote") {
+        const inner = renderInlineLeaves(child.children);
+        return `<blockquote style="border-left:3px solid currentColor;opacity:0.8;padding-left:0.75rem;font-style:italic;margin:0.75em 0">${inner}</blockquote>`;
+      }
+
+      // Listes
+      if (type === "ul" || type === "ol") {
+        const items = (child.children ?? [])
+          .map((li) => `<li>${renderListItemChildren(li)}</li>`)
+          .join("");
+        const listStyle =
+          type === "ul"
+            ? "list-style-type:disc;padding-left:1.25rem;margin:0.5em 0"
+            : "list-style-type:decimal;padding-left:1.25rem;margin:0.5em 0";
+        return `<${type} style="${listStyle}">${items}</${type}>`;
+      }
+
+      return "";
+    })
+    .join("");
 }

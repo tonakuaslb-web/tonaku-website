@@ -25,7 +25,8 @@ export default function ProjectContentSection({
   section,
 }: ProjectContentSectionProps) {
   const layoutType = section.layout || "text-only";
-  const imgPositionClass = IMAGE_POSITION_CLASS[section.imagePosition ?? ""] ?? "object-center";
+  const imgPositionClass =
+    IMAGE_POSITION_CLASS[section.imagePosition ?? ""] ?? "object-center";
 
   return (
     <div className="space-y-6">
