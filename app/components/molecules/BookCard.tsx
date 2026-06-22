@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BookOpen, Download, Calendar, User } from "lucide-react";
+import { BookOpen, ShoppingCart, Calendar, User } from "lucide-react";
 import { cn } from "@/app/lib/utils";
 
 type BookCardProps = Readonly<{
@@ -9,7 +9,8 @@ type BookCardProps = Readonly<{
   category?: string;
   description?: string;
   coverImage?: string;
-  downloadLink?: string;
+  readOnlineUrl?: string;
+  purchaseUrl?: string;
   featured?: boolean;
   className?: string;
 }>;
@@ -21,18 +22,21 @@ export default function BookCard({
   category,
   description,
   coverImage,
-  downloadLink,
+  readOnlineUrl,
+  purchaseUrl,
   featured = false,
   className = "",
 }: BookCardProps) {
   return (
     <div
       className={cn(
-        "group relative bg-background-100 rounded-xl overflow-hidden transition-all duration-300 shrink-0 w-[92vw] max-w-6xl",
+        "group relative bg-background-100 rounded-xl overflow-hidden transition-all duration-300 shrink-0",
+        "w-[90vw] md:w-[92vw] max-w-6xl",
+        "snap-center",
         "border-2 hover:shadow-xl",
         featured
-          ? "border-secondary-400 shadow-lg"
-          : "border-primary-300 hover:border-primary-400",
+          ? "border-transparent md:border-secondary-400 shadow-lg"
+          : "border-transparent md:border-primary-300 md:hover:border-primary-400",
         className,
       )}
     >
@@ -107,27 +111,35 @@ export default function BookCard({
           </div>
 
           {/* Actions */}
-          <div className="flex gap-3 mt-4">
-            <button
-              className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300",
-                "bg-primary-600 text-white hover:bg-primary-700 hover:shadow-md",
-              )}
-            >
-              <BookOpen size={18} />
-              En savoir plus
-            </button>
-
-            {downloadLink && (
-              <button
+          <div className="flex flex-col md:flex-row gap-3 mt-4">
+            {readOnlineUrl && (
+              <a
+                href={readOnlineUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300",
+                  "flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300",
+                  "bg-primary-600 text-white hover:bg-primary-700 hover:shadow-md",
+                )}
+              >
+                <BookOpen size={18} />
+                Lire en ligne
+              </a>
+            )}
+
+            {purchaseUrl && (
+              <a
+                href={purchaseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300",
                   "border-2 border-secondary-400 text-blue-logo hover:bg-secondary-100 hover:shadow-md",
                 )}
               >
-                <Download size={18} />
-                Télécharger
-              </button>
+                <ShoppingCart size={18} />
+                Acheter
+              </a>
             )}
           </div>
         </div>

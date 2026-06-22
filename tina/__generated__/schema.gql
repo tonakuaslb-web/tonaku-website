@@ -498,10 +498,8 @@ type ProjectConnection implements Connection {
 }
 
 type BookAvailability {
-  ebook: Boolean
-  ebookUrl: String
-  print: Boolean
-  printUrl: String
+  readOnlineUrl: String
+  purchaseUrl: String
   price: String
 }
 
@@ -522,10 +520,8 @@ type Book implements Node & Document {
 }
 
 input BookAvailabilityFilter {
-  ebook: BooleanFilter
-  ebookUrl: StringFilter
-  print: BooleanFilter
-  printUrl: StringFilter
+  readOnlineUrl: StringFilter
+  purchaseUrl: StringFilter
   price: StringFilter
 }
 
@@ -780,10 +776,8 @@ input ProjectMutation {
 }
 
 input BookAvailabilityMutation {
-  ebook: Boolean
-  ebookUrl: String
-  print: Boolean
-  printUrl: String
+  readOnlineUrl: String
+  purchaseUrl: String
   price: String
 }
 

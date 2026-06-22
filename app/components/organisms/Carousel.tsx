@@ -39,7 +39,7 @@ export default function Carousel({ children, className = "" }: CarouselProps) {
       {/* Conteneur défilable */}
       <div
         ref={scrollContainerRef}
-        className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide px-12"
+        className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide snap-x snap-mandatory px-[5vw] md:px-12"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",

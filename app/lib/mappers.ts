@@ -82,7 +82,8 @@ export function mapBook(book: Book) {
     category: book.category || undefined,
     description: richTextToHTML(book.description),
     coverImage: book.cover || undefined,
-    downloadLink: book.availability?.ebookUrl || undefined,
+    readOnlineUrl: book.availability?.readOnlineUrl || undefined,
+    purchaseUrl: book.availability?.purchaseUrl || undefined,
     featured: book.featured || false,
   };
 }
