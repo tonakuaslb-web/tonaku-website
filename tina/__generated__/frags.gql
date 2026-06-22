@@ -142,10 +142,8 @@ fragment BookParts on Book {
   pages
   availability {
     __typename
-    ebook
-    ebookUrl
-    print
-    printUrl
+    readOnlineUrl
+    purchaseUrl
     price
   }
   featured

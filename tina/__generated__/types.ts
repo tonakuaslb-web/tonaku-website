@@ -709,10 +709,8 @@ export type ProjectConnection = Connection & {
 
 export type BookAvailability = {
   __typename?: 'BookAvailability';
-  ebook?: Maybe<Scalars['Boolean']['output']>;
-  ebookUrl?: Maybe<Scalars['String']['output']>;
-  print?: Maybe<Scalars['Boolean']['output']>;
-  printUrl?: Maybe<Scalars['String']['output']>;
+  readOnlineUrl?: Maybe<Scalars['String']['output']>;
+  purchaseUrl?: Maybe<Scalars['String']['output']>;
   price?: Maybe<Scalars['String']['output']>;
 };
 
@@ -734,10 +732,8 @@ export type Book = Node & Document & {
 };
 
 export type BookAvailabilityFilter = {
-  ebook?: InputMaybe<BooleanFilter>;
-  ebookUrl?: InputMaybe<StringFilter>;
-  print?: InputMaybe<BooleanFilter>;
-  printUrl?: InputMaybe<StringFilter>;
+  readOnlineUrl?: InputMaybe<StringFilter>;
+  purchaseUrl?: InputMaybe<StringFilter>;
   price?: InputMaybe<StringFilter>;
 };
 
@@ -1128,10 +1124,8 @@ export type ProjectMutation = {
 };
 
 export type BookAvailabilityMutation = {
-  ebook?: InputMaybe<Scalars['Boolean']['input']>;
-  ebookUrl?: InputMaybe<Scalars['String']['input']>;
-  print?: InputMaybe<Scalars['Boolean']['input']>;
-  printUrl?: InputMaybe<Scalars['String']['input']>;
+  readOnlineUrl?: InputMaybe<Scalars['String']['input']>;
+  purchaseUrl?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1175,7 +1169,7 @@ export type SupportPartsFragment = { __typename: 'Support', mainTitle: string, w
 
 export type ProjectPartsFragment = { __typename: 'Project', title: string, year: string, status: string, description?: any | null, image?: string | null, location?: string | null, introTitle?: string | null, introText?: any | null, conclusionText?: any | null, gallery?: Array<string | null> | null, details?: { __typename: 'ProjectDetails', beneficiaries?: string | null, budget?: string | null, goal?: string | null } | null, contentSections?: Array<{ __typename: 'ProjectContentSections', sectionTitle?: string | null, layout: string, image?: string | null, imagePosition?: string | null, content: any } | null> | null };
 
-export type BookPartsFragment = { __typename: 'Book', title: string, author?: string | null, year?: string | null, isbn?: string | null, cover?: string | null, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, availability?: { __typename: 'BookAvailability', ebook?: boolean | null, ebookUrl?: string | null, print?: boolean | null, printUrl?: string | null, price?: string | null } | null };
+export type BookPartsFragment = { __typename: 'Book', title: string, author?: string | null, year?: string | null, isbn?: string | null, cover?: string | null, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, availability?: { __typename: 'BookAvailability', readOnlineUrl?: string | null, purchaseUrl?: string | null, price?: string | null } | null };
 
 export type ContactPartsFragment = { __typename: 'Contact', country: string, city?: string | null, address?: string | null, phone?: string | null, email?: string | null, notes?: any | null, hours?: { __typename: 'ContactHours', weekdays?: string | null, weekend?: string | null } | null };
 
@@ -1298,7 +1292,7 @@ export type BookQueryVariables = Exact<{
 }>;
 
 
-export type BookQuery = { __typename?: 'Query', book: { __typename: 'Book', id: string, title: string, author?: string | null, year?: string | null, isbn?: string | null, cover?: string | null, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, availability?: { __typename: 'BookAvailability', ebook?: boolean | null, ebookUrl?: string | null, print?: boolean | null, printUrl?: string | null, price?: string | null } | null } };
+export type BookQuery = { __typename?: 'Query', book: { __typename: 'Book', id: string, title: string, author?: string | null, year?: string | null, isbn?: string | null, cover?: string | null, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, availability?: { __typename: 'BookAvailability', readOnlineUrl?: string | null, purchaseUrl?: string | null, price?: string | null } | null } };
 
 export type BookConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1310,7 +1304,7 @@ export type BookConnectionQueryVariables = Exact<{
 }>;
 
 
-export type BookConnectionQuery = { __typename?: 'Query', bookConnection: { __typename?: 'BookConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'BookConnectionEdges', cursor: string, node?: { __typename: 'Book', id: string, title: string, author?: string | null, year?: string | null, isbn?: string | null, cover?: string | null, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, availability?: { __typename: 'BookAvailability', ebook?: boolean | null, ebookUrl?: string | null, print?: boolean | null, printUrl?: string | null, price?: string | null } | null } | null } | null> | null } };
+export type BookConnectionQuery = { __typename?: 'Query', bookConnection: { __typename?: 'BookConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'BookConnectionEdges', cursor: string, node?: { __typename: 'Book', id: string, title: string, author?: string | null, year?: string | null, isbn?: string | null, cover?: string | null, description?: any | null, category?: string | null, pages?: number | null, featured?: boolean | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, availability?: { __typename: 'BookAvailability', readOnlineUrl?: string | null, purchaseUrl?: string | null, price?: string | null } | null } | null } | null> | null } };
 
 export type ContactQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1482,10 +1476,8 @@ export const BookPartsFragmentDoc = gql`
   pages
   availability {
     __typename
-    ebook
-    ebookUrl
-    print
-    printUrl
+    readOnlineUrl
+    purchaseUrl
     price
   }
   featured
