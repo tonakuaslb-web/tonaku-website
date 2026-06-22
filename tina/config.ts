@@ -732,25 +732,16 @@ export default defineConfig({
             label: "Disponibilité",
             fields: [
               {
-                type: "boolean",
-                name: "ebook",
-                label: "eBook disponible",
+                type: "string",
+                name: "readOnlineUrl",
+                label: "Lien lecture en ligne",
+                description: "URL pour lire le livre en ligne",
               },
               {
                 type: "string",
-                name: "ebookUrl",
-                label: "Lien de téléchargement eBook",
-                description: "URL du fichier PDF/EPUB",
-              },
-              {
-                type: "boolean",
-                name: "print",
-                label: "Version papier disponible",
-              },
-              {
-                type: "string",
-                name: "printUrl",
-                label: "Lien d'achat version papier",
+                name: "purchaseUrl",
+                label: "Lien boutique d'achat",
+                description: "URL de la boutique en ligne pour acheter le livre",
               },
               {
                 type: "string",

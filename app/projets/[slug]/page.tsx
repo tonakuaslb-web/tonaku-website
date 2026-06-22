@@ -54,7 +54,7 @@ export default async function ProjectPage({
 }) {
   // Dans Next.js 15+, params est une Promise
   const { slug } = await params;
-  
+
   const project = await getProjectBySlug(slug);
 
   if (!project) {
@@ -142,57 +142,83 @@ export default async function ProjectPage({
         )}
 
         {/* Sections de contenu */}
-        {project.contentSections && project.contentSections.length > 0 && (() => {
-          // Regrouper les sections "image-card" consécutives pour les afficher côte à côte
-          type SectionGroup =
-            | { type: "single"; section: NonNullable<(typeof project.contentSections)[number]>; key: string }
-            | { type: "image-card-row"; sections: NonNullable<(typeof project.contentSections)[number]>[]; keys: string[] };
-
-          const groups: SectionGroup[] = [];
-          project.contentSections.forEach((section, idx) => {
-            if (!section) return;
-            const layout = section.layout || "text-only";
-            const key = section.sectionTitle
-              ? `section-${section.sectionTitle.replaceAll(/\s+/g, "-").toLowerCase()}-${idx}`
-              : `section-${layout}-${idx}`;
-
-            if (layout === "image-card") {
-              const last = groups[groups.length - 1];
-              if (last && last.type === "image-card-row") {
-                last.sections.push(section);
-                last.keys.push(key);
-              } else {
-                groups.push({ type: "image-card-row", sections: [section], keys: [key] });
-              }
-            } else {
-              groups.push({ type: "single", section, key });
-            }
-          });
-
-          return (
-            <div className="space-y-12 mb-16">
-              {groups.map((group, groupIdx) => {
-                if (group.type === "image-card-row") {
-                  return (
-                    <div key={`row-${groupIdx}`} className="flex flex-wrap gap-6">
-                      {group.sections.map((section, i) => (
-                        <div
-                          key={group.keys[i]}
-                          className="w-full sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)]"
-                        >
-                          <ProjectContentSection section={section} />
-                        </div>
-                      ))}
-                    </div>
-                  );
+        {project.contentSections &&
+          project.contentSections.length > 0 &&
+          (() => {
+            // Regrouper les sections "image-card" consécutives pour les afficher côte à côte
+            type SectionGroup =
+              | {
+                  type: "single";
+                  section: NonNullable<
+                    (typeof project.contentSections)[number]
+                  >;
+                  key: string;
                 }
-                return (
-                  <ProjectContentSection key={group.key} section={group.section} />
-                );
-              })}
-            </div>
-          );
-        })()}
+              | {
+                  type: "image-card-row";
+                  sections: NonNullable<
+                    (typeof project.contentSections)[number]
+                  >[];
+                  keys: string[];
+                };
+
+            const groups: SectionGroup[] = [];
+            project.contentSections.forEach((section, idx) => {
+              if (!section) return;
+              const layout = section.layout || "text-only";
+              const key = section.sectionTitle
+                ? `section-${section.sectionTitle
+                    .replaceAll(/\s+/g, "-")
+                    .toLowerCase()}-${idx}`
+                : `section-${layout}-${idx}`;
+
+              if (layout === "image-card") {
+                const last = groups[groups.length - 1];
+                if (last && last.type === "image-card-row") {
+                  last.sections.push(section);
+                  last.keys.push(key);
+                } else {
+                  groups.push({
+                    type: "image-card-row",
+                    sections: [section],
+                    keys: [key],
+                  });
+                }
+              } else {
+                groups.push({ type: "single", section, key });
+              }
+            });
+
+            return (
+              <div className="space-y-12 mb-16">
+                {groups.map((group, groupIdx) => {
+                  if (group.type === "image-card-row") {
+                    return (
+                      <div
+                        key={`row-${groupIdx}`}
+                        className="flex flex-wrap gap-6"
+                      >
+                        {group.sections.map((section, i) => (
+                          <div
+                            key={group.keys[i]}
+                            className="w-full sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)]"
+                          >
+                            <ProjectContentSection section={section} />
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  }
+                  return (
+                    <ProjectContentSection
+                      key={group.key}
+                      section={group.section}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })()}
 
         {/* Paragraphe de conclusion de la page (optionnel) */}
         {project.conclusionText && (

@@ -16,10 +16,7 @@ export default function MissionCard({
 }: MissionCardProps) {
   return (
     <div
-      className={cn(
-        "rounded-xl p-[2px] shadow-sm w-full",
-        className
-      )}
+      className={cn("rounded-xl p-[2px] shadow-sm w-full", className)}
       style={{
         background: "linear-gradient(135deg, #fef9e7 0%, #d4a024 100%)",
       }}
@@ -35,9 +32,10 @@ export default function MissionCard({
             {/* Titre de la mission */}
             <h3 className="text-lg font-bold text-blue-logo mb-2">{title}</h3>
             {/* Description en bleu foncé */}
-            <p className="text-blue-logo/80 leading-relaxed text-sm">
-              {description}
-            </p>
+            <div
+              className="text-blue-logo/80 leading-relaxed text-sm"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
           </div>
         </div>
       </div>
