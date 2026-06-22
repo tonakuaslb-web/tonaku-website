@@ -57,6 +57,7 @@ export default function BookCard({
                 src={coverImage}
                 alt={`Couverture de ${title}`}
                 fill
+                unoptimized
                 className="object-cover"
               />
             ) : (
